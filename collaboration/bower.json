@@ -1,0 +1,21 @@
+{
+  "name": "Online Collaboration Website",
+  "authors": [
+    "Ahmad Qureshi <aqureshi536@gmail.com>"
+  ],
+  "description": "This is an online collaboration website build at niit",
+  "main": "",
+  "license": "MIT",
+  "homepage": "index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
