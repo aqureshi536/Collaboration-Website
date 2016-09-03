@@ -1,37 +1,30 @@
 <!doctype html>
 <html>
 <head>
-<link rel="stylesheet" href="././assets/css/all.css">
+<link rel="stylesheet" href="./assets/css/all.css">
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
-	<div class="wrapper">
-		<!-- Header or navbar -->
-		<header class="main-header" id="navbar">
-			<!-- navbar will be inserted through jquery -->
-		</header>
-		<!-- Header or can say nav bar till here -->
+	<div  ng-app="commonApp">
+		<div >
+		<header aheader ></header>
+		<aside asidebar></aside>
+		<div></div>
 		
-		 <aside class="main-sidebar" id="sidebar">
-		 
-		 </aside>  
-		
-		<!-- Sidebar ends here -->
-
+		</div>
+	
 	</div>
+
 
 
 	<!-- Script starts here  -->
 
 
+	<script src="././assets/js/angular.js"></script>
+	<script src="././assets/js/angular-route.js"></script>
+	<script src="./app/components/common.js"></script>
 	<script src="././assets/js/jquery.js"></script>
-
-	<!-- for navbar -->
-	<script>
-		
-		$("#navbar").load("app/shared/navbar.html");
-		$("#navbar").load("app/shared/sidebar.html");
-	</script>
 
 	<!-- jQuery UI 1.11.4 -->
 	<script src="././assets/js/jquery-ui.js"></script>
