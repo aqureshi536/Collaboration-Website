@@ -23,14 +23,4 @@ app.directive("asidebar", function() {
 		}*/
 	}
 });
-app.directive('forumCard', function(){
-	// Runs during compile
-	return {		
-		 restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
-		 replace: true,
-		 /*scope:{
-		 	page:'='
-		 }*/
-		 templateUrl: './app/components/forum/forumPost.html'
-	}
-});
+
