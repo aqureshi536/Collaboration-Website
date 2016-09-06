@@ -1,12 +1,13 @@
-	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	  <modelVersion>4.0.0</modelVersion>
-	  <groupId>com.ahmad</groupId>
-	  <artifactId>CollaborationBackend</artifactId>
-	  <packaging>war</packaging>
-	  <version>0.0.1-SNAPSHOT</version>
-	  <name>CollaborationBackend Maven Webapp</name>
-	  <url>http://maven.apache.org</url>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ahmad</groupId>
+	<artifactId>CollaborationBackend</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>CollaborationBackend Maven Webapp</name>
+	<url>http://maven.apache.org</url>
 	<properties>
 		<spring.version>4.3.1.RELEASE</spring.version>
 	</properties>
@@ -73,6 +74,13 @@
 			<version>5.2.1.Final</version>
 		</dependency>
 
+		<!-- oracle -->
+	 <!-- <dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0</version>			
+		</dependency> --> 
+		
 	</dependencies>
 	<build>
 		<finalName>CollaborationWebsiteBackend</finalName>
