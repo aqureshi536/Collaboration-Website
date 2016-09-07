@@ -16,14 +16,14 @@ public class TestTest {
 		context.refresh();
 		
 		TestDAO testd= (TestDAO) context.getBean("testDAO");
-		Test t = (Test)context.getBean("test");
+		Test test = (Test)context.getBean("test");
 		Date date= new Date();
 		long time1=date.getTime();
 		Timestamp time =new Timestamp(time1);
-		t.setTestId("T001");
-		t.setTestName("Firsst name");
-		t.setTestDate(time);
+		test.setTestId("T001");
+		test.setTestName("Firsst name");
+		test.setTestDate(time);
 		
-		testd.saveOrUpdateTest(t);
+		testd.saveOrUpdateTest(test);
 	}
 }

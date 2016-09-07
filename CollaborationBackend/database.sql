@@ -38,7 +38,7 @@ constraint fk_userId_Blog FOREIGN key (userId) REFERENCES User_Detail(userId)
 create  table test(
 testId varchar2(20),
 testName varchar2(20),
-testDate TIMESTAMP,
+testDate TIMESTAMP[0],
 CONSTRAINT pk_test_testId PRIMARY KEY (testId)
 );
 

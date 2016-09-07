@@ -7,12 +7,16 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Component
 public class Test {
 	@Id
 	private String testId;
 	private String testName;
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="UTC")
 	private Timestamp testDate;
 
 	public String getTestId() {
@@ -38,5 +42,9 @@ public class Test {
 	public void setTestDate(Timestamp testDate) {
 		this.testDate = testDate;
 	}
+
+	
+	
+
 
 }
