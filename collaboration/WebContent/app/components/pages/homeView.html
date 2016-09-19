@@ -1,0 +1,81 @@
+<div class="container">
+	<!-- blog starts here -->
+	<div class="row">
+
+		<div class="col-sm-5 inner-content collection">
+			<h4 class="ctitle">What's New</h4>
+			<ul>
+				<li class="collection-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti incidunt dignissimos modi corporis qui dolorem totam esse, iure quae exercitationem!</li>
+				<li class="collection-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis quasi exercitationem, reprehenderit accusantium harum. Harum illo quasi deleniti maiores nesciunt?</li>
+				<li class="collection-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus ratione facere sequi quibusdam! Eaque vel alias deserunt quo, aspernatur culpa.</li>
+			</ul>
+		</div>
+
+			<div class="col-sm-offset-1 col-sm-6 inner-content">
+				<h4 class="ctitle">New Jobs</h4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae sed quos quia impedit ab dolores. Perspiciatis, quaerat! Eligendi corrupti eius, ipsam nam, quaerat aliquid illum omnis harum consectetur, labore necessitatibus!</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4" ng-controller="blogCtrl">
+					<h3 class="ctitle">Popular Blogs</h3>		
+					<div class="collapsible popout" data-collapsible="accordion" ng-repeat="blog in blogs">
+						<li class="inner-content"> 	
+							<div class="collapsible-header collection">
+								<h3 class="">{{blog.blogName}}</h3>
+								<p>{{blog.blogDescription}}&nbsp;&nbsp;</p>
+								<p> <b>{{blog.blogComments.length}} Comment/s</b></p>
+							</div>
+							<div class="collapsible-body">				
+								<ul class="collection" ng-repeat="blogComment in blog.blogComments">
+									<li class="collection-item avatar">
+										<img class="card-image circle" ng-src="assets/images/{{blogComment.userImage}}.jpg"><span class="card-text">{{blogComment.blogComment}}</span>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<script>
+//Instert this just after closing </li>             
+$(document).ready(function() {
+	$('.collapsible').collapsible({
+		accordion: true 
+	});
+});
+</script>
+</div>			
+</div>
+<!-- blog ends here -->
+
+
+<div class="col-sm-7 col-sm-offset-1" ng-controller="forumCtrl as forumCon">
+	<h3 class="ctitle">Recent Discussions</h3>
+
+	<div class="collapsible popout" data-collapsible="accordion" ng-repeat="forum in forumCon.forums">
+		<li class="inner-content">
+			<div class="collapsible-header collection">
+				<h3 class="">{{forum.forumName}}</h3>
+				<p>{{forum.forumDescription}}&nbsp;&nbsp;</p>
+				<p> <b>{{forum.forumPosts.length}} Post/s</b></p>				
+			</div>
+			<div class="collapsible-body collection" id="frmTable{{$index}}">				
+
+				<ul class="collection" ng-repeat="forumPost in forum.forumPosts">
+					<li class="collection-item avatar">
+						<img class="circle card-image" ng-src="assets/images/{{forumPost.userImage}}.jpg"><span class="card-text">{{forumPost.forumPost}}</span>
+					</li>
+				</ul>
+
+			</div>
+		</li>
+		<script>
+//Instert this just after closing </li>             
+$(document).ready(function() {
+	$('.collapsible').collapsible({
+		accordion: true 
+	});
+});
+</script>
+</div>	
+</div>			
+</div><!-- row ends here -->
+
+</div>

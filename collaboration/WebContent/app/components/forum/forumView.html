@@ -1,0 +1,53 @@
+	<div class="container-fluid" ng-controller="forumCtrl as forumCtrl">
+		<h1 class="ctitle"><i class="material-icons medium">question_answer</i> Discussions </h1>
+		<div class="row">
+			<div class="col-md-9" >
+				<div class="row" ng-repeat="forum in forumCtrl.forums">
+					<div class="col-sm-12" >
+						<ul class="collapsible popout" data-collapsible="accordion">
+							<li class="inner-content">
+								<div class="collapsible-header collection">
+									<h2>{{forum.forumName}}</h2>
+									<p class="title">{{forum.forumDescription}}</p>
+									<p> <b>{{forum.forumPosts.length}} Post/s</b></p>	
+									<br>
+								</div>
+								<div class="collapsible-body">									
+									<ul class="collection" ng-repeat="fp in forum.forumPosts">
+										<li class="collection-item avatar">
+											<img  class="circle card-image" ng-src="assets/images/{{fp.userImage}}.jpg"><span class="card-text">{{fp.forumPost}}</span>
+										</li>
+									</ul>
+									<button class="btn green darken-1 waves-effect waves-light">View More</button>
+								</div>
+							</li>
+							<script>
+									//Instert this just after closing </li>             
+									$(document).ready(function() {
+										$('.collapsible').collapsible({
+											accordion: true 
+										});
+									});
+								</script>
+							</ul>
+						</div>
+
+					</div><<!--  Inner row -->
+
+				</div>   <!-- col-sm-8  -->
+
+				<div class="col-sm-3">
+					<h5 class="ctitle">New Blog Comments</h5>
+					<div class="inner-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate, tenetur vitae consectetur sint accusamus dignissimos est, illo provident voluptatum quos assumenda eum. Ex possimus mollitia laboriosam ad quisquam, atque delectus!</div>
+					<div class="inner-content">Nulla, accusantium nobis laboriosam itaque? Ab consequuntur, repudiandae magni, fugiat ipsum debitis eveniet consequatur nobis. Ipsam voluptatum tenetur, id modi vero quod ad provident fuga quibusdam cum officia dolorum ipsum.</div>
+					<div class="inner-content">Rem quos et id deserunt repudiandae, maxime, ullam eius iure voluptates, provident obcaecati sed alias ratione soluta, eligendi enim cum neque deleniti? Quis impedit consectetur ab vitae adipisci, quia fuga.</div>
+					<div class="inner-content">Rerum ex ullam magnam. Consequatur vitae reiciendis sequi doloribus tempore maiores voluptatibus deserunt praesentium ducimus sint sapiente, quo eius excepturi consequuntur optio dignissimos explicabo ipsa ab suscipit iure porro ea.</div>
+					<div class="inner-content">Delectus voluptatibus natus pariatur modi eligendi rem voluptate quod labore eos adipisci, repellendus rerum maxime nihil quasi. Delectus quasi deleniti voluptates saepe dolores molestiae, sint cupiditate, praesentium, quod obcaecati nam.</div>
+				</div>  <!-- col-sm-3 -->
+
+			</div>	<!-- Outer row -->
+
+		</div>
+
+
+

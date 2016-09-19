@@ -20,10 +20,12 @@ public class TestTest {
 		Date date= new Date();
 		long time1=date.getTime();
 		Timestamp time =new Timestamp(time1);
-		test.setTestId("T001");
-		test.setTestName("Firsst name");
+		test.setTestId("T002");
+		test.setTestName("Updated name");
 		test.setTestDate(time);
 		
-		testd.saveOrUpdateTest(test);
+		/*testd.saveOrUpdateTest(test);*/
+		
+		testd.delete("T002");
 	}
 }

@@ -1,0 +1,55 @@
+		<div class="container-fluid" ng-controller="blogCtrl">
+			<h1 class="ctitle"><i class="material-icons medium">speaker_notes</i> Blogs</h1>
+			<div class="row">
+				<div class="col-md-9">
+
+					<div class="row" ng-repeat="blog in blogs">
+						<div class="col-sm-12" >
+							<ul class="collapsible popout" data-collapsible="accordion">
+								<li class="inner-content">
+									<div class="collapsible-header collection">
+										<h2>{{blog.blogName}}</h2>
+										<p class="title">{{blog.blogDescription}}&nbsp;&nbsp;
+										</p>
+										<p> <b>{{blog.blogComments.length}} Comment/s</b></p>
+
+										<br>
+									</div>
+									<div class="collapsible-body">									
+										<ul class="collection" ng-repeat="blogComment in blog.blogComments">
+											<li class="collection-item avatar">
+												<img  class="circle card-image" ng-src="assets/images/{{blogComment.userImage}}.jpg"><span class="card-text">{{blogComment.blogComment}}</span>
+											</li>
+										</ul>
+
+										<button class="btn green darken-1 waves-effect waves-light">View more</button>
+									</div>
+								</li>
+								<script>
+//Instert this just after closing </li>             
+$(document).ready(function() {
+	$('.collapsible').collapsible({
+		accordion: true 
+	});
+});
+</script>
+</ul>
+</div>  <!-- col-sm-12 -->
+</div>  <!-- inner row -->
+</div>
+
+<div class="col-sm-3">
+<h5 class="ctitle">Active Discussion</h5>
+	<div class="inner-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero sequi obcaecati officiis libero, dicta odio distinctio? Ad dolore quasi vero, iste accusamus, cumque fugiat temporibus dolor delectus voluptatibus esse, enim!</div>
+	<div class="inner-content">Cupiditate, omnis, minima? Magnam unde voluptatum, quidem quae quo suscipit molestiae perspiciatis veniam. Soluta harum asperiores atque, commodi laudantium minus. Alias unde beatae a ipsum commodi reiciendis, perspiciatis esse quibusdam!</div>
+	<div class="inner-content">Cum quas expedita atque dolore assumenda, ab eos? Rem, ducimus voluptatem quasi nihil maiores nam recusandae temporibus consectetur dignissimos necessitatibus quidem alias doloribus sed quisquam saepe iure numquam, dolores, obcaecati!</div>
+	<div class="inner-content">Animi aperiam dolore, repellat tempore aliquid. Officia dolore, blanditiis rem error maiores delectus magnam incidunt deleniti fugit mollitia necessitatibus laboriosam ab quidem vitae! Aut, est. Quam, beatae! Illo, nostrum non!</div>
+	<div class="inner-content">Odit commodi similique quibusdam a sit iure non, repellat esse omnis totam ut, quia. Nihil doloribus aliquam amet itaque velit, totam excepturi, incidunt placeat, sed natus ducimus odio aspernatur doloremque.</div>
+	<div class="inner-content">Optio magnam inventore aspernatur, pariatur itaque incidunt necessitatibus provident nisi amet soluta distinctio, nihil odio, iure tenetur corporis, maiores esse at nulla voluptate. Molestiae voluptatem a, voluptatibus est delectus aliquid!</div>
+	<div class="inner-content">Repellendus optio asperiores beatae, quos, recusandae, velit nisi inventore modi delectus eveniet iusto, quibusdam praesentium. Inventore necessitatibus reprehenderit adipisci facere autem corporis explicabo voluptatem eos quis id, rem laudantium ab?</div>
+	<div class="inner-content">Aliquam fuga id illum deserunt quo fugit aliquid unde odio. Sunt ab dicta, voluptatum nam enim autem quae obcaecati fugiat quo, pariatur necessitatibus ipsum numquam tempore, doloremque molestias. Amet, voluptatem?</div>
+	
+
+</div>	<!-- outer row -->
+
+</div>

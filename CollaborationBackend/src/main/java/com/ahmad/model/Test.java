@@ -16,7 +16,7 @@ public class Test {
 	private String testId;
 	private String testName;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="UTC")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="IST")
 	private Timestamp testDate;
 
 	public String getTestId() {
