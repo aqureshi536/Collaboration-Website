@@ -1,21 +1,40 @@
 package com.ahmad.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Component
-public class BlogComment {
+public class BlogComment implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private String blogCommentId;
-	private String blogId;
 	private String userId;
 	private String blogCommentContent;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="IST")
 	private Timestamp commentedAt;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "blogId", nullable = false)
+	@JsonBackReference
+	private Blog blog;
 
 	public String getBlogCommentId() {
 		return blogCommentId;
@@ -23,14 +42,6 @@ public class BlogComment {
 
 	public void setBlogCommentId(String blogCommentId) {
 		this.blogCommentId = blogCommentId;
-	}
-
-	public String getBlogId() {
-		return blogId;
-	}
-
-	public void setBlogId(String blogId) {
-		this.blogId = blogId;
 	}
 
 	public String getUserId() {
@@ -57,4 +68,23 @@ public class BlogComment {
 		this.commentedAt = commentedAt;
 	}
 
+	public Blog getBlog() {
+		return blog;
+	}
+
+	public void setBlog(Blog blog) {
+		this.blog = blog;
+	}
+
+	public BlogComment() {
+		this.blogCommentId = "BLGCMT" + UUID.randomUUID().toString().substring(24).toUpperCase();
+	}
+
+	@Override
+	public String toString() {
+		return "BlogComment [blogCommentId=" + blogCommentId + ", userId=" + userId + ", blogCommentContent="
+				+ blogCommentContent + ", commentedAt=" + commentedAt + ", blog=" + blog + "]";
+	}
+	
+	
 }

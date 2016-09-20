@@ -13,6 +13,9 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.ahmad.model.Blog;
 import com.ahmad.model.BlogComment;
@@ -45,8 +48,9 @@ public class ApplicationConfig {
 	private Properties getHibernateProperties() {
 		Properties properties = new Properties();
 		properties.put("hibernate.show_sql", "true");
-		properties.put("hibernate.format_sql", "true");
+		properties.put("hibernate.format_sql", "true");		
 		properties.put("hibernate.dialect", "org.hibernate.dialect.OracleDialect");
+		properties.put("hibernate.hbm2ddl.auto", "update");
 		return properties;
 	}
 
@@ -75,4 +79,6 @@ public class ApplicationConfig {
 		return transactionManager;
 
 	}
+	
+	  
 }

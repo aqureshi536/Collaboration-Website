@@ -5,11 +5,12 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ahmad.DAO.BlogDAO;
 import com.ahmad.model.Blog;
-
+@Repository("blogDAO")
 public class BlogDAOImpl implements BlogDAO {
 	@Autowired
 	SessionFactory sessionFactory;
@@ -35,7 +36,7 @@ public class BlogDAOImpl implements BlogDAO {
 	@Transactional
 	public Blog getBlog(String blogId) {
 		String hql = "from Blog where blogId=:blogId";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("blogId",blogId);
 		List<Blog> gotBlog = query.getResultList();
 		if (gotBlog != null && !gotBlog.isEmpty())
 			return gotBlog.get(0);

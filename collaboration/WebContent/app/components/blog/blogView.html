@@ -1,9 +1,12 @@
-		<div class="container-fluid" ng-controller="blogCtrl">
+		<div class="container-fluid" ng-controller="blogController as blogCtrl">
 			<h1 class="ctitle"><i class="material-icons medium">speaker_notes</i> Blogs</h1>
 			<div class="row">
-				<div class="col-md-9">
+				<div class="col-sm-9">
+				<p class="text-center" ng-hide="blogCtrl.dataLoaded">
+						<i class="fa fa-spinner fa-pulse fa-5x"></i>
+					</p>
 
-					<div class="row" ng-repeat="blog in blogs">
+					<div class="row" ng-repeat="blog in blogCtrl.blogs" ng-show="blogCtrl.dataLoaded">
 						<div class="col-sm-12" >
 							<ul class="collapsible popout" data-collapsible="accordion">
 								<li class="inner-content">
@@ -18,11 +21,11 @@
 									<div class="collapsible-body">									
 										<ul class="collection" ng-repeat="blogComment in blog.blogComments">
 											<li class="collection-item avatar">
-												<img  class="circle card-image" ng-src="assets/images/{{blogComment.userImage}}.jpg"><span class="card-text">{{blogComment.blogComment}}</span>
+												<img  class="circle card-image" ng-src="assets/images/{{blogComment.userImage}}.jpg"><span class="card-text">{{blogComment.blogCommentContent}}</span>
 											</li>
 										</ul>
 
-										<button class="btn green darken-1 waves-effect waves-light">View more</button>
+										<span ng-if="blog.blogComments>4"><button class="btn green darken-1 waves-effect waves-light">View more</button></span>
 									</div>
 								</li>
 								<script>
@@ -39,7 +42,7 @@ $(document).ready(function() {
 </div>
 
 <div class="col-sm-3">
-<h5 class="ctitle">Active Discussion</h5>
+	<h5 class="ctitle">Active Discussion</h5>
 	<div class="inner-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero sequi obcaecati officiis libero, dicta odio distinctio? Ad dolore quasi vero, iste accusamus, cumque fugiat temporibus dolor delectus voluptatibus esse, enim!</div>
 	<div class="inner-content">Cupiditate, omnis, minima? Magnam unde voluptatum, quidem quae quo suscipit molestiae perspiciatis veniam. Soluta harum asperiores atque, commodi laudantium minus. Alias unde beatae a ipsum commodi reiciendis, perspiciatis esse quibusdam!</div>
 	<div class="inner-content">Cum quas expedita atque dolore assumenda, ab eos? Rem, ducimus voluptatem quasi nihil maiores nam recusandae temporibus consectetur dignissimos necessitatibus quidem alias doloribus sed quisquam saepe iure numquam, dolores, obcaecati!</div>

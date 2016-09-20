@@ -26,6 +26,7 @@ CONSTRAINT fk_userId_UserAuthorities FOREIGN key (userId) REFERENCES User_Detail
 CREATE table Blog(
 blogId varchar2(20),
 userId varchar2(20),
+blogName varchar(100),
 blogDescription varchar2(1000),
 noOfComments long,
 status char(1),

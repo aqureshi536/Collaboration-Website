@@ -27,10 +27,12 @@ E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\model\Forum.j
 E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\controller\PageController.java
 E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\DAOImpl\ForumDAOImpl.java
 E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\DAOImpl\JobOpportunityDAOImpl.java
+E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\config\CORSFilter.java
 E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\DAO\TestDAO.java
 E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\DAO\ForumPostCommentDAO.java
 E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\DAOImpl\UserAuthoritiesDAOImpl.java
 E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\model\UserAuthorities.java
+E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\controller\BlogController.java
 E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\DAOImpl\UserDAOImpl.java
 E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\model\JobOpportunity.java
 E:\dtWS\Collaboration\CollaborationBackend\src\main\java\com\ahmad\DAOImpl\ForumPostDAOImpl.java

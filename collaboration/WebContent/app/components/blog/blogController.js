@@ -1,4 +1,4 @@
-app.controller('blogCtrl', ['$scope', function($scope){
+/*app.controller('blogCtrl', ['$scope', function($scope){
 	var blogs=[
 	{"blogName":"First Blog",
 	"blogDescription":"This is the first blog",	
@@ -34,13 +34,28 @@ app.controller('blogCtrl', ['$scope', function($scope){
 ]
 
 $scope.blogs=blogs;
-$scope.toggleBlog=function(id){
-	/*alert(id);*/
-	var buttonToggle=$('#buttonBlogToggle'+id);
-        $('#blgTable'+id).is(":visible") ? buttonToggle.text("View") : buttonToggle.text("Hide");
-        $('#blgTable'+id).toggle(100);
-    
-	
 
-};
 }]);
+*/
+
+
+app.controller('blogController', ['$http','blogFactory', function($http,blogFactory){
+
+var self = this;
+self.blogs= [];
+
+fetchAllBlogs();
+
+function fetchAllBlogs(){
+	self.dataLoaded = false;
+	blogFactory.fetchAllBlogs()
+	.then(function(data){
+		self.blogs= data;
+		self.dataLoaded = true;
+	},function(errResponse){
+		console.error("Error fetching blogs");
+	});
+}
+	
+}]);
+
