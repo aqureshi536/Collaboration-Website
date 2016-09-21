@@ -52,8 +52,10 @@ function fetchAllBlogs(){
 	.then(function(data){
 		self.blogs= data;
 		self.dataLoaded = true;
+		self.failed=false;
 	},function(errResponse){
 		console.error("Error fetching blogs");
+		self.failed=true;
 	});
 }
 	

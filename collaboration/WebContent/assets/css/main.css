@@ -64,7 +64,7 @@ body {
 	font-size: 15px;
 }
 
-/* ############################################ */
+/*############################################ */
 /* My nav bar */
 
 
@@ -112,6 +112,7 @@ body {
 	border-radius:5px;	
 /* 	box-shadow: 2px 2px 5px 0px; */
 	padding:0px 20px 20px 20px;
+	font-size:1em;
 	
 	
 }
@@ -202,7 +203,9 @@ width: 100%;
 .sidebar-ul{
 font-size: 18px;
 } */
-
+.label-big{
+	font-size:20px;
+}
 
 
 
