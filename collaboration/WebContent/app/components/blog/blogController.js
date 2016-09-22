@@ -58,6 +58,30 @@ function fetchAllBlogs(){
 		self.failed=true;
 	});
 }
+
+
+function createBlog(blog){
 	
+	blogFactory.createBlog(blog)
+	.then(
+		fetchAllBlogs,
+		function(errResponse){
+			console.error("Error creating blog");
+
+		});
+}
+	
+
+
+	function submitBlog(){
+		alert("in create blog");
+		createBlog(self.blog);
+	}
+
+
+
+	function resetFeilds(){
+		self.blog={}
+	}
 }]);
 
