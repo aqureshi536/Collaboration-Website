@@ -64,6 +64,9 @@ body {
 	font-size: 15px;
 }
 
+input[type=text]{
+	line-height: normal;
+}
 /*############################################ */
 /* My nav bar */
 
@@ -189,6 +192,14 @@ table > tbody > tr > td>span{
 li.inner-content{
 	list-style: none;
 }
+
+input[type="text"]{
+	font-size: 15px;
+}
+
+textarea.materialize-textarea{
+	font-size: 15px;
+}	
 /* .sidebar-back{
 	background-color:red;
 	min-height: 100%;

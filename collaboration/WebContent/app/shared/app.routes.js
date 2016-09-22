@@ -6,9 +6,9 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 		controllerAs:homeCtrl*/
 	}).
 	when('/blog/',{
-		templateUrl:'app/components/blog/blogView.html'
-		/*controller:BlogController,
-		controllerAs:blgCtrl*/
+		templateUrl:'app/components/blog/blogView.html',
+		controller:'blogController',
+		controllerAs:'blogCtrl'
 	}).
 	when('/forum/',{
 		templateUrl:'app/components/forum/forumView.html'
@@ -16,7 +16,8 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 		controllerAs:frmCtrl*/
 	}).
 	when('/blog/addBlog',{
-		templateUrl:'app/components/blog/addBlogView.html'
+		templateUrl:'app/components/blog/addBlogView.html',
+		
 	})
 	.otherwise({
 		redirectTo:'/home/	'
