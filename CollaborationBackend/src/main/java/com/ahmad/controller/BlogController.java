@@ -3,13 +3,17 @@ package com.ahmad.controller;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -45,6 +49,7 @@ public class BlogController {
 	
 	@PostMapping("/blogs/")
 	public ResponseEntity<Void> createBlog(@RequestBody Blog blog,UriComponentsBuilder ucBuilder){
+		blog.setBlogId(UUID.randomUUID().toString().substring(24).toUpperCase());
 		Date date = new Date();
 		long time = date.getTime();
 		Timestamp timestamp = new Timestamp(time);
@@ -60,6 +65,36 @@ public class BlogController {
 		return new ResponseEntity<Void>(httpHeaders,HttpStatus.CREATED);
 		
 		
+	}
+	
+	@PutMapping("/blogs/{blogId}")
+	public ResponseEntity<Blog> updateBlog(@PathVariable("blogId")String blogId,@RequestBody Blog blog){
+		this.blog = blogDAO.getBlog(blogId);
+		if(this.blog==null){
+			return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);
+		}
+		this.blog.setBlogName(blog.getBlogName());
+		this.blog.setBlogDescription(blog.getBlogDescription());
+		Date date = new Date();
+	long time= 	date.getTime();
+	Timestamp timestamp = new Timestamp(time);
+		this.blog.setModifiedAt(timestamp);
+		blogDAO.saveOrUpdateBlog(this.blog);
+		return new ResponseEntity<Blog>(HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/blogs/{blogId}")
+	public ResponseEntity<Blog> deleteBlog(@PathVariable("blogId")String blogId){
+	this.blog = blogDAO.getBlog(blogId);
+	if(this.blog==null){
+		System.out.println("Blog not exist to delete");
+		return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);
+		
+	}
+	
+		blogDAO.deleteBlog(blogId);
+		return new ResponseEntity<Blog>(HttpStatus.NO_CONTENT);
+	
 	}
 
 }
