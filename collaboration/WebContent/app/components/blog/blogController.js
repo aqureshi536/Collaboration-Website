@@ -41,47 +41,88 @@ $scope.blogs=blogs;
 
 app.controller('blogController', ['$http','blogFactory', function($http,blogFactory){
 
-var self = this;
-self.blogs= [];
+	var self = this;
+	self.blog={blogId:'',blogName:'',blogDescription:''};
+	self.blogs= [];
 
-fetchAllBlogs();
+	fetchAllBlogs();
 
-function fetchAllBlogs(){
-	self.dataLoaded = false;
-	blogFactory.fetchAllBlogs()
-	.then(function(data){
-		self.blogs= data;
-		self.dataLoaded = true;
-		self.failed=false;
-	},function(errResponse){
-		console.error("Error fetching blogs");
-		self.failed=true;
-	});
-}
-
-
-function createBlog(blog){
-	
-	blogFactory.createBlog(blog)
-	.then(
-		fetchAllBlogs,
-		function(errResponse){
-			console.error("Error creating blog");
-
+	function fetchAllBlogs(){
+		self.dataLoaded = false;
+		blogFactory.fetchAllBlogs()
+		.then(function(data){
+			self.blogs= data;
+			self.dataLoaded = true;
+			self.failed=false;
+		},function(errResponse){
+			console.error("Error fetching blogs");
+			self.failed=true;
 		});
-}
+	}
+
+	/*creating blog*/
+	function createBlog(blog){
+		console.log(blog);
+		blogFactory.createBlog(blog)
+		.then(
+			fetchAllBlogs,
+			function(errResponse){
+				console.error("Error creating blog");
+
+			});
+	}
 	
 
-
-	function submitBlog(){
+	self.submitBlog = function (){
 		alert("in create blog");
-		createBlog(self.blog);
+		if(self.blog.blogId===''){createBlog(self.blog);}  /*if blog id doesnt exist from begning save it*/
+		else{updateBlog(self.blog,self.blog.blogId);}	/*else if data or id exist go to update method and update the blog*/
+		resetFields();
+	}
+
+	/*###############################################*/
+
+
+
+	/*Update Blog*/
+	function updateBlog(blog ,blogId){
+		blogFactory.updateBlog(blog,blogId)
+		.then(function(data){
+			alert("Updated success");
+			fetchAllBlogs();
+		},
+		function(errResponse){
+			console.log("Error updating blog");
+		});
+		
 	}
 
 
+	self.editBlog = function(blogId){
+		console.log('blogid to edit : ',blogId);
+		for(var i=0;i<self.blogs.length;i++){
+			self.blog = angular.copy(self.blogs[i]);
+			break;	
+		}
+		
+		
+	}
 
-	function resetFeilds(){
-		self.blog={}
+
+	self.deleteBlog=function(blogId){
+		alert('In delete blog');
+		if(self.blog.blogId === blogId) {//clean form if the user to be deleted is shown there.
+            resetFields()
+        }
+		blogFactory.deleteBlog(blogId).
+		then(fetchAllBlogs,function(errResponse){
+			console.error("Error deleting blog");
+		});
+		 
+	}
+
+	function resetFields(){
+		self.blog={blogId:'',blogName:'',blogDescription:''};
 	}
 }]);
 

@@ -1,4 +1,4 @@
-		<div class="container-fluid" ng-controller="blogController">
+		<div class="container-fluid">
 			
 
 
@@ -6,7 +6,7 @@
 			<div class="row">
 				<br>
 				<form class="col-sm-12 inner-content" ng-submit="blogCtrl.submitBlog()">
-
+				<input type="hidden" ng-model="blogCtrl.blog.blogId" />
 					<div class="input-field">
 						<i class="fa fa-server fa-2x prefix"></i>
 						<input id="icon_prefix" type="text" class="validate" ng-model="blogCtrl.blog.blogName" required>
@@ -17,7 +17,7 @@
 						<textarea id="blog_description"  class="materialize-textarea" ng-model="blogCtrl.blog.blogDescription"></textarea>
 						<label for="blog_description">Description</label>
 					</div>
-					<input type="submit" value="Add Blog" class="btn green">
+					<input type="submit"  value="{{!blogCtrl.blog.blogId ? 'Add Blog' : 'Update Blog'}}" class="btn green col-sm-offset-2">
 
 				</form>
 			</div>
@@ -26,17 +26,8 @@
 
 					<h3 ng-show="blogCtrl.failed">Unable to load data please try after sometime</h3>
 
-					<div ng-hide="blogCtrl.failed">
-						<p class="text-center" ng-hide="blogCtrl.dataLoaded">
-							<i class="fa fa-spinner fa-pulse fa-5x"></i>
-						</p>
-
-						<div class="row" ng-repeat="blog in blogCtrl.blogs" ng-show="blogCtrl.dataLoaded">
-							<div class="col-sm-12" >
-								<ul class="collapsible popout" data-collapsible="accordion">
-									<li class="inner-content">
-										<div class="collapsible-header collection">
-											<h2>{{blog.blogName}}</h2>
+					
+											<h2>{{blog.blogName}}</h2>&nbsp;<span ng-click="blogCtrl.editBlog(blog.blogId)" class="fa fa-edit fa-5x"></span><span class="fa fa-trash" ng-click="blogCtrl.deleteBlog(blog.blogId)"></span>
 											<p class="title">{{blog.blogDescription}}&nbsp;&nbsp;
 											</p>
 											<p> <b>{{blog.blogComments.length}} Comment/s</b> - &nbsp;&nbsp; 

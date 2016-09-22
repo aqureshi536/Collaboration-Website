@@ -3,7 +3,9 @@ app.factory('blogFactory', ['$http','$q', function($http,$q){
 	var address  = "http://localhost:8080/CollaborationWebsiteBackend/blogs/"
 	var factory= {
 		fetchAllBlogs:fetchAllBlogs,
-		createBlog:createBlog
+		createBlog:createBlog,
+		updateBlog:updateBlog,
+		deleteBlog:deleteBlog
 	};
 
 	return factory;
@@ -27,11 +29,12 @@ app.factory('blogFactory', ['$http','$q', function($http,$q){
 
 	function createBlog(blog){
 		var deferred = $q.defer();
-		$http.post(address,blog)
+		$http.post(address,blog)		
 		.then(
 			function (response) {
-                deferred.resolve(response.data);
-            },
+
+				deferred.resolve(response.data);
+			},
 			function(errResponse){
 				console.error('Error adding blog');
 				deferred.reject(errResponse);
@@ -40,25 +43,28 @@ app.factory('blogFactory', ['$http','$q', function($http,$q){
 	}
 
 
-function updateBlog(blog,blogId){
-	var deferred = $q.defer();
-	$http.put(address+blogId,blog)
-	.then(function(response){
-		deferred.resolve(response.data);
-	},function(errResponse){
-		deferred.reject(errResponse);
-	});
-}
+	function updateBlog(blog,blogId){
+		var deferred = $q.defer();
+		$http.put(address+blogId,blog)
+		.then(function(response){
+			deferred.resolve(response.data);
+		},function(errResponse){
+			deferred.reject(errResponse);
+		});
+
+		return deferred.promise;
+	}
 
 
-function deleteBlog(blogId){
-	var deferred = $q.defer();
-	$http.delete(address+blogId)
-	.then(function(response){
-		deferred.resolve(response.data);
-	},function(errResponse){
-		deferred.reject(errResponse);
-	});
-}
+	function deleteBlog(blogId){
+		var deferred = $q.defer();
+		$http.delete(address+blogId)
+		.then(function(response){
+			deferred.resolve(response.data);
+		},function(errResponse){
+			deferred.reject(errResponse);
+		});
+		return deferred.promise;
+	}
 
 }]);
