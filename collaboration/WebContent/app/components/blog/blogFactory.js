@@ -1,15 +1,21 @@
-app.factory('blogFactory', ['$http','$q', function($http,$q){
+app.factory('blogFactory', ['$http','$q', '$log', function($http,$q, $log){
 	
-	var address  = "http://localhost:8080/CollaborationWebsiteBackend/blogs/"
+	var address  = "http://localhost:8080/CollaborationWebsiteBackend/blogs/";
+	//var addressForComment = "http://localhost:8080/CollaborationWebsiteBackend/blogcomments/";
 	var factory= {
 		fetchAllBlogs:fetchAllBlogs,
 		createBlog:createBlog,
 		updateBlog:updateBlog,
-		deleteBlog:deleteBlog
+		deleteBlog:deleteBlog,
+		getBlogComments:getBlogComments,
+		createBlogComment:createBlogComment,
+		getBlog:getBlog
 	};
 
 	return factory;
 
+
+	/*##################    Blog Section  #############################*/
 
 
 	function fetchAllBlogs(){
@@ -27,8 +33,28 @@ app.factory('blogFactory', ['$http','$q', function($http,$q){
 	}
 
 
-	function createBlog(blog){
+	function getBlog(blogId){
+
 		var deferred = $q.defer();
+		debugger;
+		$log.info($q);
+		$http.get(address+blogId)
+		.then(function(response){
+			$log.info(response);
+			deferred.resolve(response.data);
+		},
+		function(errResponse){
+			console.error('Error getting blog');
+			deferred.reject(errResponse);
+		});
+		return deferred.promise;
+	}
+
+	function createBlog(blog){
+		
+		var deferred = $q.defer();
+		debugger;
+
 		$http.post(address,blog)		
 		.then(
 			function (response) {
@@ -66,5 +92,43 @@ app.factory('blogFactory', ['$http','$q', function($http,$q){
 		});
 		return deferred.promise;
 	}
+
+
+
+	/*############  blog comment section    ######################################################################*/
+
+
+	/*For fetching all blog comments   */
+	function getBlogComments(blogId){
+		var deferred = $q.defer();
+		$http.get(addressForComment+blogId).
+		then(function(response){
+			deferred.resolve(response.data);
+			console.log('fetched blogs comments');
+		},function(errResponse){
+			deferred.reject(errResponse);
+			console.error('error fetching blogcomments');
+		});
+	}
+
+
+	/*==================================================================================================*/
+
+
+
+	/*for commenting on a blog*/
+
+	function createBlogComment(blog,comment){
+		var deferred = $q.defer();
+		$http.post(addressForComment,blog,comment).
+		then(function(response){
+			deferred.resolve(response.data);
+			console.log('created blog comment');
+		},function(errResponse){
+			deferred.reject(errResponse);
+			console.error('error creating blogcomments');
+		});
+	}
+
 
 }]);

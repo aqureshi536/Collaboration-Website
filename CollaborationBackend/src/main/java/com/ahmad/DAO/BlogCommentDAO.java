@@ -13,4 +13,6 @@ public interface BlogCommentDAO {
 	BlogComment getBlogComment(String blogCommentId);
 
 	List<BlogComment> listBlogComments();
+	
+	List<BlogComment> listBlogByCreatedAt(String blogId);
 }

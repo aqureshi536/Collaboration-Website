@@ -13,4 +13,6 @@ public interface BlogDAO {
 	Blog getBlog(String blogId);
 	
 	List<Blog> listBlogs();
+	
+	List<Blog> listBlogsByCreatedAt();
 }

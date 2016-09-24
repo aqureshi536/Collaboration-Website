@@ -22,6 +22,7 @@ import com.ahmad.DAO.BlogCommentDAO;
 import com.ahmad.DAO.BlogDAO;
 import com.ahmad.model.Blog;
 import com.ahmad.model.BlogComment;
+import com.ahmad.utility.IdGenerator;
 
 @RestController
 public class BlogController {
@@ -40,16 +41,25 @@ public class BlogController {
 
 	@GetMapping("/blogs/")
 	public ResponseEntity<List<Blog>> listAllBlogs() {
-		List<Blog> listOfBlogs = blogDAO.listBlogs();
+		List<Blog> listOfBlogs = blogDAO.listBlogsByCreatedAt();
 		if (listOfBlogs.isEmpty()) {
 			return new ResponseEntity <List<Blog>> (HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity < List < Blog >> (listOfBlogs, HttpStatus.OK);
 	}
 	
+	@GetMapping("/blogs/{blogId}")
+	public ResponseEntity<Blog> getBlog(@PathVariable("blogId") String blogId){
+		this.blog = blogDAO.getBlog(blogId);
+		if(this.blog == null){
+			return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Blog>(this.blog,HttpStatus.OK);
+	}
+	
 	@PostMapping("/blogs/")
 	public ResponseEntity<Void> createBlog(@RequestBody Blog blog,UriComponentsBuilder ucBuilder){
-		blog.setBlogId(UUID.randomUUID().toString().substring(24).toUpperCase());
+		blog.setBlogId(IdGenerator.generateId("BLG"));
 		Date date = new Date();
 		long time = date.getTime();
 		Timestamp timestamp = new Timestamp(time);

@@ -51,4 +51,13 @@ public class BlogDAOImpl implements BlogDAO {
 		return listOfBlogs;
 	}
 
+	@Transactional
+	public List<Blog> listBlogsByCreatedAt() {
+		String hql = "from Blog b ORDER BY b.createdAt DESC";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Blog> listOfBlogs = query.getResultList();
+		return listOfBlogs;
+		
+	}
+
 }

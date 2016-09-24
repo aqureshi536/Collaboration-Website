@@ -15,9 +15,10 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 		/*controller:ForumController,
 		controllerAs:frmCtrl*/
 	}).
-	when('/blog/addBlog',{
-		templateUrl:'app/components/blog/addBlogView.html',
-		
+	when('/blog/view',{
+		templateUrl:'app/components/blog/singleBlogView.html',
+		controller:'singleBlogController',
+		controllerAs:'blogCommCtrl'
 	})
 	.otherwise({
 		redirectTo:'/home/	'

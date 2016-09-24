@@ -51,4 +51,12 @@ public class BlogCommentDAOImpl implements BlogCommentDAO {
 		return listOfBlogComments;
 	}
 
+	@Transactional
+	public List<BlogComment> listBlogByCreatedAt(String blogId) {
+		String hql = "from BlogComment where blog.blogId=:blogId ORDER BY commentedAt DESC ";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("blogId", blogId);
+		List<BlogComment> listOfBlogComments = query.getResultList();
+		return listOfBlogComments;
+	}
+
 }

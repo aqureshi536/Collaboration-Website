@@ -40,7 +40,7 @@
 											<p class="title">{{blog.blogDescription}}&nbsp;&nbsp;
 											</p>
 											<p> <b>{{blog.blogComments.length}} Comment/s</b> - &nbsp;&nbsp; 
-												Last Updated {{blog.modifiedAt}}</p>
+												Last Updated {{blog.modifiedAt}}&nbsp;&nbsp;<a href="#/blog/view" class="btn blur lighten 2" ng-controller="singleBlogController as blogCommCtrl" ng-click="blogCommCtrl.getBlog(blog.blogId)">Comment</a></p>
 
 												<br>
 											</div>
