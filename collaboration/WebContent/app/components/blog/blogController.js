@@ -109,7 +109,7 @@ app.controller('blogController', ['blogFactory','$log', function(blogFactory,$lo
 
 	self.submitBlog = function (){
 		//alert("in create blog");
-		debugger;
+		//debugger;
 		if(self.blog.blogId === '' || self.blog.blogId === undefined){
 			createBlog(self.blog);
 			//debugger;

@@ -14,11 +14,11 @@
 				<div class="col-sm-12">
 					<ul>
 						<li class="inner-content">
-							<div class="collection">
+							<div class="collection-header">
 								<h2>{{blogCommCtrl.singleBlog.blogName}}</h2>&nbsp;
 								<p class="title">{{blogCommCtrl.singleBlog.blogDescription}}&nbsp;&nbsp;
 								</p>
-								<p> <b>{{blogCommCtrl.singleBlog.blogComments.length}} Comment/s</b> - &nbsp;&nbsp; 
+								<p> <b>{{blogCommCtrl.singleBlog.blogComments.length}} Comment/s</b>  &nbsp;&nbsp; 
 									Last Updated {{blogCommCtrl.singleBlog.modifiedAt}}&nbsp;&nbsp;Comment</a></p>
 
 
@@ -40,7 +40,7 @@
 
 									<br>
 									<div>									
-									<ul class="collection" ng-repeat="blogComment in blogCommCtrl.singleBlog.blogComments | orderBy : 'blogComments.commentedAt' ">
+										<ul class="collection" ng-repeat="blogComment in blogCommCtrl.singleBlog.blogComments | orderBy : 'blogComments.commentedAt' ">
 											<li class="collection-item avatar">
 												<img  class="circle card-image" ng-src="assets/images/{{blogComment.userImage}}.jpg"><span class="card-text">{{blogComment.blogCommentContent}}</span>
 											</li>
@@ -54,4 +54,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+
+
+

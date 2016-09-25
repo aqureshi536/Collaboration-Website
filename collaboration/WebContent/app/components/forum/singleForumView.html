@@ -1,0 +1,12 @@
+<ul class="collection with-header inner-content" >
+	<li class="collection-header">
+		<h3>{{sforumCtrl.forum.forumTitle}}</h3>
+		<p>{{sforumCtrl.forum.forumDescription}}</p>
+		Last Updated : {{sforumCtrl.forum.modifiedAt}}
+		<br>
+	</li>
+	<li class="collection-item" ng-repeat="forumPost in sforumCtrl.forum.forumPosts">
+		{{forumPost.forumPostContent}}&nbsp;&nbsp;Posted at : {{forumPost.postedAt}}
+	</li>
+
+</ul>
