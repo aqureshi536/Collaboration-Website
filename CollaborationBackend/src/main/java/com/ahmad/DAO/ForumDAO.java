@@ -13,5 +13,6 @@ public interface ForumDAO {
 	Forum getForum(String forumId);
 
 	List<Forum> listForums();
-
+	
+	List<Forum> listForumByCreatedAt();
 }

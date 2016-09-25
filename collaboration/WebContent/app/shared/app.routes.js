@@ -11,14 +11,18 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 		controllerAs:'blogCtrl'
 	}).
 	when('/forum/',{
-		templateUrl:'app/components/forum/forumView.html'
-		/*controller:ForumController,
-		controllerAs:frmCtrl*/
+		templateUrl:'app/components/forum/forumView.html',
+		controller:'forumController',
+		controllerAs:'forumCtrl'
 	}).
 	when('/blog/view',{
 		templateUrl:'app/components/blog/singleBlogView.html',
 		controller:'singleBlogController',
 		controllerAs:'blogCommCtrl'
+	}).when('/forum/view',{
+		templateUrl:'app/components/forum/singleForumView.html',
+		controller:'singleForumController',
+		controllerAs:'sforumCtrl'
 	})
 	.otherwise({
 		redirectTo:'/home/	'

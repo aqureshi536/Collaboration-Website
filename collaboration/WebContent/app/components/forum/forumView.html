@@ -1,27 +1,51 @@
-	<div class="container-fluid" ng-controller="forumCtrl as forumCtrl">
+	<div class="container-fluid">
 		<h1 class="ctitle"><i class="material-icons medium">question_answer</i> Discussions </h1>
-		<div class="row">
+
+		<form class="col-sm-12 inner-content" ng-submit="forumCtrl.submitForum()">
+			<input type="hidden" ng-model="forumCtrl.forum.forumId" />
+			<div class="input-field">
+				<i class="fa fa-server fa-2x prefix"></i>
+				<input id="forum_title" type="text" class="validate" ng-model="forumCtrl.forum.forumTitle" required/>
+				<label for="forum_title">Forum Title</label>
+			</div>
+			<div class="input-field">
+				<i class="material-icons prefix">phone</i>
+				<textarea id="forum_description"  class="materialize-textarea" ng-model="forumCtrl.forum.forumDescription"></textarea>
+				<label for="forum_description">Description</label>
+			</div>
+			<input type="submit"  value="Add Forum" class="btn green col-sm-offset-2">
+
+		</form>
+
+
+
+		<div class="row">		
 			<div class="col-md-9" >
-				<div class="row" ng-repeat="forum in forumCtrl.forums">
+				<br>
+				<div class="row" ng-repeat="forum in forumCtrl.forums | orderBy:'-createdAt'">
 					<div class="col-sm-12" >
 						<ul class="collapsible popout" data-collapsible="accordion">
 							<li class="inner-content">
 								<div class="collapsible-header collection">
-									<h2>{{forum.forumName}}</h2>
-									<p class="title">{{forum.forumDescription}}</p>
-									<p> <b>{{forum.forumPosts.length}} Post/s</b></p>	
-									<br>
-								</div>
-								<div class="collapsible-body">									
-									<ul class="collection" ng-repeat="fp in forum.forumPosts">
-										<li class="collection-item avatar">
-											<img  class="circle card-image" ng-src="assets/images/{{fp.userImage}}.jpg"><span class="card-text">{{fp.forumPost}}</span>
-										</li>
-									</ul>
-									<button class="btn green darken-1 waves-effect waves-light">View More</button>
-								</div>
-							</li>
-							<script>
+									<h2>{{forum.forumTitle}}</h2>
+									<p class="title">
+									<a href="#/forum/view" class="btn waves-effect waves-light" ng-click="forumCtrl.getForum(forum.forumId)">Comment</a>
+									&nbsp;&nbsp;{{forum.forumDescription}}
+									</p>
+									<p> <b>{{forum.forumPosts.length}} Post/s</b>&nbsp;&nbsp;Last Updated : 
+										{{forum.modifiedAt}}</p>	<span class="fa fa-trash" ng-click="forumCtrl.deleteForum(forum.forumId)"></span><span class="fa fa-edit" ng-click="forumCtrl.editForum(forum.forumId)"></span>
+										<br>
+									</div>
+									<div class="collapsible-body">									
+										<ul class="collection" ng-repeat="fp in forum.forumPosts">
+											<li class="collection-item avatar">
+												<img  class="circle card-image" ng-src="assets/images/{{fp.userImage}}.jpg"><span class="card-text">{{fp.forumPostContent}}</span>
+											</li>
+										</ul>
+										<button class="btn green darken-1 waves-effect waves-light">View More</button>
+									</div>
+								</li>
+								<script>
 									//Instert this just after closing </li>             
 									$(document).ready(function() {
 										$('.collapsible').collapsible({
@@ -32,7 +56,7 @@
 							</ul>
 						</div>
 
-					</div><<!--  Inner row -->
+					</div><!--  Inner row -->
 
 				</div>   <!-- col-sm-8  -->
 

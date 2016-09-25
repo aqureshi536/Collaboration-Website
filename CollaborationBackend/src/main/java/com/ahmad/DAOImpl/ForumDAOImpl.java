@@ -5,10 +5,13 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ahmad.DAO.ForumDAO;
 import com.ahmad.model.Forum;
 
+@Repository("forumDAO")
 public class ForumDAOImpl implements ForumDAO {
 	@Autowired
 	SessionFactory sessionFactory;
@@ -17,20 +20,20 @@ public class ForumDAOImpl implements ForumDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	@Override
+	@Transactional
 	public void saveOrUpdateForum(Forum forum) {
 		sessionFactory.getCurrentSession().saveOrUpdate(forum);
 
 	}
 
-	@Override
+	@Transactional
 	public void deleteForum(String forumId) {
 		Forum forumToDelete = new Forum();
 		forumToDelete.setForumId(forumId);
 		sessionFactory.getCurrentSession().delete(forumToDelete);
 	}
 
-	@Override
+	@Transactional
 	public Forum getForum(String forumId) {
 		String hql = "from Forum where forumId=:forumId";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("forumId", forumId);
@@ -40,12 +43,21 @@ public class ForumDAOImpl implements ForumDAO {
 		return null;
 	}
 
-	@Override
+	@Transactional
 	public List<Forum> listForums() {
 		String hql = "from Forum";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<Forum> listOfForums = query.getResultList();
 		return listOfForums;
 	}
+	
+	@Transactional
+	public List<Forum> listForumByCreatedAt(){
+		String hql = "from Forum order by createdAt desc";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Forum> listOfForums = query.getResultList();
+		return listOfForums;
+	}
+	
 
 }

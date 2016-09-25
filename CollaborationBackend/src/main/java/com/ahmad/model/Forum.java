@@ -1,11 +1,19 @@
 package com.ahmad.model;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Component
@@ -15,11 +23,24 @@ public class Forum {
 	private String userId;
 	private String forumTitle;
 	private String forumDescription;
-	private long noOfPosts;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="IST")
 	private Timestamp createdAt;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="IST")
 	private Timestamp modifiedAt;
 	private char status;// Will include A,P,R as keyword for Approved,Pending
 						// and Rejected respectively
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "forum")
+	@JsonManagedReference
+	private Set<ForumPost> forumPosts = new HashSet<>();
+
+	public Set<ForumPost> getForumPosts() {
+		return forumPosts;
+	}
+
+	public void setForumPosts(Set<ForumPost> forumPosts) {
+		this.forumPosts = forumPosts;
+	}
 
 	public String getForumId() {
 		return forumId;
@@ -51,14 +72,6 @@ public class Forum {
 
 	public void setForumDescription(String forumDescription) {
 		this.forumDescription = forumDescription;
-	}
-
-	public long getNoOfPosts() {
-		return noOfPosts;
-	}
-
-	public void setNoOfPosts(long noOfPosts) {
-		this.noOfPosts = noOfPosts;
 	}
 
 	public Timestamp getCreatedAt() {

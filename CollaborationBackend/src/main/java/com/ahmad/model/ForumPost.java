@@ -3,19 +3,43 @@ package com.ahmad.model;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.springframework.stereotype.Component;
+
+import com.ahmad.utility.IdGenerator;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Component
 public class ForumPost {
 	@Id
 	private String forumPostId;
-	private String forumId;
+	
 	private String userId;
 	private String forumPostContent;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="IST")
 	private Timestamp postedAt;
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JsonBackReference
+	@JoinColumn(name="forumId",nullable=false)
+	private Forum forum;
+	
+	
+	
+	
+	public Forum getForum() {
+		return forum;
+	}
+
+	public void setForum(Forum forum) {
+		this.forum = forum;
+	}
 
 	public String getForumPostId() {
 		return forumPostId;
@@ -25,13 +49,7 @@ public class ForumPost {
 		this.forumPostId = forumPostId;
 	}
 
-	public String getForumId() {
-		return forumId;
-	}
-
-	public void setForumId(String forumId) {
-		this.forumId = forumId;
-	}
+	
 
 	public String getUserId() {
 		return userId;
@@ -55,6 +73,10 @@ public class ForumPost {
 
 	public void setPostedAt(Timestamp postedAt) {
 		this.postedAt = postedAt;
+	}
+	
+	public ForumPost(){
+		this.forumPostId=IdGenerator.generateId("FRMPOST");
 	}
 
 }
