@@ -1,11 +1,14 @@
 app.factory('forumFactory', ['$http','$q', function($http,$q){
-	var address = 'http://localhost:8080/CollaborationWebsiteBackend/forums/';
+	var address = 'http://localhost:8080/CollaborationWebsiteBackend/forums/';	
+	var addressPost = 'http://localhost:8080/CollaborationWebsiteBackend/forumPost/';
+
 	var factory = {
 		fetchAllForums:fetchAllForums,
 		createForum:createForum,
 		updateForum:updateForum,
 		deleteForum:deleteForum,
-		getForum:getForum
+		getForum:getForum,
+		postComment:postComment
 	};
 
 	return factory;
@@ -71,6 +74,22 @@ app.factory('forumFactory', ['$http','$q', function($http,$q){
 			deferred.resolve(response.data);
 		},function(errResponse){
 			deferred.reject(errResponse);
+		});
+		return deferred.promise;
+	}
+
+
+
+
+	function postComment(fp) {
+		var deferred = $q.defer();
+		//debugger;
+		$http.post(addressPost,fp).
+		then(function(response){
+			deferred.resolve(response.data);
+		},function (errResponse){
+			deferred.reject(errResponse);
+			console.error("Error posting post in forum");			
 		});
 		return deferred.promise;
 	}

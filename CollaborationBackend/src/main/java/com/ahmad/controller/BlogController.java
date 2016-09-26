@@ -58,7 +58,7 @@ public class BlogController {
 	}
 	
 	@PostMapping("/blogs/")
-	public ResponseEntity<Void> createBlog(@RequestBody Blog blog,UriComponentsBuilder ucBuilder){
+	public ResponseEntity<Blog> createBlog(@RequestBody Blog blog,UriComponentsBuilder ucBuilder){
 		blog.setBlogId(IdGenerator.generateId("BLG"));
 		Date date = new Date();
 		long time = date.getTime();
@@ -72,7 +72,7 @@ public class BlogController {
 		blogDAO.saveOrUpdateBlog(blog);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(ucBuilder.path("/blog/{id}").buildAndExpand(blog.getBlogId()).toUri());
-		return new ResponseEntity<Void>(httpHeaders,HttpStatus.CREATED);
+		return new ResponseEntity<Blog>(blog,httpHeaders,HttpStatus.CREATED);
 		
 		
 	}
@@ -90,7 +90,7 @@ public class BlogController {
 	Timestamp timestamp = new Timestamp(time);
 		this.blog.setModifiedAt(timestamp);
 		blogDAO.saveOrUpdateBlog(this.blog);
-		return new ResponseEntity<Blog>(HttpStatus.OK);
+		return new ResponseEntity<Blog>(this.blog,HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/blogs/{blogId}")
