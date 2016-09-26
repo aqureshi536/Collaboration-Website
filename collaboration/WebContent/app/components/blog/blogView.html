@@ -2,59 +2,76 @@
 			
 
 
-			<h1 class="ctitle"><i class="material-icons medium">speaker_notes</i> Blogs</h1>
-			<div class="row">
-				<br>
-				<form class="col-sm-12 inner-content" ng-submit="blogCtrl.submitBlog()">
-				<input type="hidden" ng-model="blogCtrl.blog.blogId" />
-					<div class="input-field">
-						<i class="fa fa-server fa-2x prefix"></i>
-						<input id="icon_prefix" type="text" class="validate" ng-model="blogCtrl.blog.blogName" required>
-						<label for="icon_prefix">Blog Name</label>
-					</div>
-					<div class="input-field">
-						<i class="material-icons prefix">phone</i>
-						<textarea id="blog_description"  class="materialize-textarea" ng-model="blogCtrl.blog.blogDescription"></textarea>
-						<label for="blog_description">Description</label>
-					</div>
-					<input type="submit"  value="{{!blogCtrl.blog.blogId ? 'Add Blog' : 'Update Blog'}}" class="btn green col-sm-offset-2">
-
-				</form>
+			<h1 class="ctitle"><i class="material-icons medium">speaker_notes</i> Blogs
+				<span class="pull right">{{blogCtrl.blogs.length}} Found</span>
+			</h1>
+			<!-- Loader -->
+			<div class="preloader-wrapper big active ajax-loader" ng-if="blogCtrl.process">
+				<div class="spinner-layer spinner-blue-only">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div><div class="gap-patch">
+					<div class="circle"></div>
+				</div><div class="circle-clipper right">
+				<div class="circle"></div>
 			</div>
-			<div class="row">
-				<div class="col-sm-9">
+		</div>
+	</div><!-- Loader -->
 
-					<h3 ng-show="blogCtrl.failed">Unable to load data please try after sometime</h3>
 
-					<div ng-hide="blogCtrl.failed">
-						<p class="text-center" ng-hide="blogCtrl.dataLoaded">
-							<i class="fa fa-spinner fa-pulse fa-5x"></i>
-						</p>
 
-						<div class="row" ng-repeat="blog in blogCtrl.blogs" ng-show="blogCtrl.dataLoaded">
-							<div class="col-sm-12" >
-								<ul class="collapsible popout" data-collapsible="accordion">
-									<li class="inner-content">
-										<div class="collapsible-header collection">
-											<h2>{{blog.blogName}}</h2>&nbsp;<span ng-click="blogCtrl.editBlog(blog.blogId)" class="fa fa-edit fa-5x"></span><span class="fa fa-trash" ng-click="blogCtrl.deleteBlog(blog.blogId)"></span>
-											<p class="title">{{blog.blogDescription}}&nbsp;&nbsp;
-											</p>
-											<p> <b>{{blog.blogComments.length}} Comment/s</b> - &nbsp;&nbsp; 
-												Last Updated {{blog.modifiedAt}}&nbsp;&nbsp;<a href="#/blog/view" class="btn blur lighten 2" ng-controller="singleBlogController as blogCommCtrl" ng-click="blogCommCtrl.getBlog(blog.blogId)">Comment</a></p>
+	<div class="row">
+		<br>
+		<form class="col-sm-12 inner-content" ng-submit="blogCtrl.submitBlog()">
+			<input type="hidden" ng-model="blogCtrl.blog.blogId" />
+			<div class="input-field">
+				<i class="fa fa-server fa-2x prefix {{blogCtrl.blog.blogName ? 'active' : ''}}"></i>
+				<input id="icon_prefix" type="text" class="validate" ng-model="blogCtrl.blog.blogName" required>
+				<label for="icon_prefix" class="{{blogCtrl.blog.blogName ? 'active' : ''}}"">Blog Name</label>
+			</div>
+			<div class="input-field">
+				<i class="material-icons prefix {{blogCtrl.blog.blogDescription ? 'active' : ''}}">phone</i>
+				<textarea id="blog_description"  class="materialize-textarea" ng-model="blogCtrl.blog.blogDescription"></textarea>
+				<label for="blog_description" class="{{blogCtrl.blog.blogDescription ? 'active' : ''}}">Description</label>
+			</div>
+			<input type="submit"  value="{{!blogCtrl.blog.blogId ? 'Add Blog' : 'Update Blog'}}" class="btn {{!blogCtrl.blog.blogId ? 'green' : 'amber'}} col-sm-offset-2">
 
-												<br>
-											</div>
-											<div class="collapsible-body">									
-												<ul class="collection" ng-repeat="blogComment in blog.blogComments">
-													<li class="collection-item avatar">
-														<img  class="circle card-image" ng-src="assets/images/{{blogComment.userImage}}.jpg"><span class="card-text">{{blogComment.blogCommentContent}}</span>
-													</li>
-												</ul>
+		</form>
+	</div>
+	<div class="row">
+		<div class="col-sm-9">
 
-												<span ng-if="blog.blogComments>4"><button class="btn green darken-1 waves-effect waves-light">View more</button></span>
-											</div>
-										</li>
-										<script>
+			<h3 ng-show="blogCtrl.failed">Unable to load data please try after sometime</h3>
+
+			<div ng-hide="blogCtrl.failed">
+				<p class="text-center" ng-hide="blogCtrl.dataLoaded">
+					<i class="fa fa-spinner fa-pulse fa-5x"></i>
+				</p>
+
+				<div class="row" ng-repeat="blog in blogCtrl.blogs | orderBy : '-createdAt' " ng-show="blogCtrl.dataLoaded">
+					<div class="col-sm-12" >
+						<ul class="collapsible popout" data-collapsible="accordion">
+							<li class="inner-content">
+								<div class="collapsible-header collection">
+									<h2>{{blog.blogName}}</h2>&nbsp;<span ng-click="blogCtrl.editBlog(blog.blogId)" class="fa fa-edit fa-5x"></span><span class="fa fa-trash" ng-click="blogCtrl.deleteBlog(blog.blogId)"></span>
+									<p class="title">{{blog.blogDescription}}&nbsp;&nbsp;
+									</p>
+									<p> <b>{{blog.blogComments.length}} Comment/s</b> - &nbsp;&nbsp; 
+										Last Updated {{blog.modifiedAt}}&nbsp;&nbsp;<a href="#/blog/view/{{blog.blogId}}" class="btn blur lighten 2">Comment</a></p>
+
+										<br>
+									</div>
+									<div class="collapsible-body">									
+										<ul class="collection" ng-repeat="blogComment in blog.blogComments | limitTo : 4">
+											<li class="collection-item avatar">
+												<img  class="circle card-image" ng-src="assets/images/{{blogComment.userImage}}.jpg"><span class="card-text">{{blogComment.blogCommentContent}}</span>
+											</li>
+										</ul>
+
+										<span ng-if="blog.blogComments.length>4"><a href="#/blog/view/{{blog.blogId}}" class="btn green darken-1 waves-effect waves-light">View more</a></span>
+									</div>
+								</li>
+								<script>
 //Instert this just after closing </li>             
 $(document).ready(function() {
 	$('.collapsible').collapsible({

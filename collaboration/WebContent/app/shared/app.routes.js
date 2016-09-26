@@ -15,7 +15,7 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 		controller:'forumController',
 		controllerAs:'forumCtrl'
 	}).
-	when('/blog/view',{
+	when('/blog/view/:blogId',{
 		templateUrl:'app/components/blog/singleBlogView.html',
 		controller:'singleBlogController',
 		controllerAs:'blogCommCtrl'

@@ -1,59 +1,36 @@
-<div class="container-fluid content-wrapper">
+	
+<br><br>
+<ul class="collection with-header inner-content" >
+	<li class="collection-header">
+		<h2>{{blogCommCtrl.singleBlog.blogName}}</h2>
+		<p> <b>{{blogCommCtrl.singleBlog.blogComments.length}} Comment/s</b>  &nbsp;&nbsp; 
+			Last Updated {{blogCommCtrl.singleBlog.modifiedAt}}&nbsp;&nbsp;Comment</a></p>
+			<hr>
 
-	<div class="row">
-		<div class="col-sm-9">
-
-			<h3 ng-show="blogCtrl.failed">Unable to load data please try after sometime</h3>
-
-			<div ng-hide="blogCtrl.failed">
-				<p class="text-center" ng-hide="blogCtrl.dataLoaded">
-					<i class="fa fa-spinner fa-pulse fa-5x"></i>
-				</p>
-
-				<!-- <div class="row" ng-repeat="blog in blogCtrl.blogs" ng-show="blogCtrl.dataLoaded"> -->
-				<div class="col-sm-12">
-					<ul>
-						<li class="inner-content">
-							<div class="collection-header">
-								<h2>{{blogCommCtrl.singleBlog.blogName}}</h2>&nbsp;
-								<p class="title">{{blogCommCtrl.singleBlog.blogDescription}}&nbsp;&nbsp;
-								</p>
-								<p> <b>{{blogCommCtrl.singleBlog.blogComments.length}} Comment/s</b>  &nbsp;&nbsp; 
-									Last Updated {{blogCommCtrl.singleBlog.modifiedAt}}&nbsp;&nbsp;Comment</a></p>
-
-
-									<hr>
-
-									<div class="row">
-										<div class="col-sm-9">
-											<div class="input-field">
-												<i class="fa fa-server fa-2x prefix"></i>
-												<input id="icon_prefix" type="text" class="validate" ng-model="blogCtrl.comment" required>
-												<label for="icon_prefix">Comment</label>
-											</div>
-										</div>
-										<div class="col-sm-2">
-											<button class="btn blue lighten 2">Comment</button>
-										</div>
-
-									</div>
-
-									<br>
-									<div>									
-										<ul class="collection" ng-repeat="blogComment in blogCommCtrl.singleBlog.blogComments | orderBy : 'blogComments.commentedAt' ">
-											<li class="collection-item avatar">
-												<img  class="circle card-image" ng-src="assets/images/{{blogComment.userImage}}.jpg"><span class="card-text">{{blogComment.blogCommentContent}}</span>
-											</li>
-										</ul>
-
-									</div>
-								</div>
-							</li>
-						</ul>
+			<div class="row">
+				<div class="col-xs-9">
+					<div class="input-field">
+						<i class="fa fa-server fa-2x prefix"></i>
+						<input id="icon_prefix" type="text" class="validate" ng-model="blogCommCtrl.blogComment.blogCommentContent" required>
+						<label for="icon_prefix">Type your views</label>
 					</div>
 				</div>
+				<div class="col-xs-2">
+					<div class="col-sm-2">
+						<button class="btn blue lighten 2" ng-click="blogCommCtrl.comment(blogCommCtrl.singleBlog.blogId,blogCommCtrl.blogComment.blogCommentContent)" ng-disabled="blogCommCtrl.blogComment.blogCommentContent===''">Comment</button>
+					</div>
+				</div>
+
 			</div>
+
+		</li>
+		<div ng-repeat="blogComment in blogCommCtrl.singleBlog.blogComments | orderBy : '-blogComments.commentedAt'">
+		<li class="collection col-sm-9" style="border:0px;">
+				<img  class="circle card-image" ng-src="assets/images/{{blogComment.userImage}}.jpg">
+				<span class="card-text">{{blogComment.blogCommentContent}}</span>
+
+			</li>
+			<span class="pull right">{{blogComment.commentedAt}}</span>
 		</div>
-
-
+	</ul>
 

@@ -95,13 +95,18 @@ app.controller('blogController', ['blogFactory','$log', function(blogFactory,$lo
 
 
 	function createBlog(blog){
-		debugger;
+		self.process=true;
+		//debugger;
 		console.log(blog);
 		blogFactory.createBlog(blog)
 		.then(
-			fetchAllBlogs,
+			function(data){
+				self.blogs=self.blogs.concat(data);
+				self.process=false;
+			},
 			function(errResponse){
 				console.error("Error creating blog");
+				self.process=false;
 
 			});
 	}
@@ -128,11 +133,21 @@ app.controller('blogController', ['blogFactory','$log', function(blogFactory,$lo
 
 	
 	function updateBlog(blog ,blogId){
+		self.process=true;
 		//debugger;
 		blogFactory.updateBlog(blog,blogId)
-		.then(fetchAllBlogs,
+		.then(function(data){
+			for(var i=0;i<self.blogs.length;i++){
+				if(self.blogs[i].blogId===blogId){
+					self.blogs.splice(i, 1, data);
+					break;
+				}
+			}
+			self.process=false;
+		},
 			function(errResponse){
 				console.log("Error updating blog");
+				self.process=false;
 			});
 		
 	}
@@ -160,13 +175,23 @@ app.controller('blogController', ['blogFactory','$log', function(blogFactory,$lo
 
 
 self.deleteBlog=function(blogId){
+	self.process=true;
 		//alert('In delete blog');
 		if(self.blog.blogId === blogId) {//clean form if the user to be deleted is shown there.
 			resetFields()
 		}
 		blogFactory.deleteBlog(blogId).
-		then(fetchAllBlogs,function(errResponse){
+		then(function(){
+			for(var i=0;i<self.blogs.length;i++){
+				if(self.blogs[i].blogId===blogId){
+					self.blogs.splice(i, 1);
+					break;
+				}
+			}
+			self.process=false;
+		},function(errResponse){
 			console.error("Error deleting blog");
+			self.process=false;
 		});
 
 	}

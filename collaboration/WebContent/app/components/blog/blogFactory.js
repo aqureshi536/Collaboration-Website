@@ -1,7 +1,7 @@
 app.factory('blogFactory', ['$http','$q', '$log', function($http,$q, $log){
 	
 	var address  = "http://localhost:8080/CollaborationWebsiteBackend/blogs/";
-	//var addressForComment = "http://localhost:8080/CollaborationWebsiteBackend/blogcomments/";
+	var addressForComment = "http://localhost:8080/CollaborationWebsiteBackend/blogcomments/";
 	var factory= {
 		fetchAllBlogs:fetchAllBlogs,
 		createBlog:createBlog,
@@ -118,9 +118,9 @@ app.factory('blogFactory', ['$http','$q', '$log', function($http,$q, $log){
 
 	/*for commenting on a blog*/
 
-	function createBlogComment(blog,comment){
+	function createBlogComment(bc){
 		var deferred = $q.defer();
-		$http.post(addressForComment,blog,comment).
+		$http.post(addressForComment,bc).
 		then(function(response){
 			deferred.resolve(response.data);
 			console.log('created blog comment');
@@ -128,7 +128,10 @@ app.factory('blogFactory', ['$http','$q', '$log', function($http,$q, $log){
 			deferred.reject(errResponse);
 			console.error('error creating blogcomments');
 		});
+		return deferred.promise;
 	}
+
+
 
 
 }]);

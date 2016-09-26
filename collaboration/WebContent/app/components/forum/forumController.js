@@ -33,32 +33,38 @@
 			self.singleForum={};	
 
 			fetchAllForums();
-
+			
 			function fetchAllForums(){
 			//	debugger;
+			self.dataLoaded= false;
 			forumFactory.fetchAllForums().
 			then(function(data){
 			//	console.log(response);
 			self.forums=data;
-			$log.info(self.forums);
+			//$log.info(self.forums);
+			self.dataLoaded= true;
+			self.failed=false;
 		},function(errResponse){
 			console.error(errResponse);
+			self.failed=true;
+			self.dataLoaded= true;
 		});
 		}
 
 		function createForum(forum){
+			self.process=true;
 			forumFactory.createForum(forum).
 			then(function(data){
 				//$.extend( true, self.forums, data);
 				/*self.addedForum=forumFactory.getAddedForum();*/
-
-
+				
 				//self.forums=angular.merge(self.forums,data);
 				self.forums=self.forums.concat(data);// to refresh the data
 				/*$log.info(self.forums);*/
+				self.process=false;
 			},
 			function(errResponse){
-
+				self.process=false;
 				console.error(errResponse);
 			});
 			
@@ -79,15 +85,19 @@
 
 
 		function updateForum(forum){
+			self.process=true;
 			forumFactory.updateForum(forum).
 			then(function(data){
+
 				self.editedForum=data;
 				for(var i=0;i<self.forums.length;i++){
 					if(self.forums[i].forumId===data.forumId){
 						self.forums.splice(i,1,data);
 					}
 				}
+				self.process=false;
 			},function(errResponse){
+				self.process=false;
 				console.error(errResponse);
 				console.error("Error updating forum : "+forumId);
 			});
@@ -108,6 +118,7 @@
 
 		self.deleteForum= function(forumId){
 			//debugger;
+			self.process=true;
 			forumFactory.deleteForum(forumId).
 			then(function(data){
 				for(var i=0;i<self.forums.length;i++){
@@ -117,7 +128,9 @@
 					}
 					console.log('Deleted Successfull : '+forumId)
 				}
+				self.process=false;
 			},function(errResponse){
+				self.process=false;
 				console.error('Not Able to delete : '+forumId);
 			});
 		}
