@@ -13,6 +13,7 @@ public class Event {
 	@Id
 	private String eventId;
 	private String content;
+	private String place;
 	private Timestamp eventAt;
 	private Timestamp postedAt;
 
@@ -30,6 +31,14 @@ public class Event {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
 	}
 
 	public Timestamp getEventAt() {

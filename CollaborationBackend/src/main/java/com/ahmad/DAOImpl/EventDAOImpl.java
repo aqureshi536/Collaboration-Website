@@ -5,11 +5,13 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ahmad.DAO.EventDAO;
 import com.ahmad.model.Event;
 
+@Repository("eventDAO")
 public class EventDAOImpl implements EventDAO {
 	@Autowired
 	SessionFactory sessionFactory;
@@ -44,6 +46,14 @@ public class EventDAOImpl implements EventDAO {
 	@Transactional
 	public List<Event> listEvents() {
 		String hql = "from Event";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Event> listOfEvents = query.getResultList();
+		return listOfEvents;
+	}
+	
+	@Transactional
+	public List<Event> listEventByEventAt(){
+		String hql = "from Event order by eventAt asc";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<Event> listOfEvents = query.getResultList();
 		return listOfEvents;

@@ -24,7 +24,7 @@
 			</div>
 
 		</li>
-		<div ng-repeat="blogComment in blogCommCtrl.singleBlog.blogComments | orderBy : '-blogComments.commentedAt'">
+		<div ng-repeat="blogComment in blogCommCtrl.singleBlog.blogComments | orderBy : '-commentedAt'">
 		<li class="collection col-sm-9" style="border:0px;">
 				<img  class="circle card-image" ng-src="assets/images/{{blogComment.userImage}}.jpg">
 				<span class="card-text">{{blogComment.blogCommentContent}}</span>

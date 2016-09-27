@@ -63,7 +63,8 @@
 										<img  class="circle card-image" ng-src="assets/images/{{fp.userImage}}.jpg"><span class="card-text">{{fp.forumPostContent}}</span>
 									</li>
 								</ul>
-								<button class="btn green darken-1 waves-effect waves-light" ng-show="forum.forumPosts.length>4">View More</button>
+								<button class="btn green darken-1 waves-effect waves-light" ng-show="forum.forumPosts.length>4" 
+								ng-click="forumCtrl.getForum(forum.forumId)">View More</button>
 							</div>
 						</li>
 						<script>

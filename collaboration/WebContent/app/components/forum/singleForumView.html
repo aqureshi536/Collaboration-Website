@@ -21,7 +21,7 @@
 
 		</div>
 	</li>
-	<li class="collection" style="border:0px;" ng-repeat="forumPost in sforumCtrl.forum.forumPosts">
+	<li class="collection" style="border:0px;" ng-repeat="forumPost in sforumCtrl.forum.forumPosts | orderBy : '-postedAt'">
 		{{forumPost.forumPostContent}}&nbsp;&nbsp;<span class="pull right">	{{forumPost.postedAt}}</span>
 	</li>
 

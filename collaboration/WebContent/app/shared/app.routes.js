@@ -23,6 +23,10 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 		templateUrl:'app/components/forum/singleForumView.html',
 		controller:'singleForumController',
 		controllerAs:'sforumCtrl'
+	}).
+	when('/event/',{
+		templateUrl:'app/components/event/eventView.html',
+		
 	})
 	.otherwise({
 		redirectTo:'/home/	'

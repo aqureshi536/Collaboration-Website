@@ -13,4 +13,6 @@ public interface EventDAO {
 	Event getEvent(String eventId);
 	
 	List<Event> listEvents();
+	
+	List<Event> listEventByEventAt();
 }
