@@ -36,7 +36,7 @@ import antlr.debug.Event;
 public class ApplicationConfig {
 
 	@Bean(name = "datasource")
-	public DataSource getOracleDatasource() {
+	public static DataSource getOracleDatasource() {
 		DriverManagerDataSource datasource = new DriverManagerDataSource();
 		datasource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		datasource.setUrl("jdbc:oracle:thin:@localhost:1521:oracledb");

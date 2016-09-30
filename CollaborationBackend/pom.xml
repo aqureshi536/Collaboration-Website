@@ -39,7 +39,12 @@
 			<version>7.0</version>
 		</dependency>
 
-
+		<!-- spring security oauth2 -->
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>2.0.11.RELEASE</version>
+		</dependency>
 
 
 		<!-- Facter Xml Jackson -->
@@ -67,13 +72,8 @@
 			<artifactId>jackson-datatype-joda</artifactId>
 			<version>2.8.2</version>
 		</dependency>
-<!-- 
-		<dependency>
-			<groupId>org.jadira.usertype</groupId>
-			<artifactId>usertype.core</artifactId>
-			<version>6.0.0.GA</version>
-		</dependency>
- -->
+		<!-- <dependency> <groupId>org.jadira.usertype</groupId> <artifactId>usertype.core</artifactId> 
+			<version>6.0.0.GA</version> </dependency> -->
 
 		<!-- Sl4j logger -->
 		<dependency>

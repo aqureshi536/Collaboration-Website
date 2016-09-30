@@ -262,3 +262,11 @@ font-size: 18px;
 }
 
 
+[type="radio"]:not(:checked) + label,
+[type="radio"]:checked + label{
+	font-size: 1em;
+}
+
+legend{
+	font-size: 15px;
+}

@@ -24,8 +24,11 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 		controller:'singleForumController',
 		controllerAs:'sforumCtrl'
 	}).
+	when('/login',{
+		templateUrl:'app/components/pages/login.html'
+	}).
 	when('/event/',{
-		templateUrl:'app/components/event/eventView.html',
+		templateUrl:'app/components/event/eventView.html'
 		
 	})
 	.otherwise({
