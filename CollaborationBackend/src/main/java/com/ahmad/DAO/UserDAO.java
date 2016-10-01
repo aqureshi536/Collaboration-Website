@@ -1,13 +1,13 @@
 package com.ahmad.DAO;
 
-import com.ahmad.model.User;
+import com.ahmad.model.UserCheck;
 
 public interface UserDAO {
 
-	void saveOrUpdateUser(User user);
+	void saveOrUpdateUser(UserCheck user);
 	
 	void deleteUser(String userId);
 	
-	User getUser(String userId);
+	UserCheck getUser(String userId);
 	
 }

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ahmad.DAO.UserDAO;
-import com.ahmad.model.User;
+import com.ahmad.model.UserCheck;
 
 public class UserDAOImpl implements UserDAO {
 	@Autowired
@@ -19,23 +19,23 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Transactional
-	public void saveOrUpdateUser(User user) {
+	public void saveOrUpdateUser(UserCheck user) {
 		sessionFactory.getCurrentSession().saveOrUpdate(user);
 	}
 
 	@Transactional
 	public void deleteUser(String userId) {
-		User userToDelete = new User();
+		UserCheck userToDelete = new UserCheck();
 		userToDelete.setUserId(userId);
 		sessionFactory.getCurrentSession().delete(userToDelete);
 
 	}
 
 	@Transactional
-	public User getUser(String userId) {
+	public UserCheck getUser(String userId) {
 		String hql= "from User where userId=:userId";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("userId",userId);
-		List<User> gotUser=query.getResultList();
+		List<UserCheck> gotUser=query.getResultList();
 		if(gotUser!=null && !gotUser.isEmpty())
 			return gotUser.get(0);
 		return null;

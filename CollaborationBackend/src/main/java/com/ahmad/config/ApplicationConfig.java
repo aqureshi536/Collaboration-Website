@@ -24,7 +24,7 @@ import com.ahmad.model.ForumPost;
 import com.ahmad.model.ForumPostComment;
 import com.ahmad.model.JobOpportunity;
 import com.ahmad.model.Test;
-import com.ahmad.model.User;
+import com.ahmad.model.UserCheck;
 import com.ahmad.model.UserAuthorities;
 import com.ahmad.model.UserDetail;
 
@@ -59,7 +59,7 @@ public class ApplicationConfig {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(datasource);
 		sessionBuilder.addProperties(getHibernateProperties());
 		sessionBuilder.addAnnotatedClass(UserDetail.class);
-		sessionBuilder.addAnnotatedClass(User.class);
+		sessionBuilder.addAnnotatedClass(UserCheck.class);
 		sessionBuilder.addAnnotatedClass(UserAuthorities.class);
 		sessionBuilder.addAnnotatedClass(Blog.class);
 		sessionBuilder.addAnnotatedClass(BlogComment.class);

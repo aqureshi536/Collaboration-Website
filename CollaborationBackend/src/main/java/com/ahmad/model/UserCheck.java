@@ -1,13 +1,12 @@
 package com.ahmad.model;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class User {
+public class UserCheck {
 	
 	private String userId;
 	@Id
