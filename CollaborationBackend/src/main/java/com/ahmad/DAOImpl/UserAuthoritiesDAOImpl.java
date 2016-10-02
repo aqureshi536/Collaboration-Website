@@ -7,11 +7,13 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ahmad.DAO.UserAuthoritiesDAO;
 import com.ahmad.model.UserAuthorities;
 
+@Repository("userAutoritiesDAO")
 public class UserAuthoritiesDAOImpl implements UserAuthoritiesDAO {
 
 	@Autowired
@@ -28,9 +30,9 @@ public class UserAuthoritiesDAOImpl implements UserAuthoritiesDAO {
 	}
 
 	@Transactional
-	public void deleteUserAuthority(String userId) {
+	public void deleteUserAuthority(String email) {
 		UserAuthorities userAuthorityToDelete = new UserAuthorities();
-		userAuthorityToDelete.setUserId(userId);
+		userAuthorityToDelete.setEmail(email);
 		sessionFactory.getCurrentSession().delete(userAuthorityToDelete);
 
 	}

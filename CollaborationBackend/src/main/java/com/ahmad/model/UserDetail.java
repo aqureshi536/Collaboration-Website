@@ -1,11 +1,18 @@
 package com.ahmad.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
+@Table(name = "user_detail")
 @Component
 public class UserDetail {
 
@@ -15,7 +22,16 @@ public class UserDetail {
 	private String name;
 	private String password;
 	private String gender;
-	private char status;//Will include A,P,R as keyword for Approved,Pending and Rejected respectively
+	private char status;// Will include A,P,R as keyword for Approved,Pending
+						// and Rejected respectively
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userDetail")
+	@JsonManagedReference
+	private Users users;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userDetail")
+	@JsonManagedReference
+	private UserAuthorities userAuthorities;
 
 	public String getUserId() {
 		return userId;
@@ -65,4 +81,19 @@ public class UserDetail {
 		this.status = status;
 	}
 
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+
+	public UserAuthorities getUserAuthorities() {
+		return userAuthorities;
+	}
+
+	public void setUserAuthorities(UserAuthorities userAuthorities) {
+		this.userAuthorities = userAuthorities;
+	}
 }

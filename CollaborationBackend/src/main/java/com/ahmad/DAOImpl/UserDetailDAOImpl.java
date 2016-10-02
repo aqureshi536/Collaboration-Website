@@ -53,4 +53,15 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 		return listOfUserDetails;
 	}
 
+	@Transactional
+	public UserDetail getUserByEmail(String email) {
+		String hql = "from UserDetail where email=:email";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("email", email);
+		List<UserDetail> gotUserDetail = query.getResultList();
+		if (gotUserDetail != null && !gotUserDetail.isEmpty())
+			return gotUserDetail.get(0);
+		return null;
+		
+	}
+
 }

@@ -1,6 +1,5 @@
-package com.ahmad.config;
+/*package com.ahmad.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +16,7 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 @EnableAuthorizationServer
 public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
 
-	@Autowired
+	//@Autowired
 	@Qualifier("authenticationManagerBean")
 	private AuthenticationManager authenticationManager;
 
@@ -45,4 +44,4 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
 	    public TokenStore tokenStore() {
 	        return new JdbcTokenStore(com.ahmad.config.ApplicationConfig.getOracleDatasource());
 	    }
-}
+}*/

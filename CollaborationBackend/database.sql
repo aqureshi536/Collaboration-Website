@@ -8,7 +8,7 @@ status char(1),
 CONSTRAINT pk_userId_userDetail primary key (userId)
 );
 
-create table Users(
+create table user_check(
 userId varchar2(20),
 email varchar2(250),
 password varchar2(250),

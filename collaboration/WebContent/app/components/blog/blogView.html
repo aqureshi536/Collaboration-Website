@@ -48,7 +48,7 @@
 					<i class="fa fa-spinner fa-pulse fa-5x"></i>
 				</p>
 
-				<div class="row" ng-repeat="blog in blogCtrl.blogs | orderBy : '-createdAt' " ng-show="blogCtrl.dataLoaded">
+				<div class="row" ng-repeat="blog in blogCtrl.blogs |orderBy : 'createdAt':true" ng-show="blogCtrl.dataLoaded">
 					<div class="col-sm-12" >
 						<ul class="collapsible popout" data-collapsible="accordion">
 							<li class="inner-content">
@@ -57,7 +57,7 @@
 									<p class="title">{{blog.blogDescription}}&nbsp;&nbsp;
 									</p>
 									<p> <b>{{blog.blogComments.length}} Comment/s</b> - &nbsp;&nbsp; 
-										Last Updated {{blog.modifiedAt}}&nbsp;&nbsp;<a href="#/blog/view/{{blog.blogId}}" class="btn blur lighten 2">Comment</a></p>
+										Last Updated {{blog.modifiedAt | date : 'h:mm a, MMM d, y '}}&nbsp;&nbsp;<a href="#/blog/view/{{blog.blogId}}" class="btn blur lighten 2">Comment</a></p>
 
 										<br>
 									</div>

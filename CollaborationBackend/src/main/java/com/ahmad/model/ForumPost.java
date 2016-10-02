@@ -22,7 +22,7 @@ public class ForumPost {
 	
 	private String userId;
 	private String forumPostContent;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="IST")
+	
 	private Timestamp postedAt;
 
 	@ManyToOne(fetch=FetchType.LAZY)

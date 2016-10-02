@@ -25,7 +25,9 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 		controllerAs:'sforumCtrl'
 	}).
 	when('/login',{
-		templateUrl:'app/components/pages/login.html'
+		templateUrl:'app/components/login/login.html',
+		controller:'loginController',
+		controllerAs:'loginCtrl'
 	}).
 	when('/event/',{
 		templateUrl:'app/components/event/eventView.html'

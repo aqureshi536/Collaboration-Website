@@ -4,7 +4,7 @@
 	<li class="collection-header">
 		<h2>{{blogCommCtrl.singleBlog.blogName}}</h2>
 		<p> <b>{{blogCommCtrl.singleBlog.blogComments.length}} Comment/s</b>  &nbsp;&nbsp; 
-			Last Updated {{blogCommCtrl.singleBlog.modifiedAt}}&nbsp;&nbsp;Comment</a></p>
+			Last Updated {{blogCommCtrl.singleBlog.modifiedAt | date : 'h:mm a, MMM d, y '}}&nbsp;&nbsp;Comment</a></p>
 			<hr>
 
 			<div class="row">
@@ -24,13 +24,13 @@
 			</div>
 
 		</li>
-		<div ng-repeat="blogComment in blogCommCtrl.singleBlog.blogComments | orderBy : '-commentedAt'">
+		<div ng-repeat="blogComment in blogCommCtrl.singleBlog.blogComments | orderBy : 'commentedAt':true">
 		<li class="collection col-sm-9" style="border:0px;">
 				<img  class="circle card-image" ng-src="assets/images/{{blogComment.userImage}}.jpg">
 				<span class="card-text">{{blogComment.blogCommentContent}}</span>
 
 			</li>
-			<span class="pull right">{{blogComment.commentedAt}}</span>
+			<span class="pull right">{{blogComment.commentedAt | date : 'h:mm a, MMM d, y '}}</span>
 		</div>
 	</ul>
 

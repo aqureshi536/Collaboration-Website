@@ -3,7 +3,7 @@
 	<li class="collection-header">
 		<h3>{{sforumCtrl.forum.forumTitle}}</h3>
 		<p>{{sforumCtrl.forum.forumDescription}}</p>
-		Last Updated : {{sforumCtrl.forum.modifiedAt}}
+		Last Updated : {{sforumCtrl.forum.modifiedAt | date : 'h:mm a, MMM d, y '}}
 		<br>
 		<hr>
 
@@ -21,8 +21,8 @@
 
 		</div>
 	</li>
-	<li class="collection" style="border:0px;" ng-repeat="forumPost in sforumCtrl.forum.forumPosts | orderBy : '-postedAt'">
-		{{forumPost.forumPostContent}}&nbsp;&nbsp;<span class="pull right">	{{forumPost.postedAt}}</span>
+	<li class="collection" style="border:0px;" ng-repeat="forumPost in sforumCtrl.forum.forumPosts | orderBy : 'postedAt':true">
+		{{forumPost.forumPostContent}}&nbsp;&nbsp;<span class="pull right">	{{forumPost.postedAt | date : 'h:mm a, MMM d, y '}}</span>
 	</li>
 
 </ul>

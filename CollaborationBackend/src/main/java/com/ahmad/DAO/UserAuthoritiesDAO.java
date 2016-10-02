@@ -8,7 +8,7 @@ public interface UserAuthoritiesDAO {
 
 	void saveOrUpdateUserAuthority(UserAuthorities userAuthorities);
 	
-	void deleteUserAuthority(String userId);
+	void deleteUserAuthority(String email);
 	
 	UserAuthorities getUserAuthority(String userId);
 }

@@ -28,7 +28,7 @@ public class BlogComment implements Serializable {
 	private String blogCommentId;
 	private String userId;
 	private String blogCommentContent;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="IST")
+	
 	private Timestamp commentedAt;
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -1,21 +1,20 @@
 package com.ahmad.test;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import javax.ejb.EJB;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import com.ahmad.DAO.TestDAO;
-import com.ahmad.model.Test;
+import com.ahmad.utility.EmailSender;
 
 public class TestTest {
-
+	
+	@EJB
+	EmailSender emailSender;
+	
 	public static void main(String[] args){
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.scan("com.ahmad");
-		context.refresh();
+		/*AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+	context.scan("com.ahmad");
+		context.refresh();*/
 		
-		TestDAO testd= (TestDAO) context.getBean("testDAO");
+	/*	TestDAO testd= (TestDAO) context.getBean("testDAO");
 		Test test = (Test)context.getBean("test");
 		Date date= new Date();
 		long time1=date.getTime();
@@ -24,8 +23,11 @@ public class TestTest {
 		test.setTestName("Updated name");
 		test.setTestDate(time);
 		
-		/*testd.saveOrUpdateTest(test);*/
+		testd.saveOrUpdateTest(test);
 		
-		testd.delete("T002");
+		testd.delete("T002");*/
+	
+		
+		
 	}
 }

@@ -5,11 +5,12 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ahmad.DAO.UserDAO;
-import com.ahmad.model.UserCheck;
-
+import com.ahmad.model.Users;
+@Repository("UserDAO")
 public class UserDAOImpl implements UserDAO {
 	@Autowired
 	SessionFactory sessionFactory;
@@ -19,23 +20,23 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Transactional
-	public void saveOrUpdateUser(UserCheck user) {
+	public void saveOrUpdateUser(Users user) {
 		sessionFactory.getCurrentSession().saveOrUpdate(user);
 	}
 
 	@Transactional
-	public void deleteUser(String userId) {
-		UserCheck userToDelete = new UserCheck();
-		userToDelete.setUserId(userId);
+	public void deleteUser(String email) {
+		Users userToDelete = new Users();
+		userToDelete.setEmail(email);
 		sessionFactory.getCurrentSession().delete(userToDelete);
 
 	}
 
 	@Transactional
-	public UserCheck getUser(String userId) {
+	public Users getUser(String userId) {
 		String hql= "from User where userId=:userId";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("userId",userId);
-		List<UserCheck> gotUser=query.getResultList();
+		List<Users> gotUser=query.getResultList();
 		if(gotUser!=null && !gotUser.isEmpty())
 			return gotUser.get(0);
 		return null;

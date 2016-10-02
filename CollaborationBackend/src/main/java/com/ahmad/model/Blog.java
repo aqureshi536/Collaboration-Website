@@ -34,9 +34,9 @@ public class Blog implements Serializable {
 	
 	private char status; // Will include A,P,R as keyword for Approved,Pending
 							// and Rejected respectively
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="IST")
+	
 	private Timestamp createdAt;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="IST")
+	
 	private Timestamp modifiedAt;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "blog")

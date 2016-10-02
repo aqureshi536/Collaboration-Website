@@ -1,3 +1,4 @@
+
 package com.ahmad.model;
 
 import java.sql.Timestamp;
@@ -23,9 +24,9 @@ public class Forum {
 	private String userId;
 	private String forumTitle;
 	private String forumDescription;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="IST")
+	
 	private Timestamp createdAt;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ss", timezone="IST")
+	
 	private Timestamp modifiedAt;
 	private char status;// Will include A,P,R as keyword for Approved,Pending
 						// and Rejected respectively

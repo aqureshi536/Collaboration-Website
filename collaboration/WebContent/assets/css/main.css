@@ -270,3 +270,20 @@ font-size: 18px;
 legend{
 	font-size: 15px;
 }
+
+.error{
+	color:white;
+	text-align: center;
+	border-radius: 3px;
+	padding:5px;
+	font-size: 1.2em;
+
+}
+.success{
+	color:black;
+	text-align: center;
+	border:2px solid green;
+	padding:5px;
+	border-radius: 3px;
+	font-size: 1.2em;
+}
