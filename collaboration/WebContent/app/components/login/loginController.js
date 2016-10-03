@@ -1,17 +1,14 @@
 app.controller('loginController', ['loginFactory', function(loginFactory){
 	var self = this;
 	self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
-	self.error=true;
+	self.error=false;
 
 	self.registerUser = function(){
 		self.process=true;
 		loginFactory.registerUser(self.user).
 		then(function(data){	
-			self.error=true;
-			self.userexist=false;
-			if(data.status==201){
-				alert(data.status);
-			}
+			self.error=false;
+			self.userexist=false;			
 			console.log('registered user');	
 			self.registered=true;
 			self.process=false;
@@ -20,11 +17,14 @@ app.controller('loginController', ['loginFactory', function(loginFactory){
 			self.registered=false;
 			if(errResponse.status==409){
 				self.userexist=true;
-			}
-			else{
 				self.error=false;
 			}
+			else{
+				self.error=true;
+				self.userexist=false;
+			}
 			self.process=false;
+			
 		});
 		reset();
 	}
