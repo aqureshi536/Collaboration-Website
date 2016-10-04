@@ -55,16 +55,20 @@ app.factory('blogFactory', ['$http','$q', '$log', function($http,$q, $log){
 		var deferred = $q.defer();
 		debugger;
 
-		$http.post(address,blog)		
-		.then(
-			function (response) {
+		$http.post(address,blog,{
+			transformRequest : angular.identity,
+			headers : {
+				'Content-Type' : undefined
+			}
+		}).then(
+		function (response) {
 
-				deferred.resolve(response.data);
-			},
-			function(errResponse){
-				console.error('Error adding blog');
-				deferred.reject(errResponse);
-			});
+			deferred.resolve(response.data);
+		},
+		function(errResponse){
+			console.error('Error adding blog');
+			deferred.reject(errResponse);
+		});
 		return deferred.promise;
 	}
 

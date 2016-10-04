@@ -114,9 +114,16 @@ app.controller('blogController', ['blogFactory','$log', function(blogFactory,$lo
 
 	self.submitBlog = function (){
 		//alert("in create blog");
-		//debugger;
+		debugger;
 		if(self.blog.blogId === '' || self.blog.blogId === undefined){
-			createBlog(self.blog);
+			var formData = new FormData();
+			var file = self.blogImage;
+			console.dir(file);			
+			formData.append('blogImage',file);
+			formData.append('blog',angular.toJson(self.blog,true));
+			console.log(self.blog);
+			console.log(formData);
+			createBlog(formData);
 			//debugger;
 		}  /*if blog id doesnt exist from begning save it*/
 		
@@ -197,8 +204,9 @@ self.deleteBlog=function(blogId){
 	}
 
 	function resetFields(){
-		self.blog={blogId:'',blobloggName:'',blogDescription:''};
+		self.blog={blogId:'',blogName:'',blogDescription:''};
 		self.comment='';
+		self.blogImage='';
 	}
 
 
