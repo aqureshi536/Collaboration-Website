@@ -29,6 +29,7 @@ import com.ahmad.DAO.BlogCommentDAO;
 import com.ahmad.DAO.BlogDAO;
 import com.ahmad.model.Blog;
 import com.ahmad.model.BlogComment;
+import com.ahmad.utility.FileUpload;
 import com.ahmad.utility.IdGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsonorg.JsonOrgModule;
@@ -48,36 +49,35 @@ public class BlogController {
 	@Autowired
 	BlogCommentDAO blogCommentDAO;
 
+	private String path = "E:\\beone\\blog\\";
+
 	@GetMapping("/blogs/")
 	public ResponseEntity<List<Blog>> listAllBlogs() {
 		List<Blog> listOfBlogs = blogDAO.listBlogsByCreatedAt();
 		if (listOfBlogs.isEmpty()) {
-			return new ResponseEntity <List<Blog>> (HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<Blog>>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity < List < Blog >> (listOfBlogs, HttpStatus.OK);
+		return new ResponseEntity<List<Blog>>(listOfBlogs, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/blogs/{blogId}")
-	public ResponseEntity<Blog> getBlog(@PathVariable("blogId") String blogId){
+	public ResponseEntity<Blog> getBlog(@PathVariable("blogId") String blogId) {
 		this.blog = blogDAO.getBlog(blogId);
-		if(this.blog == null){
+		if (this.blog == null) {
 			return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Blog>(this.blog,HttpStatus.OK);
+		return new ResponseEntity<Blog>(this.blog, HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/blogs/")
-	public ResponseEntity<Blog> createBlog(@RequestParam(value="blog") String blogJson,@RequestParam(value="blogImage")MultipartFile file,HttpServletRequest request,UriComponentsBuilder ucBuilder){
+	public ResponseEntity<Blog> createBlog(@RequestParam(value = "blog") String blogJson,
+			@RequestParam(value = "blogImage") MultipartFile file, UriComponentsBuilder ucBuilder) {
 		System.out.println(blogJson.toString());
-		 JSONObject jsonObj = new JSONObject(blogJson);
-		// JsonNode jsonNode = convertJsonFormat(jsonObj);		 
-		 ObjectMapper mapper = new ObjectMapper().registerModule(new JsonOrgModule());
-		 blog=mapper.convertValue(jsonObj, Blog.class);
-		 
-		String directory = "E:\\beone\\blog\\";
-		
-	
-		
+		JSONObject jsonObj = new JSONObject(blogJson);
+		// JsonNode jsonNode = convertJsonFormat(jsonObj);
+		ObjectMapper mapper = new ObjectMapper().registerModule(new JsonOrgModule());
+		blog = mapper.convertValue(jsonObj, Blog.class);
+
 		blog.setBlogId(IdGenerator.generateId("BLG"));
 		Date date = new Date();
 		long time = date.getTime();
@@ -85,63 +85,47 @@ public class BlogController {
 		blog.setCreatedAt(timestamp);
 		blog.setModifiedAt(timestamp);
 		blog.setStatus('P');
-		
-		blog.setUserId("USR001");  //  to be changed when developed user module		
-		
+
+		blog.setUserId("USR001"); // to be changed when developed user module
+
 		blogDAO.saveOrUpdateBlog(blog);
-		
-		if(file!=null){
-			if(!Files.exists(Paths.get(directory))){
-				try{
-					Files.createDirectories(Paths.get(directory));
-				}
-				catch(Exception ex){
-					ex.printStackTrace();
-				}
-			}
-			try{
-				file.transferTo(new File(directory+blog.getBlogId()+".png"));
-			}
-			catch(Exception ex){
-				ex.printStackTrace();
-			}
-		}
-		
+
+		FileUpload.uploadImage(path, file, blog.getBlogId());
+
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(ucBuilder.path("/blog/{id}").buildAndExpand(blog.getBlogId()).toUri());
-		return new ResponseEntity<Blog>(blog,httpHeaders,HttpStatus.CREATED);
-		
-		
+		return new ResponseEntity<Blog>(blog, httpHeaders, HttpStatus.CREATED);
+
 	}
-	
+
 	@PutMapping("/blogs/{blogId}")
-	public ResponseEntity<Blog> updateBlog(@PathVariable("blogId")String blogId,@RequestBody Blog blog){
+	public ResponseEntity<Blog> updateBlog(@PathVariable("blogId") String blogId, @RequestBody Blog blog) {
 		this.blog = blogDAO.getBlog(blogId);
-		if(this.blog==null){
+		if (this.blog == null) {
 			return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);
 		}
 		this.blog.setBlogName(blog.getBlogName());
 		this.blog.setBlogDescription(blog.getBlogDescription());
 		Date date = new Date();
-	long time= 	date.getTime();
-	Timestamp timestamp = new Timestamp(time);
+		long time = date.getTime();
+		Timestamp timestamp = new Timestamp(time);
 		this.blog.setModifiedAt(timestamp);
 		blogDAO.saveOrUpdateBlog(this.blog);
-		return new ResponseEntity<Blog>(this.blog,HttpStatus.OK);
+		return new ResponseEntity<Blog>(this.blog, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/blogs/{blogId}")
-	public ResponseEntity<Blog> deleteBlog(@PathVariable("blogId")String blogId){
-	this.blog = blogDAO.getBlog(blogId);
-	if(this.blog==null){
-		System.out.println("Blog not exist to delete");
-		return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);
-		
-	}
-	
+	public ResponseEntity<Blog> deleteBlog(@PathVariable("blogId") String blogId) {
+		this.blog = blogDAO.getBlog(blogId);
+		if (this.blog == null) {
+			System.out.println("Blog not exist to delete");
+			return new ResponseEntity<Blog>(HttpStatus.NOT_FOUND);
+
+		}
+		FileUpload.deleteImage(path, blogId);
 		blogDAO.deleteBlog(blogId);
 		return new ResponseEntity<Blog>(HttpStatus.NO_CONTENT);
-	
+
 	}
 
 }
