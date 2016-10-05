@@ -2,6 +2,7 @@ app.controller('loginController', ['loginFactory', function(loginFactory){
 	var self = this;
 	self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
 	self.error=false;
+	self.client = {email:'',password:''};
 
 	self.registerUser = function(){
 		self.process=true;
@@ -30,9 +31,37 @@ app.controller('loginController', ['loginFactory', function(loginFactory){
 	}
 
 
+	/*######################  For registering user ###################################*/
+
+
+
+	self.login = function(){
+		var form = new FormData();
+
+		form.append('email',self.client.email);
+		form.append('password',self.client.password);
+		console.log(form);
+		loginUser(form);
+	}
+
+	function loginUser(user){
+		loginFactory.loginUser(user).
+		then(function(data){
+			console.log("login successful");
+		},function(errResponse){
+			console.error(errResponse.status);
+		});
+		resetLoginFields();
+	}
+
+
+
 	function reset(){
 		self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
 	};
 
+	function resetLoginFields(){
+		self.client={email:'',password:''};
+	};
 
 }])

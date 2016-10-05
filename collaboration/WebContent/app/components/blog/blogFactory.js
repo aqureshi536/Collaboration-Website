@@ -1,6 +1,6 @@
 app.factory('blogFactory', ['$http','$q', '$log', function($http,$q, $log){
 	
-	var address  = "http://localhost:8080/CollaborationWebsiteBackend/blogs/";
+	var address  = "http://localhost:8080/CollaborationWebsiteBackend/user/blogs/";
 	var addressForComment = "http://localhost:8080/CollaborationWebsiteBackend/blogcomments/";
 	var factory= {
 		fetchAllBlogs:fetchAllBlogs,

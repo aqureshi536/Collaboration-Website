@@ -13,16 +13,16 @@
 </div>
 </div><!-- Loader -->
 <div class="inner-content col-md-4">
-	<form action="">
+	<form ng-submit="loginCtrl.login()">
 		<h2 class="ctitle">Login</h2> 
 		<br>
 
 		<div class="input-field">
-			<input type="text" id="login-email">
+			<input type="text" id="login-email" ng-model="loginCtrl.client.email">
 			<label for="login-email">Email Id</label>
 		</div>
 		<div class="input-field">
-			<input type="text" id="login-password">
+			<input type="text" id="login-password" ng-model="loginCtrl.client.password">
 			<label for="login-password">Password</label>
 		</div>
 		<br>
