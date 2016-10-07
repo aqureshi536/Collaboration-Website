@@ -15,4 +15,6 @@ public interface UserDetailDAO {
 	List<UserDetail> listUserDetails();
 	
 	UserDetail getUserByEmail(String email);
+	
+	UserDetail checkUser(String email,String password);
 }

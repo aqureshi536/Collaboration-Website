@@ -3,36 +3,77 @@ package com.ahmad.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
-@Configuration
-@EnableWebSecurity
+/*@Configuration
+@EnableWebSecurity*/
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-
+	private static String REALM = "REALM_NAME";
 	@Autowired
 	DataSource datasource;
+
+	@Autowired
+	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("aqureshi536@gmail.com").password("050325").roles("STUDENT");
+
+	}
+
+	/*
+	 * @Override protected void configure(HttpSecurity http) throws Exception {
+	 * System.out.println("In security");
+	 * http.authorizeRequests().antMatchers("/admin/**").access(
+	 * "hasRole('ROLE_ADMIN')").antMatchers("/user/**")
+	 * .access("hasRole('ROLE_STUDENT')").antMatchers("/user/**").access(
+	 * "hasRole('ROLE_EMPLOYEE')")
+	 * .antMatchers("/user/**").access("hasRole('ROLE_ALUMNI')").and().formLogin
+	 * ().loginPage("/login").defaultSuccessUrl("/user/blogs/")
+	 * .loginProcessingUrl("/j_spring_security_check").usernameParameter("email"
+	 * ).passwordParameter("password")
+	 * .and().logout().logoutSuccessUrl("/login?logout").logoutUrl(
+	 * "/j_spring_security_logout")
+	 * .invalidateHttpSession(true).and().csrf().disable(); }
+	 */
+
+	/*
+	 * @Autowired public void configAuthentication(AuthenticationManagerBuilder
+	 * auth) throws Exception {
+	 * 
+	 * auth.jdbcAuthentication().dataSource(datasource)
+	 * .authoritiesByUsernameQuery("select email,authority from UserAuthorities where email=?"
+	 * )
+	 * .usersByUsernameQuery("select email,password,enabled from user_check where email=?"
+	 * );
+	 * 
+	 * }
+	 */
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')").antMatchers("/user/**")
-				.access("hasRole('ROLE_USER')").and().formLogin().loginPage("/login")
-				.loginProcessingUrl("/j_spring_security_check").usernameParameter("email")
-				.passwordParameter("password").and().logout().logoutSuccessUrl("/login?logout")
-				.logoutUrl("/j_spring_security_logout").invalidateHttpSession(true);
+		http.csrf().disable().authorizeRequests().antMatchers("/user/**")
+				.hasRole("STUDENT").antMatchers("/user/**").hasRole("ALUMNI").antMatchers("/user/**")
+				.hasRole("EMPLOYEE").antMatchers("/admin/**").hasRole("ADMIN").and().httpBasic().realmName(REALM)
+				.authenticationEntryPoint(getBasicAuthorityPoint()).and().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 	}
 
-	@Autowired
-	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		
-		auth.jdbcAuthentication().dataSource(datasource)
-				.authoritiesByUsernameQuery("select username,authority from UserAuthorities where email=?")
-				.usersByUsernameQuery("select username,password,enabled from user_check where email=?");
-
+	@Bean
+	public CustomBasicAuthenticationEntryPoint getBasicAuthorityPoint() {
+		return new CustomBasicAuthenticationEntryPoint();
 	}
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
+	}
+
 }

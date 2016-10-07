@@ -1,4 +1,4 @@
-app.controller('loginController', ['loginFactory', function(loginFactory){
+app.controller('loginController', ['loginFactory','$rootScope','$location', function(loginFactory,$rootScope,$location){
 	var self = this;
 	self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
 	self.error=false;
@@ -36,32 +36,81 @@ app.controller('loginController', ['loginFactory', function(loginFactory){
 
 
 	self.login = function(){
+		debugger;
 		var form = new FormData();
-
+	    //authInterceptor.username = self.client.email;
+		//authInterceptor.password = self.client.password;
 		form.append('email',self.client.email);
 		form.append('password',self.client.password);
-		console.log(form);
-		loginUser(form);
-	}
+		//Credentials.setCredentials(self.client.email,self.client.password);
 
-	function loginUser(user){
-		loginFactory.loginUser(user).
+		/*console.log(form);*/
+		//loginUser(form);
+		loginUser(self.client);
+}
+
+function loginUser(client){
+	debugger;
+	/*var values = {email:email,password:password}*/
+	loginFactory.loginUser(client).
+	then(function(data){
+		console.log("login successful");
+		console.log(data);
+		$location.path('/blog/');
+	},function(errResponse){
+		console.error(errResponse.status);
+	});
+	resetLoginFields();
+}
+
+	/*function loginUser(form){
+		loginFactory.loginUser(form).
 		then(function(data){
 			console.log("login successful");
+			//$location.path('/blog/');
 		},function(errResponse){
 			console.error(errResponse.status);
 		});
 		resetLoginFields();
-	}
+	}*/
 
 
 
-	function reset(){
-		self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
-	};
+	/*###################### Basic authenctication   ############*/
 
-	function resetLoginFields(){
-		self.client={email:'',password:''};
-	};
+
+
+
+	/*################  Code for oauth2 authentication  ########################*/
+
+/*self.login = function(){
+	$rootScope.username = self.client.email;
+	$rootScope.password = self.client.password;
+	console.log($rootScope);
+	loginFactory.firstRequest().
+	then(function(data){
+		console.log(data);
+		$rootScope.token = data;
+	},
+	function(errResponse){
+		console.log('error getting token');
+	});
+	resetLoginFields();
+}*/
+
+
+
+/*#############################################################################*/
+
+
+
+
+function reset(){
+	self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
+};
+
+function resetLoginFields(){
+	self.client={email:'',password:''};
+};
 
 }])

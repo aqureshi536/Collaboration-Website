@@ -1,4 +1,4 @@
-app.factory('blogFactory', ['$http','$q', '$log', function($http,$q, $log){
+app.factory('blogFactory', ['$http','$q', '$log', '$rootScope',function($http,$q, $log,$rootScope){
 	
 	var address  = "http://localhost:8080/CollaborationWebsiteBackend/user/blogs/";
 	var addressForComment = "http://localhost:8080/CollaborationWebsiteBackend/blogcomments/";
@@ -21,6 +21,9 @@ app.factory('blogFactory', ['$http','$q', '$log', function($http,$q, $log){
 	function fetchAllBlogs(){
 		//Create a deferred object
 		var deferred = $q.defer();
+		//var value = $rootScope.username+":"+$rootScope.password;
+		//console.log(value);
+		//$http.get(address)
 		$http.get(address)
 		.then(function(response){
 			deferred.resolve(response.data);

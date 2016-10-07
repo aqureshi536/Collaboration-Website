@@ -1,6 +1,6 @@
 app.factory('forumFactory', ['$http','$q', function($http,$q){
-	var address = 'http://localhost:8080/CollaborationWebsiteBackend/forums/';	
-	var addressPost = 'http://localhost:8080/CollaborationWebsiteBackend/forumPost/';
+	var address = 'http://localhost:8080/CollaborationWebsiteBackend/user/forums/';	
+	var addressPost = 'http://localhost:8080/CollaborationWebsiteBackend/user/forumPost/';
 
 	var factory = {
 		fetchAllForums:fetchAllForums,

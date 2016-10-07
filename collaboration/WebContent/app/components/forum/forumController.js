@@ -37,6 +37,7 @@
 			function fetchAllForums(){
 			//	debugger;
 			self.dataLoaded= false;
+			console.log("Success fetching forums");
 			forumFactory.fetchAllForums().
 			then(function(data){
 			//	console.log(response);
