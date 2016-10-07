@@ -3,6 +3,7 @@ app.controller('loginController', ['loginFactory','$rootScope','$location', func
 	self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
 	self.error=false;
 	self.client = {email:'',password:''};
+	//$rootScope.customUser= {data:'',status:''};
 
 	self.registerUser = function(){
 		self.process=true;
@@ -37,11 +38,11 @@ app.controller('loginController', ['loginFactory','$rootScope','$location', func
 
 	self.login = function(){
 		debugger;
-		var form = new FormData();
+		//var form = new FormData();
 	    //authInterceptor.username = self.client.email;
 		//authInterceptor.password = self.client.password;
-		form.append('email',self.client.email);
-		form.append('password',self.client.password);
+		//form.append('email',self.client.email);
+		//form.append('password',self.client.password);
 		//Credentials.setCredentials(self.client.email,self.client.password);
 
 		/*console.log(form);*/
@@ -56,12 +57,21 @@ function loginUser(client){
 	then(function(data){
 		console.log("login successful");
 		console.log(data);
-		$location.path('/blog/');
+		//$rootScope.customUser.data = data;
+		//$rootScope.customUser.status= true;
+		//$location.path('/blog/');
 	},function(errResponse){
 		console.error(errResponse.status);
 	});
 	resetLoginFields();
 }
+
+
+
+self.logout=function(){
+//$rootScope.customUser = '';
+//$rootScope.customUser.status= false;
+};
 
 	/*function loginUser(form){
 		loginFactory.loginUser(form).

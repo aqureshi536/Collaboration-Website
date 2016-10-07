@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-default menubar navbar-fixed-top">
+<nav class="navbar navbar-default menubar navbar-fixed-top" >
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 			<span class="icon-bar"></span>
@@ -25,7 +25,8 @@
 			</ul>
 
 		</li>
-		<li><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		<li ng-controller="loginController as loginCtrl" ng-if="!customUser.status"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		<li ng-controller="loginController as loginCtrl" ng-if="customUser.status" ng-click="loginCtrl.logout()"><a href="#/home"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 
 		<li><a href="#/event/"><span class="fa fa-calendar-o"></span> Events </a></li>
 		<li><a href="#"><span class="fa fa-newspaper-o"></span> News</a></li>
