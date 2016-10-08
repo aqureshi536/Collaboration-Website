@@ -10,7 +10,7 @@
 		</a>
 	</div>
 	<div class="collapse navbar-collapse" id="myNavbar">
-		<ul class="nav navbar-nav" >
+		<ul class="nav navbar-nav" ng-if="client">
 
 			<li><a href="#blog/" ><span class="fa fa-codepen"></span> Blog</a></li>
 			<li><a href="#forum/"><span class="glyphicon glyphicon-comment"></span> Forum</a></li>
@@ -19,15 +19,17 @@
 
 		<ul class="nav navbar-nav navbar-right" data-hover="dropdown"
 		data-animations="jello fadeInRight fadeInUp fadeInLeft">
-		<li class="dropdown"><a href= class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> User</a>
+		<li class="dropdown" ng-if="client"><a href= class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> User</a>
 			<ul class="dropdown-menu dropdownhover-bottom" role="menu">
 				<li><a href="#/blog/addBlog/">Add Blog</a></li>
 			</ul>
 
 		</li>
-		<li ng-controller="loginController as loginCtrl" ng-if="!customUser.status"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-		<li ng-controller="loginController as loginCtrl" ng-if="customUser.status" ng-click="loginCtrl.logout()"><a href="#/home"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-
+		
+		
+			<li><a href="#/login" ng-if="!client"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			<li ng-controller="loginController as Ctrl" ng-click="Ctrl.logout()" ng-if="client"><a href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+		
 		<li><a href="#/event/"><span class="fa fa-calendar-o"></span> Events </a></li>
 		<li><a href="#"><span class="fa fa-newspaper-o"></span> News</a></li>
 		<li style="margin-right:10px"><a href="#"><span class="glyphicon glyphicon-tower"></span> Jobs</a></li>

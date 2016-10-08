@@ -30,7 +30,9 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 		controllerAs:'loginCtrl'
 	}).
 	when('/event/',{
-		templateUrl:'./app/components/event/eventView.html'
+		templateUrl:'./app/components/event/eventView.html',
+		controller:'eventController',
+		controllerAs:'eventCtrl'
 		
 	})
 	.otherwise({

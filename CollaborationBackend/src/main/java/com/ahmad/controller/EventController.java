@@ -1,6 +1,7 @@
 package com.ahmad.controller;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ahmad.DAO.EventDAO;
 import com.ahmad.model.Event;
 import com.ahmad.utility.IdGenerator;
+import com.ahmad.viewmodel.EventModel;
 
 @RestController
 public class EventController {
@@ -30,7 +32,9 @@ public class EventController {
 	
 	@GetMapping("/events/")
 	public ResponseEntity<List<Event>> listEvents(){
-		List<Event> listOfEvents = eventDAO.listEventByEventAt();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		String date  = dateFormat.format(new Date());
+		List<Event> listOfEvents = eventDAO.listEvents();
 		if(listOfEvents==null || listOfEvents.isEmpty())
 		{
 			return new ResponseEntity<List<Event>>(HttpStatus.NO_CONTENT);
@@ -39,13 +43,17 @@ public class EventController {
 	}
 	
 	@PostMapping("/events/")
-	public ResponseEntity<Event> createEvent(@RequestBody Event event){
+	public ResponseEntity<Event> createEvent(@RequestBody EventModel eventModel){
+		event = eventModel.getEvent();
 		event.setEventId(IdGenerator.generateId("EVN"));
 		Date date = new Date();
 		long time = date.getTime();
 		Timestamp timestamp = new Timestamp(time);
 		event.setPostedAt(timestamp);
-		eventDAO.saveOrUpdateEvent(event);
+		
+		System.out.println(eventModel.getCalendar());		
+		
+		//eventDAO.saveOrUpdateEvent(event);
 		return new ResponseEntity<Event>(HttpStatus.OK);
 	}
 	

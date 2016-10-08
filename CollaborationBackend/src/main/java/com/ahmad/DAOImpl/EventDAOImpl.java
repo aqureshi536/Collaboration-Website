@@ -53,7 +53,7 @@ public class EventDAOImpl implements EventDAO {
 	
 	@Transactional
 	public List<Event> listEventByEventAt(){
-		String hql = "from Event order by eventAt asc";
+		String hql = "from Event e ORDER BY e.eventAt ASC";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<Event> listOfEvents = query.getResultList();
 		return listOfEvents;

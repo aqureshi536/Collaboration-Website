@@ -7,6 +7,8 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
+import com.ahmad.utility.IdGenerator;
+
 @Entity
 @Component
 public class Event {
@@ -57,4 +59,8 @@ public class Event {
 		this.postedAt = postedAt;
 	}
 
+	public Event(){
+		this.eventId = IdGenerator.generateId("EVN");
+	}
+	
 }

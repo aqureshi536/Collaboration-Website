@@ -90,7 +90,19 @@ public class LoginController {
 		UserToSend userToSend = new UserToSend();
 		userToSend.setUserId(userDetail.getUserId());
 		userToSend.setEmail( userDetail.getEmail());
-		userToSend.setRole( userAuthoritiesDAO.getUserAuthority(userDetail.getUserId()).getAuthority());
+		int roleValue = 0;
+		switch( userAuthoritiesDAO.getUserAuthority(userDetail.getUserId()).getAuthority()){
+		case "ROLE_STUDENT":
+			roleValue = 1;
+			break;
+		case "ROLE_ALUMNI":
+			roleValue = 2;
+			break;
+		case "ROLE_EMPLOYEE":
+			roleValue = 3;
+			break;		
+		}
+		userToSend.setRole(roleValue);
 		return new ResponseEntity<UserToSend>(userToSend,HttpStatus.OK);
 
 	}

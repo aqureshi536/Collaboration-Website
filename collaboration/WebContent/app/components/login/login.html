@@ -1,5 +1,6 @@
 <div class="container-fluid">
 	<br>
+	{{$storage.status}}
 	<!-- Loader -->
 	<div class="preloader-wrapper big active ajax-loader" ng-if="loginCtrl.process">
 		<div class="spinner-layer spinner-blue-only">
@@ -13,6 +14,7 @@
 </div>
 </div><!-- Loader -->
 <div class="inner-content col-md-4">
+	<p class="error">Invalid Credentials, Please provide right data credentials</p>
 	<form ng-submit="loginCtrl.login()">
 		<h2 class="ctitle">Login</h2> 
 		<br>

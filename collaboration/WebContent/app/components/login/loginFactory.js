@@ -59,7 +59,7 @@ function registerUser(user){
  function loginUser(values){
 
  	var deferred  = $q.defer();
- 	debugger;
+ 	//debugger;
  	$http.post(addressForLogin,values).
  	then(function(response){
  		deferred.resolve(response.data);

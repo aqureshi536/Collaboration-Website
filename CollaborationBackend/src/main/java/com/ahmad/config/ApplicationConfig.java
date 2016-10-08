@@ -26,7 +26,7 @@ import com.ahmad.model.UserAuthorities;
 import com.ahmad.model.UserDetail;
 import com.ahmad.model.Users;
 
-import antlr.debug.Event;
+import com.ahmad.model.Event;
 
 @Configuration
 @EnableTransactionManagement

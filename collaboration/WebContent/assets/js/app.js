@@ -5,7 +5,7 @@ var app = angular.module('module',[]);
 	$httpProvider.interceptors.push('authInterceptor');
 }]);*/
 
-app.run(['$http','$rootScope',function($http,$rootScope){
+/*app.run(['$http','$rootScope',function($http,$rootScope){
 	var value = $rootScope.username+":"+$rootScope.password;		
 	$http.defaults.headers.common['Authorization'] ='Basic '+btoa(value);
 	console.log(value);
@@ -14,4 +14,4 @@ app.run(['$http','$rootScope',function($http,$rootScope){
 app.config(['$httpProvider','$rootScope',function($httpProvider,$rootScope){	
 	var value = $rootScope.username+":"+$rootScope.password;		
 	$http.defaults.headers.common['Authorization'] ='Basic '+btoa(value);
-}]);
+}]);*/

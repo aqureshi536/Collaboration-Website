@@ -1,10 +1,21 @@
-app.controller('loginController', ['loginFactory','$rootScope','$location', function(loginFactory,$rootScope,$location){
+app.controller('loginController', ['loginFactory','authenticationFactory','$rootScope','$location','$scope','$localStorage',function(loginFactory,authenticationFactory,$rootScope,$location,$scope,$localStorage){
 	var self = this;
 	self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
 	self.error=false;
 	self.client = {email:'',password:''};
-	//$rootScope.customUser= {data:'',status:''};
+	self.loginError='';
 
+	//$rootScope.customUser= {data:'',status:''};
+	/*$scope.$storage= $localStorage.$default({});
+
+	(function () {
+		$scope.$storage.$reset();
+	})();
+	$scope.$storage= $localStorage.$default({status:''});
+
+	*/
+
+	$scope.$storage= $localStorage.$default(JSON.parse(window.localStorage.getItem("ngStorage-client")));
 	self.registerUser = function(){
 		self.process=true;
 		loginFactory.registerUser(self.user).
@@ -34,10 +45,21 @@ app.controller('loginController', ['loginFactory','$rootScope','$location', func
 
 	/*######################  For registering user ###################################*/
 
+	function initController() {
+            // reset login status
+            authenticationFactory.clearCredentials();
+        };
 
 
-	self.login = function(){
-		debugger;
+        initController();
+
+
+/*Method which log in the user*/
+
+        self.login = function(){
+        	self.process=true;
+        	debugger;
+		//debugger;
 		//var form = new FormData();
 	    //authInterceptor.username = self.client.email;
 		//authInterceptor.password = self.client.password;
@@ -47,31 +69,92 @@ app.controller('loginController', ['loginFactory','$rootScope','$location', func
 
 		/*console.log(form);*/
 		//loginUser(form);
-		loginUser(self.client);
-}
 
-function loginUser(client){
-	debugger;
+		authenticationFactory.login(self.client.email,self.client.password,function(data){
+			authenticationFactory.setCredentials(self.client.email,self.client.password);
+			resetLoginFields();
+
+			$rootScope.client = data;
+			$scope.$storage.client = data;
+			console.log($rootScope.client);
+			self.loginError='';
+			self.process = false;
+			$location.path("/");
+
+		});
+		
+	}
+ 
+
+/*method to logout user*/
+
+	self.logout=function(){
+		debugger;
+		$localStorage.$reset();
+		delete $rootScope.client;
+		$location.path("/");
+ /*document.cookie = 'globals';
+
+
+		function createCookie(name,value,days) {
+			if (days) {
+				var date = new Date();
+				date.setTime(date.getTime()+(days*24*60*60*1000));
+				var expires = "; expires="+date.toGMTString();
+			}
+			else var expires = "";
+			document.cookie = name+"="+value+expires+"; path=/";
+		}
+
+
+		function eraseCookie(name) {
+			createCookie(name,"",-1);
+		}
+
+
+		var cookies = document.cookie.split(";");
+		for (var i = 0; i < cookies.length; i++){
+			eraseCookie(cookies[i].split("=")[0]);
+		}*/
+
+	}
+
+
+	function reset(){
+		self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
+	};
+
+	function resetLoginFields(){
+		self.client={email:'',password:''};
+	};
+
+}]);
+
+//function loginUser(client){
+	//debugger;
 	/*var values = {email:email,password:password}*/
-	loginFactory.loginUser(client).
-	then(function(data){
-		console.log("login successful");
-		console.log(data);
+//	loginFactory.loginUser(client).
+//	then(function(data){
+//		console.log("login successful");
+//		console.log(data);
 		//$rootScope.customUser.data = data;
 		//$rootScope.customUser.status= true;
 		//$location.path('/blog/');
-	},function(errResponse){
-		console.error(errResponse.status);
-	});
-	resetLoginFields();
-}
+
+		
+//		$scope.$storage.client = data;
+		//$scope.$storage.status = true;
+
+		//console.log($scope.$storage.client);
+		//delete $scope.$storage.data;
+//	},function(errResponse){
+//		console.error(errResponse.status);
+//	});
+//	resetLoginFields();
+//}
 
 
 
-self.logout=function(){
-//$rootScope.customUser = '';
-//$rootScope.customUser.status= false;
-};
 
 	/*function loginUser(form){
 		loginFactory.loginUser(form).
@@ -115,12 +198,3 @@ self.logout=function(){
 
 
 
-function reset(){
-	self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
-};
-
-function resetLoginFields(){
-	self.client={email:'',password:''};
-};
-
-}])
