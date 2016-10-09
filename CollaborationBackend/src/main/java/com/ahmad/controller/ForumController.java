@@ -50,7 +50,7 @@ public class ForumController {
 		forum.setCreatedAt(timestamp);
 		forum.setModifiedAt(timestamp);
 		forum.setStatus('P');
-		forum.setUserId("USR001");
+		//forum.setUserId("USR001");
 		forumDAO.saveOrUpdateForum(forum);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(ucBuilder.path("/forums/{id}").buildAndExpand(forum.getForumId()).toUri());

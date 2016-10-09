@@ -83,7 +83,7 @@ public class BlogController {
 		blog.setModifiedAt(timestamp);
 		blog.setStatus('P');
 
-		blog.setUserId("USR001"); // to be changed when developed user module
+		//blog.setUserId("USR001"); // to be changed when developed user module
 
 		blogDAO.saveOrUpdateBlog(blog);
 

@@ -41,13 +41,13 @@ $scope.blogs=blogs;
 */
 
 
-app.controller('blogController', ['blogFactory','$log', function(blogFactory,$log){
+app.controller('blogController', ['blogFactory','$log','$rootScope', function(blogFactory,$log,$rootScope){
 
 	var self = this;
-	self.blog={blogId:'',blogName:'',blogDescription:''};
+	self.blog={blogId:'',blogName:'',blogDescription:'',userId:''};
 	self.blogs= [];
 	self.singleBlog={};
-
+	self.form = false;
 	fetchAllBlogs();
 
 
@@ -120,6 +120,7 @@ app.controller('blogController', ['blogFactory','$log', function(blogFactory,$lo
 			var file = self.blogImage;
 			console.dir(file);			
 			formData.append('blogImage',file);
+			self.blog.userId = $rootScope.client.userId;
 			formData.append('blog',angular.toJson(self.blog,true));
 			console.log(self.blog);
 			console.log(formData);
@@ -152,15 +153,16 @@ app.controller('blogController', ['blogFactory','$log', function(blogFactory,$lo
 			}
 			self.process=false;
 		},
-			function(errResponse){
-				console.log("Error updating blog");
-				self.process=false;
-			});
-		
+		function(errResponse){
+			console.log("Error updating blog");
+			self.process=false;
+		});
+		self.form = false;
 	}
 
 
 	self.editBlog = function(blogId){
+		self.form = true;
 		console.log('blogid to edit : ',blogId);
 		//debugger;
 		for(var i=0;i<self.blogs.length;i++){

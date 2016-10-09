@@ -7,7 +7,7 @@ body {
 	color: #384452;
 	font-family: 'Lato', sans-serif;
 	font-weight: 400;
-	}
+}
 
 .menubar{
 	border-radius: 0px;
@@ -113,15 +113,23 @@ input[type=text]{
 	margin:70px 20px 20px 20px;
 	/* background-color: #cbe4f8; */
 	border-radius:5px;	
-/* 	box-shadow: 2px 2px 5px 0px; */
+	/* 	box-shadow: 2px 2px 5px 0px; */
 	padding:0px 20px 20px 20px;
 	font-size:1em;
 	
 	
 }
 
-@media {
-	
+.content{
+	margin: 80px 0px 0px 0px;
+}
+
+
+@media (min-width: 900px){
+	.shift-right{
+	margin-left:30px;
+}
+
 }
 
 
@@ -157,9 +165,9 @@ input[type=text]{
 	box-shadow: 0px  2px 2px 0px;
 }
 .card-image{
-height:70px;
-width: 70px;
-float:left;
+	height:70px;
+	width: 70px;
+	float:left;
 }
 
 /* for text after the image in card */
@@ -173,7 +181,7 @@ float:left;
 
 .table-toggle tbody tr td{
 
-border-bottom: 2px solid;
+	border-bottom: 2px solid;
 }
 .table > tbody > tr > td{
 	margin:5px;
@@ -248,42 +256,63 @@ font-size: 18px;
     z-index:1000;
     background-color:grey;
     opacity: .2;
- } */
+    } */
 
-.ajax-loader {
+    .ajax-loader {
 
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    z-index:1000;
-    margin-left: -32px; /* -1 * image width / 2 */
-    margin-top: -32px;  /* -1 * image height / 2 */
-    display: block;     
-}
+    	position: fixed;
+    	left: 50%;
+    	top: 50%;
+    	z-index:1000;
+    	margin-left: -32px; /* -1 * image width / 2 */
+    	margin-top: -32px;  /* -1 * image height / 2 */
+    	display: block;     
+    }
 
 
-[type="radio"]:not(:checked) + label,
-[type="radio"]:checked + label{
-	font-size: 1em;
-}
+    .pop-form{
+    	position: fixed;
+    	left: 20%;
+    	top: 20%;
+    	z-index:10000;
+    	margin-left: -32px; /* -1 * image width / 2 */
+    	margin-top: -32px;  /* -1 * image height / 2 */
+    	display: block; 
 
-legend{
-	font-size: 15px;
-}
+    }
 
-.error{
-	color:white;
-	text-align: center;
-	border-radius: 3px;
-	padding:5px;
-	font-size: 1.2em;
+	.model-background
+    {
+    	position: fixed;
+    	height:100%; 
+    	width:100%;
+    	 background-color: #7F7F7F;
+    	  opacity: 0.5;
+    	  z-index: 1000
+    }
 
-}
-.success{
-	color:black;
-	text-align: center;
-	border:2px solid green;
-	padding:5px;
-	border-radius: 3px;
-	font-size: 1.2em;
-}
+    [type="radio"]:not(:checked) + label,
+    [type="radio"]:checked + label{
+    	font-size: 1em;
+    }
+
+    legend{
+    	font-size: 15px;
+    }
+
+    .error{
+    	color:white;
+    	text-align: center;
+    	border-radius: 3px;
+    	padding:5px;
+    	font-size: 1.2em;
+
+    }
+    .success{
+    	color:black;
+    	text-align: center;
+    	border:2px solid green;
+    	padding:5px;
+    	border-radius: 3px;
+    	font-size: 1.2em;
+    }

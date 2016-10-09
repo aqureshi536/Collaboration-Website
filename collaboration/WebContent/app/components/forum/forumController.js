@@ -31,6 +31,7 @@
 			self.forums= [];
 			self.forum={forumTitle:'',forumDescription:''};
 			self.singleForum={};	
+			self.form = false;
 
 			fetchAllForums();
 			
@@ -73,7 +74,9 @@
 
 		self.submitForum = function(){
 			//debugger;
+
 			if(self.forum.forumId==''||self.forum.forumId==undefined){
+				self.forum.userId = $rootScope.client.userId;
 				createForum(this.forum);
 			}
 			else{
@@ -102,12 +105,14 @@
 				console.error(errResponse);
 				console.error("Error updating forum : "+forumId);
 			});
+			self.form = false;
 		}
 
 		
 
 
 		self.editForum = function(forumId){
+			self.form = true;
 			for(var i=0;i<self.forums.length;i++){
 				if(self.forums[i].forumId===forumId){
 					self.forum=angular.copy(self.forums[i])

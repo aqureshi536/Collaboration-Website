@@ -3,7 +3,7 @@ app.controller('loginController', ['loginFactory','authenticationFactory','$root
 	self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
 	self.error=false;
 	self.client = {email:'',password:''};
-	self.loginError='';
+	self.loginError=false;
 
 	//$rootScope.customUser= {data:'',status:''};
 	/*$scope.$storage= $localStorage.$default({});
@@ -54,7 +54,7 @@ app.controller('loginController', ['loginFactory','authenticationFactory','$root
         initController();
 
 
-/*Method which log in the user*/
+        /*Method which log in the user*/
 
         self.login = function(){
         	self.process=true;
@@ -70,23 +70,28 @@ app.controller('loginController', ['loginFactory','authenticationFactory','$root
 		/*console.log(form);*/
 		//loginUser(form);
 
-		authenticationFactory.login(self.client.email,self.client.password,function(data){
-			authenticationFactory.setCredentials(self.client.email,self.client.password);
-			resetLoginFields();
+		authenticationFactory.login(self.client.email,self.client.password,function(data,error){
+			if(data!=null){
+				authenticationFactory.setCredentials(self.client.email,self.client.password);
+				
 
-			$rootScope.client = data;
-			$scope.$storage.client = data;
-			console.log($rootScope.client);
-			self.loginError='';
-			self.process = false;
-			$location.path("/");
-
+				$rootScope.client = data;
+				$scope.$storage.client = data;
+				console.log($rootScope.client);
+				self.loginError=error;
+				self.process = false;
+				$location.path("/");
+			}
+			else{
+				self.process = false;
+				self.loginError=error;
+			}
 		});
-		
+		resetLoginFields();
 	}
- 
 
-/*method to logout user*/
+
+	/*method to logout user*/
 
 	self.logout=function(){
 		debugger;

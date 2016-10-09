@@ -38,10 +38,11 @@ app.factory('authenticationFactory', ['loginFactory','$http', '$cookieStore', '$
       //  $scope.$storage = $localStorage.$defaults({})
        // $scope.$storage.client = data;
 
-        callback(data);
+        callback(data,false);
     },
     function(errResponse){
         console.error(errResponse);
+        callback(null,true);
     });
 
 }

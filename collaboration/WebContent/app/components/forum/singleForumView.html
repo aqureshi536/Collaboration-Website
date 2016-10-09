@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<div class="col-xs-2">
-				<button class="btn blue lighten 2" ng-click="sforumCtrl.postComment(sforumCtrl.forum,sforumCtrl.post)" ng-disabled="sforumCtrl.post.forumPostContent===''">Post</button>
+				<button class="btn blue lighten 2" ng-click="sforumCtrl.postComment(sforumCtrl.forum,sforumCtrl.post)" ng-disabled="sforumCtrl.post.forumPostContent===''" ng-if="client">Post</button>
 			</div>
 
 		</div>
