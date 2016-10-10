@@ -1,0 +1,14 @@
+<h2 class="ctitle shift-right"><span class="fa fa-users"></span> All Users</h2>
+<div class="col-sm-8">
+	<input type="text" class="form-control pull right " placeholder="Search User ....">
+</div>
+<div style="clear: both;"></div>
+<ul class="collection inner-content col-md-8 col-sm-10 col-xs-12">
+	<li class="collection-item-avatar" ng-repeat="user in userCtrl.users">
+		<img src="./.././assets/images/1.jpg" alt="" class="card-image circle">
+		<span class="name">{{user.name}}</span>
+		<p ><img src="./.././assets/images/online.png" ng-if="user.status == A"> <span ng-if="user.status == A">Online</span> 
+		<img src="./.././assets/images/offline.png" ng-if="user.status == N"> <span>Offline </span><span class="pull right"><button class="btn btn-primary">Send Request</button></span></p>
+		<p>{{user.userStatus}}</p>
+	</li>
+</ul>

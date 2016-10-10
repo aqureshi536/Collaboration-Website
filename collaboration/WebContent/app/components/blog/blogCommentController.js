@@ -26,9 +26,9 @@ app.controller('singleBlogController', ['blogFactory','$log','$routeParams' ,fun
 
 		/*########################################################################*/
 
-		self.comment=function(blogId,blogComment){
+		self.comment=function(blogId,blogComment,userId){
 			self.process=true;
-			var bc = {blogId:blogId,blogComment:blogComment};
+			var bc = {blogId:blogId,blogComment:blogComment,userId:userId};
 			blogFactory.createBlogComment(bc).
 			then(function(data){
 				self.singleBlog.blogComments=self.singleBlog.blogComments.concat(data);

@@ -1,13 +1,13 @@
 
 app.factory('authenticationFactory', ['loginFactory','$http', '$cookieStore', '$rootScope', function(loginFactory,$http, $cookieStore, $rootScope){
 
-   var service = {};
+ var service = {};
 
-   service.login = login;
-   service.setCredentials = setCredentials;
-   service.clearCredentials = clearCredentials;
+ service.login = login;
+ service.setCredentials = setCredentials;
+ service.clearCredentials = clearCredentials;
 
-   return service;
+ return service;
 
    //$scope.$storage= $localStorage.$defaults({client:''});
 
@@ -38,12 +38,17 @@ app.factory('authenticationFactory', ['loginFactory','$http', '$cookieStore', '$
       //  $scope.$storage = $localStorage.$defaults({})
        // $scope.$storage.client = data;
 
-        callback(data,false);
-    },
-    function(errResponse){
-        console.error(errResponse);
+       callback(data,false);
+   },
+   function(errResponse){
+    console.error(errResponse);
+    if(errResponse.status == 404){
+        callback(null,404)
+    }
+    else{
         callback(null,true);
-    });
+    }
+});
 
 }
 

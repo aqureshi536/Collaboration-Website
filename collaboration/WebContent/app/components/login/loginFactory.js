@@ -9,6 +9,7 @@ app.factory('loginFactory', ['$http','$q','$rootScope',function($http,$q,$rootSc
 return {
 	registerUser:registerUser,
 	loginUser:loginUser,
+	logout:logout,
 	firstRequest:firstRequest
 };
 
@@ -69,6 +70,9 @@ function registerUser(user){
  	return deferred.promise;	
  }
 
+
+
+
 /*#######################################################*/
 
 
@@ -86,7 +90,17 @@ function registerUser(user){
 }*/
 
 
-
+function logout(userId){
+	var deferred = $q.defer();
+	$http.put('http://localhost:8080/CollaborationWebsiteBackend/logout/'+userId)
+	.then(function (reponse) {
+		deferred.resolve(response);
+	},
+	function(errResponse){
+		deferred.reject(errResponse);
+	});
+	return deferred.promise;
+}
 
 /*########################################################################################*/
 

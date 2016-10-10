@@ -31,7 +31,7 @@ public class Forum {
 	private char status;// Will include A,P,R as keyword for Approved,Pending
 						// and Rejected respectively
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "forum")
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "forum")
 	@JsonManagedReference
 	private Set<ForumPost> forumPosts = new HashSet<>();
 

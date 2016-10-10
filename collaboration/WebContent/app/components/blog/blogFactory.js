@@ -58,12 +58,8 @@ app.factory('blogFactory', ['$http','$q', '$log', '$rootScope',function($http,$q
 		var deferred = $q.defer();
 		debugger;
 
-		$http.post(address,blog,{
-			transformRequest : angular.identity,
-			headers : {
-				'Content-Type' : undefined
-			}
-		}).then(
+		$http.post(address,blog)
+		.then(
 		function (response) {
 
 			deferred.resolve(response.data);

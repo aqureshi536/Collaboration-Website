@@ -34,8 +34,18 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 		controller:'eventController',
 		controllerAs:'eventCtrl'
 		
+	}).
+	when('/chat/',{
+		templateUrl:'./app/components/chat/chatView.html',
+		controller:'chatController',
+		controllerAs:'chatCtrl'
+	}).
+	when('/users/',{
+		templateUrl:'./app/components/user/usersView.html',
+		controller:'userController',
+		controllerAs:'userCtrl'
 	})
 	.otherwise({
-		redirectTo:'/home/	'
+		redirectTo:'/'
 	})
 }])

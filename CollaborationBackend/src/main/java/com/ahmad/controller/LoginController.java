@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -50,9 +52,9 @@ public class LoginController {
 		if (userDetailDAO.getUserByEmail(loginModel.getRegisterEmail()) != null) {
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
-
+		userDetail = new UserDetail();
 		userDetail.setUserId(IdGenerator.generateId("USR"));
-		userDetail.setStatus('P');
+		userDetail.setStatus('N');
 		userDetail.setEmail(loginModel.getRegisterEmail());
 		userDetail.setName(loginModel.getRegisterName());
 		userDetail.setGender(loginModel.getRegisterGender());
@@ -87,6 +89,7 @@ public class LoginController {
 			return new ResponseEntity<UserToSend>(HttpStatus.NOT_FOUND);
 		}
 		userDetail = userDetailDAO.checkUser(validUser.getEmail(), validUser.getPassword());
+		
 		UserToSend userToSend = new UserToSend();
 		userToSend.setUserId(userDetail.getUserId());
 		userToSend.setEmail( userDetail.getEmail());
@@ -103,9 +106,26 @@ public class LoginController {
 			break;		
 		}
 		userToSend.setRole(roleValue);
+		userDetail.setStatus('A');
+		userDetailDAO.saveOrUpdateUserDetail(userDetail);
+		
 		return new ResponseEntity<UserToSend>(userToSend,HttpStatus.OK);
 
 	}
+	
+	@PutMapping("/logout/{userId}")
+	public ResponseEntity<Void> logout(@PathVariable("userId") String userId){
+		if(userId !=null){
+		userDetail = userDetailDAO.getUserDetail(userId);
+		userDetail.setStatus('N');
+		userDetailDAO.saveOrUpdateUserDetail(userDetail);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+		}
+		return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	
 
 	/*
 	 * @GetMapping("/login") public ResponseEntity<Void>

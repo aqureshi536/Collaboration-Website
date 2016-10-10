@@ -69,7 +69,7 @@ public class CommentController {
 		long time = date.getTime();
 		Timestamp timestamp = new Timestamp(time);
 		blogComment.setCommentedAt(timestamp);
-		blogComment.setUserId("USR001");
+		blogComment.setUserId(blogModel.getUserId());
 		blogComment.setBlogCommentContent(blogModel.getBlogComment());
 		blogComment.setBlog(blogDAO.getBlog(blogModel.getBlogId()));
 		blogCommentDAO.saveOrUpdateBlogComment(blogComment);

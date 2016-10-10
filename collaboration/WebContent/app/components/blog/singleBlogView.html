@@ -17,7 +17,7 @@
 				</div>
 				<div class="col-xs-2">
 					<div class="col-sm-2">
-						<button class="btn blue lighten 2" ng-click="blogCommCtrl.comment(blogCommCtrl.singleBlog.blogId,blogCommCtrl.blogComment.blogCommentContent)" ng-disabled="blogCommCtrl.blogComment.blogCommentContent===''" ng-if="client">Comment</button>
+						<button class="btn blue lighten 2" ng-click="blogCommCtrl.comment(blogCommCtrl.singleBlog.blogId,blogCommCtrl.blogComment.blogCommentContent,client.userId)" ng-disabled="blogCommCtrl.blogComment.blogCommentContent===''" ng-if="client">Comment</button>
 					</div>
 				</div>
 
@@ -30,7 +30,7 @@
 				<span class="card-text">{{blogComment.blogCommentContent}}</span>
 
 			</li>
-			<span class="pull right">{{blogComment.commentedAt | date : 'h:mm a, MMM d, y '}}</span>
+			<span class="pull right">{{blogComment.userId}} , At {{blogComment.commentedAt | date : 'h:mm a, MMM d, y '}}</span>
 		</div>
 	</ul>
 

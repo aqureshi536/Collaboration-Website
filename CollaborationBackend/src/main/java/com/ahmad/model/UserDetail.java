@@ -22,8 +22,10 @@ public class UserDetail {
 	private String name;
 	private String password;
 	private String gender;
-	private char status;// Will include A,P,R as keyword for Approved,Pending
+	private char status;// Will include A , N as keyword for Approved,Pending
 						// and Rejected respectively
+	private String userStatus;
+	
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userDetail")
 	@JsonManagedReference
@@ -96,4 +98,14 @@ public class UserDetail {
 	public void setUserAuthorities(UserAuthorities userAuthorities) {
 		this.userAuthorities = userAuthorities;
 	}
+
+	public String getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
+	}
+	
+	
 }

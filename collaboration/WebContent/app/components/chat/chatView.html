@@ -1,0 +1,18 @@
+<div style="margin: auto;" class="inner-content">
+	<form ng-submit="chatCtrl">
+		<div class="row">
+			<div class="input-field col-sm-6 col-xs-8">
+				<input type="text" id="messageText" ng-model="chatCtrl.message">
+				<label for="messageText">Type your message here ....</label>
+			</div>
+			<div class="col-xs-2">
+				<input type="submit" value="Send" class="btn blue lighten-2">
+			</div>
+		</div>
+		<hr>
+		<p ng-repeat="message in chatCtrl.messages">
+			<time>{{message.time | date : 'HH:mm' }}</time>
+			<span>{{message.message}}</span>
+		</p>
+	</form>
+</div>

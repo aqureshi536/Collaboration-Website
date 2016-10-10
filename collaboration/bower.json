@@ -22,6 +22,9 @@
     "jquery-ui": "^1.12.0",
     "font-awesome": "^4.6.3",
     "Ionicons": "ionicons#^2.0.1",
-    "angular-route": "^1.5.8"
+    "angular-route": "^1.5.8",
+    "sockjs": "^0.3.4",
+    "stomp-websocket": "^2.3.4",
+    "lodash": "^4.16.4"
   }
 }

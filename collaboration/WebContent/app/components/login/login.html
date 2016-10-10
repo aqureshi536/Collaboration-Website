@@ -15,6 +15,7 @@
 </div><!-- Loader -->
 <div class="inner-content col-md-4">
 	<p class="error red lighten-2" ng-show="loginCtrl.loginError"><img src="./.././assets/images/warning.png" alt="warning"> Invalid Credentials</p>
+	<p ng-if="loginCtrl.failed" style="padding: 15px;border:2px solid red;font-size: 1.5em">Sorry,Unable to complete your request try after sometimes</span></p>
 	<form ng-submit="loginCtrl.login()">
 		<h2 class="ctitle">Login</h2> 
 		<br>

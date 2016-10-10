@@ -116,15 +116,15 @@ app.controller('blogController', ['blogFactory','$log','$rootScope', function(bl
 		//alert("in create blog");
 		debugger;
 		if(self.blog.blogId === '' || self.blog.blogId === undefined){
-			var formData = new FormData();
-			var file = self.blogImage;
-			console.dir(file);			
-			formData.append('blogImage',file);
+			//var formData = new FormData();
+			//var file = self.blogImage;
+			//console.dir(file);			
+			//formData.append('blogImage',file);
 			self.blog.userId = $rootScope.client.userId;
-			formData.append('blog',angular.toJson(self.blog,true));
-			console.log(self.blog);
-			console.log(formData);
-			createBlog(formData);
+			//formData.append('blog',angular.toJson(self.blog,true));
+			//console.log(self.blog);
+			//console.log(formData);
+			createBlog(self.blog);
 			//debugger;
 		}  /*if blog id doesnt exist from begning save it*/
 		
@@ -132,6 +132,7 @@ app.controller('blogController', ['blogFactory','$log','$rootScope', function(bl
 			updateBlog(self.blog,self.blog.blogId);
 		}	/*else if data or id exist go to update method and update the blog*/
 		resetFields();
+		self.form=false;
 	}
 
 

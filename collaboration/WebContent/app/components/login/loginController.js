@@ -4,6 +4,7 @@ app.controller('loginController', ['loginFactory','authenticationFactory','$root
 	self.error=false;
 	self.client = {email:'',password:''};
 	self.loginError=false;
+	self.failed = false;
 
 	//$rootScope.customUser= {data:'',status:''};
 	/*$scope.$storage= $localStorage.$default({});
@@ -16,7 +17,10 @@ app.controller('loginController', ['loginFactory','authenticationFactory','$root
 	*/
 
 	$scope.$storage= $localStorage.$default(JSON.parse(window.localStorage.getItem("ngStorage-client")));
+	
 	self.registerUser = function(){
+		self.failed= false;
+		self.loginError = false;
 		self.process=true;
 		loginFactory.registerUser(self.user).
 		then(function(data){	
@@ -80,11 +84,17 @@ app.controller('loginController', ['loginFactory','authenticationFactory','$root
 				console.log($rootScope.client);
 				self.loginError=error;
 				self.process = false;
+				self.failed = false;
 				$location.path("/");
 			}
 			else{
 				self.process = false;
-				self.loginError=error;
+				if(error==404){
+					self.loginError=error;
+				}
+				else{
+					self.failed = true;
+				}
 			}
 		});
 		resetLoginFields();
@@ -94,7 +104,8 @@ app.controller('loginController', ['loginFactory','authenticationFactory','$root
 	/*method to logout user*/
 
 	self.logout=function(){
-		debugger;
+		//debugger;
+		loginFactory.logout($rootScope.client.userId);
 		$localStorage.$reset();
 		delete $rootScope.client;
 		$location.path("/");

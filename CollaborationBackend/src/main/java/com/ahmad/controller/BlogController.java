@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ahmad.DAO.BlogCommentDAO;
@@ -67,13 +65,12 @@ public class BlogController {
 	}
 
 	@PostMapping("/blogs/")
-	public ResponseEntity<Blog> createBlog(@RequestParam(value = "blog") String blogJson,
-			@RequestParam(value = "blogImage") MultipartFile file, UriComponentsBuilder ucBuilder) {
-		System.out.println(blogJson.toString());
-		JSONObject jsonObj = new JSONObject(blogJson);
-		// JsonNode jsonNode = convertJsonFormat(jsonObj);
-		ObjectMapper mapper = new ObjectMapper().registerModule(new JsonOrgModule());
-		blog = mapper.convertValue(jsonObj, Blog.class);
+	public ResponseEntity<Blog> createBlog(@RequestBody Blog blog, UriComponentsBuilder ucBuilder) {
+		//System.out.println(blogJson.toString());
+		//JSONObject jsonObj = new JSONObject(blogJson);
+		// --- JsonNode jsonNode = convertJsonFormat(jsonObj);
+		//ObjectMapper mapper = new ObjectMapper().registerModule(new JsonOrgModule());
+	//	blog = mapper.convertValue(jsonObj, Blog.class);
 
 		blog.setBlogId(IdGenerator.generateId("BLG"));
 		Date date = new Date();
@@ -87,7 +84,7 @@ public class BlogController {
 
 		blogDAO.saveOrUpdateBlog(blog);
 
-		FileUpload.uploadImage(path, file, blog.getBlogId());
+		//FileUpload.uploadImage(path, file, blog.getBlogId());
 
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(ucBuilder.path("/blog/{id}").buildAndExpand(blog.getBlogId()).toUri());

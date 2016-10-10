@@ -39,7 +39,7 @@ public class Blog implements Serializable {
 	
 	private Timestamp modifiedAt;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "blog")
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "blog" )
 	@JsonManagedReference
 	private Set<BlogComment> blogComments = new HashSet<>();
 
