@@ -14,5 +14,5 @@ public interface ForumDAO {
 
 	List<Forum> listForums();
 	
-	List<Forum> listForumByCreatedAt();
+	List<Forum> listForumByCreatedAt(char status);
 }

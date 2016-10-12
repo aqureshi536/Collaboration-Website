@@ -7,12 +7,14 @@ import com.ahmad.model.Blog;
 public interface BlogDAO {
 
 	void saveOrUpdateBlog(Blog blog);
-	
+
 	void deleteBlog(String blogId);
-	
+
 	Blog getBlog(String blogId);
-	
+
 	List<Blog> listBlogs();
-	
-	List<Blog> listBlogsByCreatedAt();
+
+	List<Blog> listBlogsByCreatedAt(char status);
+
+//	List<Blog> listofPendingBlogs(char status);
 }

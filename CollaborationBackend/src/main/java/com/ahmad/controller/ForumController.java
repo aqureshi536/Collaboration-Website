@@ -33,9 +33,9 @@ public class ForumController {
 	
 	@GetMapping("/forums/")
 	public ResponseEntity<List<Forum>> listForum(){
-		//List<Forum> listOfForums = forumDAO.listForumByCreatedAt();
-		List<Forum> listOfForums = forumDAO.listForums();
-		if(listOfForums==null){
+		List<Forum> listOfForums = forumDAO.listForumByCreatedAt('A');
+		//List<Forum> listOfForums = forumDAO.listForums();
+		if(listOfForums==null && listOfForums.isEmpty()){
 			return new ResponseEntity<List<Forum>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Forum>>(listOfForums,HttpStatus.OK);

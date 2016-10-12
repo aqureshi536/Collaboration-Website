@@ -44,6 +44,14 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 		templateUrl:'./app/components/user/usersView.html',
 		controller:'userController',
 		controllerAs:'userCtrl'
+	}).
+	when('/user/edit/:userId',{
+		templateUrl:'./app/components/profile/profileView.html',
+		controller:'profileController',
+		controllerAs:'profileCtrl'
+	}).
+	when('/admin/dashboard',{
+		templateUrl:'./app/components/admin/adminView.html'
 	})
 	.otherwise({
 		redirectTo:'/'

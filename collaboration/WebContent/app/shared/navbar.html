@@ -22,7 +22,7 @@
 		<li><a href="#/users/"><span class="fa fa-users"></span> Users</a></li>
 		<li class="dropdown" ng-if="client"><a href= class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> User</a>
 			<ul class="dropdown-menu dropdownhover-bottom" role="menu">
-				<li><a href="#/blog/addBlog/">Add Blog</a></li>
+				<li><a href="#/user/edit/{{client.userId}}">Edit Profile</a></li>
 			</ul>
 
 		</li>
@@ -30,7 +30,7 @@
 		
 			<li><a href="#/login" ng-if="!client"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 			<li ng-controller="loginController as Ctrl" ng-click="Ctrl.logout()" ng-if="client"><a href=""><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-		
+		<li><a href="#/admin/dashboard"><span class="fa fa-dashboard"></span> Dashboard</a></li>
 		<li><a href="#/event/"><span class="fa fa-calendar-o"></span> Events </a></li>
 		<li><a href="#"><span class="fa fa-newspaper-o"></span> News</a></li>
 		<li style="margin-right:10px"><a href="#"><span class="glyphicon glyphicon-tower"></span> Jobs</a></li>

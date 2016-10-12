@@ -1,0 +1,41 @@
+<h2 class="ctitle shift-right"><span class="fa fa-child"></span> Edit Profile</h2>
+<!-- Loader -->
+<div class="preloader-wrapper big active ajax-loader" ng-if="blogCtrl.process">
+	<div class="spinner-layer spinner-blue-only">
+		<div class="circle-clipper left">
+			<div class="circle"></div>
+		</div><div class="gap-patch">
+		<div class="circle"></div>
+	</div><div class="circle-clipper right">
+	<div class="circle"></div>
+</div>
+</div>
+</div><!-- Loader -->
+
+
+<div class="inner-content profile-wrapper">
+	<p class="text-center" ng-hide="profileCtrl.dataLoaded" >
+		<i class="fa fa-spinner fa-pulse fa-5x"></i>
+	</p>
+	<!-- <img ng-src="file:E:/beone/users/{{client.userId}}" class="circle profile-image" alt="{{client.userId}}.png"> <-->
+
+	</-->
+	<p><img src="./assets/images/1.jpg" class="img-circle img-responsive profile-image" alt=""><span class="shift-right profile-name">{{profileCtrl.user.name}}</span>
+	</p><br>
+	<span class="profile-status shift-right" ng-if="profileCtrl.user.userStatus">Status <br>	 {{profileCtrl.user.userStatus}}</span><br><br>
+	<div>
+		<form ng-submit="profileCtrl.uploadImage()">
+			<span class="profile-status shift-right" ng-if="profileCtrl.user.userStatus">Change Image</span>
+
+
+			<input type="file" file-model="profileCtrl.userImage">
+			<br><br>
+			<input type="submit" class="btn btn-primary" value="Update Image">
+		</form>
+	</div>
+	<div class="input-field col-xs-4">
+		<input type="text" id="status" ng-model="profileCtrl.status.userStatus">
+		<label for="status">Update Status</label>
+	</div>
+	<button ng-click="profileCtrl.updateStatus()" class="btn btn-primary">Update Status</button>
+</div>

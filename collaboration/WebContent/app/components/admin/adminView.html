@@ -1,0 +1,45 @@
+<h2 class="ctitle"><span class="fa fa-dashboard"></span> DashBoard</h2>
+
+<div class="row">
+	<div class="col-lg-offset-1 col-lg-4 inner-content" ng-controller="adminBlogController as adminBlogCtrl">
+	<h3 class="ctitle">Blogs</h3>
+		<div ng-repeat="blog in adminBlogCtrl.blogs">
+			<h4>{{blog.blog.blogName}}</h4>
+			<p>{{blog.blog.blogDescription}}</p>
+			<div class="pull right">
+				<button ng-click="adminBlogCtrl.approveBlog(blog.blog.blogId)" class="btn btn-success">
+				<span class="fa fa-check"></span> Approve</button>
+				<button class="btn btn-danger" ng-click="adminBlogCtrl.unApproveBlog(blog.blog.blogId)">
+				<span class="fa fa-close"></span> Reject</button>
+			</div>
+			<div class="admin-user-box">
+				<b>UserDetails-></b><br>
+				<span >{{blog.name}}</span><br>
+				<span>{{blog.email}}</span><br>
+				<span >{{blog.role}}</span> 
+			</div>
+			<hr>
+		</div>
+	</div>
+	<div class="col-lg-offset-1 col-lg-4 inner-content" ng-controller="adminForumController as adminForumCtrl">
+	<h3 class="ctitle">Forums</h3>
+		<div ng-repeat="forum in adminForumCtrl.forums">
+			<h4>{{forum.forum.forumName}}</h4>
+			<p>{{forum.forum.forumDescription}}</p>
+			<div class="pull right">
+				<button ng-click="adminForumCtrl.approveForum(forum.forum.forumId)" class="btn btn-success">
+				<span class="fa fa-check"></span> Approve</button>
+				<button class="btn btn-danger" ng-click="adminForumCtrl.unApproveForum(forum.forum.forumId)">
+				<span class="fa fa-close"></span> Reject</button>
+			</div>
+
+			<div class="admin-user-box">
+				<b>UserDetails-></b><br>
+				<span>{{forum.name}}</span><br>
+				<span>{{forum.email}}</span><br>
+				<span>{{forum.role}}</span> 
+			</div>
+			<hr>
+		</div>
+	</div>
+</div>

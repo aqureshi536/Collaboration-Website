@@ -52,9 +52,9 @@ public class ForumDAOImpl implements ForumDAO {
 	}
 	
 	@Transactional
-	public List<Forum> listForumByCreatedAt(){
-		String hql = "from Forum order by createdAt desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	public List<Forum> listForumByCreatedAt(char status){
+		String hql = "from Forum where status=:status order by createdAt desc";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("status", status);
 		List<Forum> listOfForums = query.getResultList();
 		return listOfForums;
 	}

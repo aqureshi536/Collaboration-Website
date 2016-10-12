@@ -11,8 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.annotation.Configuration;
-
 public class CORSFilter implements Filter{
 
 	
@@ -22,13 +20,13 @@ public class CORSFilter implements Filter{
 			throws IOException, ServletException {
 		System.out.println("Filtering is on");
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-		HttpServletRequest httpServletRequest = (HttpServletRequest)request;
+		//HttpServletRequest httpServletRequest = (HttpServletRequest)request;
 		httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
 		httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
 		httpServletResponse.setHeader("Access-Control-Max-Age", "3600");
-		httpServletResponse.setHeader("Access-Control-Allow-Headers","Content-Type,X-Requested-With,Authorization");
+		httpServletResponse.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Authorization");
 		httpServletResponse.setHeader("Access-Control-Allow-Headers", httpServletResponse.getHeader("Access-Control-Request-Headers"));
-		//httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
+		httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
 		//httpServletResponse.setHeader("Access-Control-Allow-Headers", "*");
 		
 		chain.doFilter(request,response);

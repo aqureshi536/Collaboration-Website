@@ -5,6 +5,7 @@ public class UserToSend {
 	private String userId;
 	private String email;
 	private int role;
+	
 
 	public String getUserId() {
 		return userId;
@@ -29,5 +30,9 @@ public class UserToSend {
 	public void setRole(int role) {
 		this.role = role;
 	}
+
+
+	
+	
 
 }

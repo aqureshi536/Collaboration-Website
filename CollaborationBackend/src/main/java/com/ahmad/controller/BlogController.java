@@ -48,7 +48,7 @@ public class BlogController {
 
 	@GetMapping("/blogs/")
 	public ResponseEntity<List<Blog>> listAllBlogs() {
-		List<Blog> listOfBlogs = blogDAO.listBlogsByCreatedAt();
+		List<Blog> listOfBlogs = blogDAO.listBlogsByCreatedAt('A');
 		if (listOfBlogs.isEmpty()) {
 			return new ResponseEntity<List<Blog>>(HttpStatus.NO_CONTENT);
 		}

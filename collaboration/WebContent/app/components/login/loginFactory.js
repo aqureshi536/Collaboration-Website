@@ -93,7 +93,7 @@ function registerUser(user){
 function logout(userId){
 	var deferred = $q.defer();
 	$http.put('http://localhost:8080/CollaborationWebsiteBackend/logout/'+userId)
-	.then(function (reponse) {
+	.then(function (response) {
 		deferred.resolve(response);
 	},
 	function(errResponse){

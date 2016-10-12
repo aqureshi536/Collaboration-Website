@@ -52,12 +52,20 @@ public class BlogDAOImpl implements BlogDAO {
 	}
 
 	@Transactional
-	public List<Blog> listBlogsByCreatedAt() {
-		String hql = "from Blog b ORDER BY b.createdAt ASC";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	public List<Blog> listBlogsByCreatedAt(char status) {
+		String hql = "from Blog  where status=:status ORDER BY createdAt desc";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("status", status);
 		List<Blog> listOfBlogs = query.getResultList();
 		return listOfBlogs;
 		
 	}
 
+/*	@Transactional
+	public List<Blog> listofPendingBlogs(char status){
+		String hql ="from Blog where status=:status";
+		Query query  = sessionFactory.getCurrentSession().createQuery(hql).setParameter("status", status);
+		List<Blog> listOfBlogs = query.getResultList();
+		return listOfBlogs;
+	}*/
+	
 }
