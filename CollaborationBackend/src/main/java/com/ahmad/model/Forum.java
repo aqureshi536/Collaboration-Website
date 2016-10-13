@@ -99,4 +99,13 @@ public class Forum {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "Forum [forumId=" + forumId + ", userId=" + userId + ", forumTitle=" + forumTitle + ", forumDescription="
+				+ forumDescription + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + ", status=" + status
+				+ ", forumPosts=" + forumPosts + "]";
+	}
+	
+	
+
 }

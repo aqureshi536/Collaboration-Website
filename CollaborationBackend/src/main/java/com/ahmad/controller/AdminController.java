@@ -1,7 +1,9 @@
 package com.ahmad.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,12 +42,16 @@ public class AdminController {
 	UserDetailDAO userDetailDAO;
 
 	@GetMapping("/admin/blogs/")
-	public ResponseEntity<List<BlogAdminModel>> getUnApprovedBlogs() {
-		BlogAdminModel blogAdminModel = new BlogAdminModel();
-		List<BlogAdminModel> listOfPendingBlogs = new ArrayList<>();
+	public ResponseEntity<Set<BlogAdminModel>> getUnApprovedBlogs() {
+		 
+		Set<BlogAdminModel> listOfPendingBlogs = new HashSet<>();
 		List<Blog> listOfBlogs = blogDAO.listBlogsByCreatedAt('P');
+		System.out.println(listOfBlogs.toString());
 		if (listOfBlogs != null && !listOfBlogs.isEmpty()) {
+			 
 			listOfBlogs.forEach(blog -> {
+				BlogAdminModel	blogAdminModel = new BlogAdminModel();
+				//System.out.println(blog);
 				blogAdminModel.setBlog(blog);
 				userDetail = userDetailDAO.getUserDetail(blog.getUserId());
 				blogAdminModel.setEmail(userDetail.getEmail());
@@ -64,20 +70,25 @@ public class AdminController {
 
 				}
 				blogAdminModel.setRole(role);
+				System.out.println(blogAdminModel);
 				listOfPendingBlogs.add(blogAdminModel);
+				System.out.println(listOfPendingBlogs+"list ofpending blogss");
 			});
-			return new ResponseEntity<List<BlogAdminModel>>(listOfPendingBlogs, HttpStatus.OK);
+			return new ResponseEntity<Set<BlogAdminModel>>(listOfPendingBlogs, HttpStatus.OK);
 		}
-		return new ResponseEntity<List<BlogAdminModel>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Set<BlogAdminModel>>(HttpStatus.NO_CONTENT);
 	}
 
 	@GetMapping("/admin/forums/")
 	public ResponseEntity<List<ForumAdminModel>> getUnApprovredForums() {
-		ForumAdminModel forumAdminModel = new ForumAdminModel();
+		
 		List<ForumAdminModel> listOfPendingForums = new ArrayList<>();
 		List<Forum> listOfForums = forumDAO.listForumByCreatedAt('P');
+		System.out.println(listOfForums.toString());
 		if (listOfForums != null && !listOfForums.isEmpty()) {
+			
 			listOfForums.forEach(forum -> {
+				ForumAdminModel forumAdminModel= new ForumAdminModel();
 				forumAdminModel.setForum(forum);
 				userDetail = userDetailDAO.getUserDetail(forum.getUserId());
 				forumAdminModel.setEmail(userDetail.getEmail());
@@ -105,7 +116,7 @@ public class AdminController {
 
 	}
 
-	@PutMapping("/mange/blog/approve/{blogId}")
+	@PutMapping("/manage/blog/approve/{blogId}")
 	public ResponseEntity<Void> approveBlog(@PathVariable("blogId") String blogId) {
 		blog = blogDAO.getBlog(blogId);
 		if (blog == null) {

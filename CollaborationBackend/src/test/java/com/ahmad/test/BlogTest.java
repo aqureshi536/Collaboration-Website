@@ -37,14 +37,14 @@ public class BlogTest {
 
 		blog.setUserId("URS001");
 
-		blogDAO.saveOrUpdateBlog(blog);
+		//blogDAO.saveOrUpdateBlog(blog);
 
 		blogComment.setBlog(blog);
 		blogComment.setCommentedAt(timestamp);
 		blogComment.setBlogCommentContent("Lorem ipsum dolor sit amet, "
 				+ "consectetur adipisicing eliak vubhefuNOEFJWOIWJEZsd CA;ukhdW kjfweYBGRCukqjwhduqih3r t. Exsdfhnvvjdsagvozs mkvslbgkhsjngvmio;klpedita esse tempora impedit magnam magni ipsum molestias et autem ea rerum.");
 		blogComment.setUserId("USR001");
-		blogCommentDAO.saveOrUpdateBlogComment(blogComment);
+		//blogCommentDAO.saveOrUpdateBlogComment(blogComment);
 		
 		
 		
@@ -55,7 +55,7 @@ public class BlogTest {
 		blogComment1.setBlogCommentContent("Lorem ipsum dolor sit amet, updated   "
 				+ "consectetur adipisicing eliak vubhefuNOEF uJWOIWJEZsd CA;ukhdW kjfweYBGRCukqjwhduqih3r t. Exsdfhnvvjdsagvozs mkvslbgkhsjngvmio;klpedita esse tempora impedit magnam magni ipsum molestias et autem ea rerum.");
 		blogComment1.setUserId("USR001");
-		blogCommentDAO.saveOrUpdateBlogComment(blogComment1);
+	//	blogCommentDAO.saveOrUpdateBlogComment(blogComment1);
 
 		if (blogDAO.getBlog("blg005") != null) {
 			System.out.println("blog exist");
@@ -64,6 +64,8 @@ public class BlogTest {
 		}
 
 		// System.out.println(blogDAO.listBlogs());
+		
+		System.out.println(blogDAO.listBlogsByCreatedAt('P').toString());
 
 	}
 

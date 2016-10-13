@@ -48,6 +48,7 @@ app.controller('blogController', ['blogFactory','$log','$rootScope', function(bl
 	self.blogs= [];
 	self.singleBlog={};
 	self.form = false;
+	self.confirm=false;
 	fetchAllBlogs();
 
 
@@ -96,12 +97,13 @@ app.controller('blogController', ['blogFactory','$log','$rootScope', function(bl
 
 	function createBlog(blog){
 		self.process=true;
-		//debugger;
+		debugger;
 		console.log(blog);
 		blogFactory.createBlog(blog)
 		.then(
 			function(data){
-				self.blogs=self.blogs.concat(data);
+				//self.blogs=self.blogs.concat(data);
+				self.confirm=true;
 				self.process=false;
 			},
 			function(errResponse){
@@ -109,11 +111,14 @@ app.controller('blogController', ['blogFactory','$log','$rootScope', function(bl
 				self.process=false;
 
 			});
+		resetFields();
+		self.form=false;
 	}
 	
 
 	self.submitBlog = function (){
 		//alert("in create blog");
+		self.confirm=false;
 		debugger;
 		if(self.blog.blogId === '' || self.blog.blogId === undefined){
 			//var formData = new FormData();
@@ -131,8 +136,8 @@ app.controller('blogController', ['blogFactory','$log','$rootScope', function(bl
 		else{
 			updateBlog(self.blog,self.blog.blogId);
 		}	/*else if data or id exist go to update method and update the blog*/
-		resetFields();
-		self.form=false;
+		
+		self.confirm=false;
 	}
 
 
@@ -158,11 +163,13 @@ app.controller('blogController', ['blogFactory','$log','$rootScope', function(bl
 			console.log("Error updating blog");
 			self.process=false;
 		});
-		self.form = false;
+		resetFields();
+		self.form=false;
 	}
 
 
 	self.editBlog = function(blogId){
+		self.confirm=false;
 		self.form = true;
 		console.log('blogid to edit : ',blogId);
 		//debugger;
@@ -185,6 +192,7 @@ app.controller('blogController', ['blogFactory','$log','$rootScope', function(bl
 
 
 self.deleteBlog=function(blogId){
+	self.confirm=false;
 	self.process=true;
 		//alert('In delete blog');
 		if(self.blog.blogId === blogId) {//clean form if the user to be deleted is shown there.
@@ -207,7 +215,7 @@ self.deleteBlog=function(blogId){
 	}
 
 	function resetFields(){
-		self.blog={blogId:'',blogName:'',blogDescription:''};
+		self.blog={blogId:'',blogName:'',blogDescription:'',userId:''};
 		self.comment='';
 		self.blogImage='';
 	}

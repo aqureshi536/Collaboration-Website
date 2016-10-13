@@ -1,16 +1,16 @@
 app.factory('adminFactory', ['$http','$q', function($http,$q){
 	var domain = 'http://localhost:8080/CollaborationWebsiteBackend/';
  
-	var blogAddress =  domain+'mange/blog/';
-	var forumAddress = domain+'mange/forum/';
+	var blogAddress =  domain+'manage/blog/';
+	var forumAddress = domain+'manage/forum/';
 
 	return {
 		getUnapprovedBlogs:getUnapprovedBlogs,
 		getUnapprovedForums:getUnapprovedForums,
 		approveBlog:approveBlog,
-		disApproveBlog:disApproveBlog,
+		disapproveBlog:disapproveBlog,
 		approveForum:approveForum,
-		disApproveForum:disApproveForum
+		disapproveForum:disapproveForum
 	};
 
 function getUnapprovedBlogs(){
@@ -46,7 +46,7 @@ function getUnapprovedForums(){
 		return deferred.promise;
 	}
 
-	function disApproveBlog(blogId){
+	function disapproveBlog(blogId){
 		var deferred = $q.defer();
 		$http.put(blogAddress+'disapprove/'+blogId).then(function (response) {
 			deferred.resolve(response.data);
@@ -68,7 +68,7 @@ function getUnapprovedForums(){
 	}
 
 
-	function disApproveForum(forumId){
+	function disapproveForum(forumId){
 		var deferred = $q.defer();
 		$http.put(forumAddress+'disapprove/'+forumId).then(function (response) {
 			deferred.resolve(response.data);

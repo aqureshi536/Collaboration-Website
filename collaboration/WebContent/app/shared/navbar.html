@@ -20,12 +20,12 @@
 		<ul class="nav navbar-nav navbar-right" data-hover="dropdown"
 		data-animations="jello fadeInRight fadeInUp fadeInLeft">
 		<li><a href="#/users/"><span class="fa fa-users"></span> Users</a></li>
-		<li class="dropdown" ng-if="client"><a href= class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> User</a>
-			<ul class="dropdown-menu dropdownhover-bottom" role="menu">
-				<li><a href="#/user/edit/{{client.userId}}">Edit Profile</a></li>
-			</ul>
-
-		</li>
+		<!-- <li class="dropdown" ng-if="client"><a href= class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> User</a>
+			<ul class="dropdown-menu dropdownhover-bottom" role="menu"> -->
+				<li ng-if="client"><a href="#/user/edit/{{client.userId}}"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
+			<!-- </ul>
+			 -->
+		<!-- </li> -->
 		
 		
 			<li><a href="#/login" ng-if="!client"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

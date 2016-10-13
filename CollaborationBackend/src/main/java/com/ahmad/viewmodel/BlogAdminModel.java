@@ -40,6 +40,13 @@ public class BlogAdminModel {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	@Override
+	public String toString() {
+		return "BlogAdminModel [blog=" + blog + ", email=" + email + ", name=" + name + ", role=" + role + "]";
+	}
+	
+	
 	
 
 }

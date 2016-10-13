@@ -66,6 +66,7 @@ public class BlogController {
 
 	@PostMapping("/blogs/")
 	public ResponseEntity<Blog> createBlog(@RequestBody Blog blog, UriComponentsBuilder ucBuilder) {
+		System.out.println(blog);
 		//System.out.println(blogJson.toString());
 		//JSONObject jsonObj = new JSONObject(blogJson);
 		// --- JsonNode jsonNode = convertJsonFormat(jsonObj);
@@ -83,6 +84,7 @@ public class BlogController {
 		//blog.setUserId("USR001"); // to be changed when developed user module
 
 		blogDAO.saveOrUpdateBlog(blog);
+		System.out.println(blog +"After saving");
 
 		//FileUpload.uploadImage(path, file, blog.getBlogId());
 
