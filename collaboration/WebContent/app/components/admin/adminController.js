@@ -5,6 +5,7 @@ app.controller('adminBlogController', ['adminFactory', function(adminFactory){
 	self.none = false;
 
 	function getUnapprovedBlogs(){
+		debugger;
 		self.loading =true;
 		adminFactory.getUnapprovedBlogs().
 		then(function(data){
@@ -17,8 +18,9 @@ app.controller('adminBlogController', ['adminFactory', function(adminFactory){
 			self.failed = false;
 		},function(errResponse){
 			console.error(errResponse);
-			self.failed = true;
 			self.loading = false;
+			self.process = false;
+			self.failed = true;
 		});
 		
 	}
@@ -27,7 +29,7 @@ app.controller('adminBlogController', ['adminFactory', function(adminFactory){
 
 
 	self.approveBlog = function(blogId){
-		self.loading = true;
+		self.process = true;
 		adminFactory.approveBlog(blogId)
 		.then(function (data){
 			var length = self.blogs.length;
@@ -39,18 +41,18 @@ app.controller('adminBlogController', ['adminFactory', function(adminFactory){
 			if(self.blogs.length<=0){
 				self.none = true;
 			}
-			self.loading = false;
+			self.process = false;
 			self.failed = false;
 			console.log('approval successful')
 		},function(errResponse){
 			console.error(errResponse);
-			self.loading = false;
+			self.process = false;
 			self.failed = true;
 		});
 		
 	}
 	self.disapproveBlog = function (blogId) {
-		self.loading = true;
+		self.process = true;
 		adminFactory.disapproveBlog(blogId)
 		.then(function(data){
 			var length = self.blogs.length; 
@@ -64,11 +66,11 @@ app.controller('adminBlogController', ['adminFactory', function(adminFactory){
 			if(self.blogs.length<=0){
 				self.none = true;
 			}
-			self.loading = false;
+			self.process = false;
 			self.failed = false;
 		},function(errResponse){
 			console.error(errResponse);
-			self.loading = false;
+			self.process = false;
 			self.failed = true;
 		});
 	}
@@ -85,7 +87,7 @@ app.controller('adminForumController', ['adminFactory', function(adminFactory){
 	
 
 	function getApprovedForums() {		
-		//debugger;
+		debugger;
 		self.loading = true;
 		adminFactory.getUnapprovedForums()
 		.then(function(data){			
@@ -96,9 +98,9 @@ app.controller('adminForumController', ['adminFactory', function(adminFactory){
 			self.loading = false;
 			self.failed = false;
 		},function(errResponse){
-			console.error(errResponse);
-			self.loading = false;
+			console.error(errResponse);			
 			self.failed = true;
+			self.loading = false;
 		});
 		
 	}
@@ -107,7 +109,7 @@ app.controller('adminForumController', ['adminFactory', function(adminFactory){
 
 
 	self.approveForum = function(forumId){
-		self.loading=true;
+		self.process=true;
 		adminFactory.approveForum(forumId).then(function(data){
 			var length = self.forums.length;
 			for(var i = 0;i<length;i++){
@@ -119,18 +121,18 @@ app.controller('adminForumController', ['adminFactory', function(adminFactory){
 			if(self.forums.length<=0){
 				self.none = true;
 			}
-			self.loading =false;
+			self.process =false;
 			self.failed = false;
 		},function(errResponse){
 			console.error(errResponse);
-			self.loading = false;
+			self.process = false;
 			self.failed = true ;
 		});
 		
 	}
 
 	self.disapproveForum = function(forumId){
-		self.loading = true;
+		self.process = true;
 		adminFactory.disapproveForum(forumId).then(function(data){
 			var length = self.forums.length;
 			for(var i = 0;i<length;i++){
@@ -142,12 +144,12 @@ app.controller('adminForumController', ['adminFactory', function(adminFactory){
 			if(self.forums.length<=0){
 				self.none = true;
 			}
-			self.loading =false;
+			self.process =false;
 			self.failed = false;
 		},
 		function(errResponse){
 			console.error(errResponse);
-			self.loading = false;
+			self.process = false;
 			self.failed = true;
 		});
 		

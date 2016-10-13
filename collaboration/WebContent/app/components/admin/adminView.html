@@ -2,54 +2,82 @@
 
 <div class="row">
 	<div class="col-lg-offset-1 col-lg-4 inner-content" ng-controller="adminBlogController as adminBlogCtrl">
-		<h3 class="ctitle">Blogs</h3>
-		<p class="text-center" ng-show="adminBlogCtrl.loading">
+		<!-- Loader -->
+		<div class="preloader-wrapper big active ajax-loader" ng-if="adminBlogCtrl.process">
+			<div class="spinner-layer spinner-blue-only">
+				<div class="circle-clipper left">
+					<div class="circle"></div>
+				</div><div class="gap-patch">
+				<div class="circle"></div>
+			</div><div class="circle-clipper right">
+			<div class="circle"></div>
+		</div>
+	</div>
+</div><!-- Loader -->
+
+
+
+<h3 class="ctitle">Blogs</h3>
+<p class="text-center" ng-show="adminBlogCtrl.loading">
+	<i class="fa fa-spinner fa-pulse fa-5x"></i>
+</p>
+<h4 ng-if="adminBlogCtrl.none">No blogs to be approved</h4>
+<h4 ng-if="adminBlogCtrl.failed">Unable to complete your request please try again later</h4>
+<div ng-repeat="blog in adminBlogCtrl.blogs">
+	<h4>{{blog.blog.blogName}}</h4>
+	<p>{{blog.blog.blogDescription}}</p>
+	<div class="pull right">
+		<button ng-click="adminBlogCtrl.approveBlog(blog.blog.blogId)" class="btn btn-success">
+			<span class="fa fa-check"></span> Approve</button>
+			<button class="btn btn-danger" ng-click="adminBlogCtrl.disapproveBlog(blog.blog.blogId)">
+				<span class="fa fa-close"></span> Reject</button>
+			</div>
+			<div class="admin-user-box">
+				<b>UserDetails-></b><br>
+				<span >{{blog.name}}</span><br>
+				<span>{{blog.email}}</span><br>
+				<span >{{blog.role}}</span> 
+			</div>
+			<hr>
+		</div>
+	</div>
+	<div class="col-lg-offset-1 col-lg-4 inner-content" ng-controller="adminForumController as adminForumCtrl">
+		<h3 class="ctitle">Forums</h3>
+		<p class="text-center" ng-show="adminForumCtrl.loading">
 			<i class="fa fa-spinner fa-pulse fa-5x"></i>
 		</p>
-		<h4 ng-if="adminBlogCtrl.none">No blogs to be approved</h4>
-		<h4 ng-if="adminBlogCtrl.failed">Unable to complete your request please try again later</h4>
-		<div ng-repeat="blog in adminBlogCtrl.blogs">
-			<h4>{{blog.blog.blogName}}</h4>
-			<p>{{blog.blog.blogDescription}}</p>
-			<div class="pull right">
-				<button ng-click="adminBlogCtrl.approveBlog(blog.blog.blogId)" class="btn btn-success">
-					<span class="fa fa-check"></span> Approve</button>
-					<button class="btn btn-danger" ng-click="adminBlogCtrl.disapproveBlog(blog.blog.blogId)">
-						<span class="fa fa-close"></span> Reject</button>
-					</div>
-					<div class="admin-user-box">
-						<b>UserDetails-></b><br>
-						<span >{{blog.name}}</span><br>
-						<span>{{blog.email}}</span><br>
-						<span >{{blog.role}}</span> 
-					</div>
-					<hr>
-				</div>
-			</div>
-			<div class="col-lg-offset-1 col-lg-4 inner-content" ng-controller="adminForumController as adminForumCtrl">
-				<h3 class="ctitle">Forums</h3>
-				<p class="text-center" ng-show="adminForumCtrl.loading">
-					<i class="fa fa-spinner fa-pulse fa-5x"></i>
-				</p>
-				<h4 ng-if="adminForumCtrl.none">No forums to be approved</h4>
-				<h4 ng-if="adminForumCtrl.failed">Unable to complete your request please try again later</h4>
-				<div ng-repeat="forum in adminForumCtrl.forums">
-					<h4>{{forum.forum.forumTitle}}</h4>
-					<p>{{forum.forum.forumDescription}}</p>
-					<div class="pull right">
-						<button ng-click="adminForumCtrl.approveForum(forum.forum.forumId)" class="btn btn-success">
-							<span class="fa fa-check"></span> Approve</button>
-							<button class="btn btn-danger" ng-click="adminForumCtrl.disapproveForum(forum.forum.forumId)">
-								<span class="fa fa-close"></span> Reject</button>
-							</div>
+		<!-- Loader -->
+		<div class="preloader-wrapper big active ajax-loader" ng-if="adminForumCtrl.process">
+			<div class="spinner-layer spinner-blue-only">
+				<div class="circle-clipper left">
+					<div class="circle"></div>
+				</div><div class="gap-patch">
+				<div class="circle"></div>
+			</div><div class="circle-clipper right">
+			<div class="circle"></div>
+		</div>
+	</div>
+</div><!-- Loader -->
 
-							<div class="admin-user-box">
-								<b>UserDetails-></b><br>
-								<span>{{forum.name}}</span><br>
-								<span>{{forum.email}}</span><br>
-								<span>{{forum.role}}</span> 
-							</div>
-							<hr>
-						</div>
-					</div>
-				</div>
+<h4 ng-if="adminForumCtrl.none">No forums to be approved</h4>
+<h4 ng-if="adminForumCtrl.failed">Unable to complete your request please try again later</h4>
+<div ng-repeat="forum in adminForumCtrl.forums">
+	<h4>{{forum.forum.forumTitle}}</h4>
+	<p>{{forum.forum.forumDescription}}</p>
+	<div class="pull right">
+		<button ng-click="adminForumCtrl.approveForum(forum.forum.forumId)" class="btn btn-success">
+			<span class="fa fa-check"></span> Approve</button>
+			<button class="btn btn-danger" ng-click="adminForumCtrl.disapproveForum(forum.forum.forumId)">
+				<span class="fa fa-close"></span> Reject</button>
+			</div>
+
+			<div class="admin-user-box">
+				<b>UserDetails-></b><br>
+				<span>{{forum.name}}</span><br>
+				<span>{{forum.email}}</span><br>
+				<span>{{forum.role}}</span> 
+			</div>
+			<hr>
+		</div>
+	</div>
+</div>
