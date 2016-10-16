@@ -25,6 +25,6 @@
     "angular-route": "^1.5.8",
     "sockjs": "^0.3.4",
     "stomp-websocket": "^2.3.4",
-    "lodash": "^4.16.4"
+    "lodash": "3.10.1"
   }
 }
