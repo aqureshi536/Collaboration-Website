@@ -17,25 +17,73 @@
 	<p class="text-center" ng-hide="profileCtrl.dataLoaded" >
 		<i class="fa fa-spinner fa-pulse fa-5x"></i>
 	</p>
-	<!-- <img ng-src="file:E:/beone/users/{{client.userId}}" class="circle profile-image" alt="{{client.userId}}.png"> <-->
-
-	</-->
-	<p><img src="./assets/images/1.jpg" class="img-circle img-responsive profile-image" alt=""><span class="shift-right profile-name">{{profileCtrl.user.name}}</span>
-	</p><br>
-	<span class="profile-status shift-right" ng-if="profileCtrl.user.userStatus">Status <br>	 {{profileCtrl.user.userStatus}}</span><br><br>
-	<div>
-		<form ng-submit="profileCtrl.uploadImage()">
-			<span class="profile-status shift-right" ng-if="profileCtrl.user.userStatus">Change Image</span>
-
-
-			<input type="file" file-model="profileCtrl.userImage">
-			<br><br>
-			<input type="submit" class="btn btn-primary" value="Update Image">
-		</form>
+	<!-- Loader -->
+	<div class="preloader-wrapper big active ajax-loader" ng-if="profileCtrl.loading">
+		<div class="spinner-layer spinner-blue-only">
+			<div class="circle-clipper left">
+				<div class="circle"></div>
+			</div><div class="gap-patch">
+			<div class="circle"></div>
+		</div><div class="circle-clipper right">
+		<div class="circle"></div>
 	</div>
-	<div class="input-field col-xs-4">
-		<input type="text" id="status" ng-model="profileCtrl.status.userStatus">
-		<label for="status">Update Status</label>
-	</div>
-	<button ng-click="profileCtrl.updateStatus()" class="btn btn-primary">Update Status</button>
 </div>
+</div><!-- Loader -->
+<!-- <img ng-src="file:E:/beone/users/{{client.userId}}" class="circle profile-image" alt="{{client.userId}}.png"> <-->
+<!-- <img src="./assets/images/users/{{client.userId}}.png" class="img-circle img-responsive profile-image" alt="" id="userImage"> -->
+<div ng-show="profileCtrl.dataLoaded">
+	<p><img ng-src="{{profileCtrl.image}}" class="img-circle img-responsive profile-image" alt="" id="userImage"><span class="shift-right profile-name">{{profileCtrl.user.name}}</span>
+	</p><br>
+	<span class="profile-status shift-right" ng-if="profileCtrl.user.userStatus">	 {{profileCtrl.user.userStatus}}</span><br><br>
+	<!-- <button id="buttonManage" class="btn btn-primary">Manage Profile</button> -->
+	<a class="btn-floating btn-large waves-effect waves-dark red" id="buttonManage"><i class="material-icons">add</i></a>
+	<div class="row" id="manageProfile">
+		<fieldset><legend><h4>Manage Profile</h4></legend>
+			<div class="col-lg-4 col-md-5 col-sm-12 col-xs-12" >
+				<form ng-submit="profileCtrl.uploadImage()">
+
+					<div class="row">
+						<div class="col-xs-8">
+							<div class="file-field input-field">
+								<div class="btn amber lighten-2">
+									<span>Change Image</span>
+									<input type="file" file-model="profileCtrl.userImage">
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text">
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-offset-1 col-xs-3">
+							<input type="submit" class="btn btn-primary" value="Update Image">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-offset-1 col-md-offset-1 col-lg-4 col-md-5 col-sm-12 col-xs-12" >
+				<div class="row">
+					<div class="col-xs-8">
+						<div class="input-field ">
+							<input type="text" id="status" ng-model="profileCtrl.status.userStatus">
+							<label for="status">Update Status</label>
+						</div>
+					</div>
+					<div class="col-xs-offset-1 col-xs-3">
+						<button ng-click="profileCtrl.updateStatus()" class="btn btn-primary">Update Status</button>
+					</div>
+				</div>
+
+
+			</div>
+		</fieldset>
+	</div>  <!-- row -->
+</div>
+</div><!--   inner-content -->
+<script>
+	$(document).ready(function(){
+		$("#manageProfile").hide();
+		$("#buttonManage").click(function(){
+			$("#manageProfile").toggle(200);
+		});
+	});
+</script>

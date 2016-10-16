@@ -2,6 +2,7 @@ package com.ahmad.controller;
 
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,10 @@ import com.ahmad.DAO.UserDetailDAO;
 import com.ahmad.model.UserDetail;
 import com.ahmad.utility.FileUpload;
 import com.ahmad.viewmodel.ProfileModel;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsonorg.JsonOrgModule;
+
 
 @RestController
 public class UserController {
@@ -28,7 +33,7 @@ public class UserController {
 	@Autowired
 	UserDetailDAO userDetailDAO;
 
-	@GetMapping("/users/")
+	// @GetMapping("/users/")
 	public ResponseEntity<List<UserDetail>> getAllUsers() {
 		List<UserDetail> listOfUsers = userDetailDAO.listUserDetails();
 		if (listOfUsers == null) {
@@ -58,13 +63,33 @@ public class UserController {
 		return new ResponseEntity<ProfileModel>(profileModel, HttpStatus.OK);
 	}
 
-	@PostMapping("/user/upload/{userId}")
-	public ResponseEntity<Void> uploadProfilePicture(@PathVariable(value="user") String userId,
-			@RequestParam(value="image") MultipartFile profilePiture) {
-		System.out.println(userId);
-		String path  = "E:\\beone\\users\\";
-		//FileUpload.uploadImage(path, profilePiture, userId);
+	@PostMapping("/user/upload/")
+	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(value = "userId") String userJson,
+			@RequestParam(value = "image") MultipartFile profilePiture) {
+		System.out.println(userJson);
+		User user = new User();
+		JSONObject obj = new JSONObject(userJson);
+		//JsonNode jsonNode = convertJsonFormat(obj);
+		ObjectMapper mapper = new ObjectMapper().registerModule(new JsonOrgModule());
+		user = mapper.convertValue(obj, User.class);
+		System.out.println(user.getUserId());
+
+		String path = "E:\\dtWS\\Collaboration\\collaboration\\WebContent\\assets\\images\\users\\";
+		FileUpload.uploadImage(path, profilePiture, user.getUserId());
 		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	}
+
+}
+
+class User {
+	private String userId;
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }

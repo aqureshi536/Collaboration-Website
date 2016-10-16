@@ -1,4 +1,4 @@
-app.controller('userController', ['userFactory', function(userFactory){
+app.controller('userController', ['userFactory','$rootScope',function(userFactory,$rootScope){
 	
 	var self  = this;
 	self.users = [];
@@ -10,7 +10,7 @@ app.controller('userController', ['userFactory', function(userFactory){
 getAllUsers();
 	function getAllUsers(){
 		self.loading = true;
-		userFactory.getAllUsers().
+		userFactory.getAllUsers($rootScope.client.userId).
 		then(function(data){
 			console.log(data);
 			self.users = data;
@@ -22,6 +22,29 @@ getAllUsers();
 			self.loading = false;
 		});
 	}
+
+
+	self.sendFriendRequest = function (userId) {
+		self.confirm = false;
+		debugger;
+		console.log(userId)
+		var form = new FormData();
+		form.append('user1',$rootScope.client.userId);
+		form.append('user2',userId);
+
+		var user  = {user1 :$rootScope.client.userId,user2 : userId };
+		console.log(user);
+		userFactory.sendFriendRequest(user).
+		then(function(data){
+			console.log(data);
+			self.confirm = true;
+			self.error = false;
+		},function(errResponse){
+			console.error(errResponse);
+			self.error = true;
+		});
+	}
+
 
 
 }])

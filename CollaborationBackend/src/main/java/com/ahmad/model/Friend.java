@@ -5,6 +5,8 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
+import com.ahmad.utility.IdGenerator;
+
 @Entity
 @Component
 public class Friend {
@@ -46,5 +48,15 @@ public class Friend {
 	public void setStatus(char status) {
 		this.status = status;
 	}
+	
+	public Friend() {
+		this .id = IdGenerator.generateId("FRN");
+	}
+
+	@Override
+	public String toString() {
+		return "Friend [id=" + id + ", user1=" + user1 + ", user2=" + user2 + ", status=" + status + "]";
+	}
+	
 
 }

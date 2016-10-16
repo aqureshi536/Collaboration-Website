@@ -20,6 +20,7 @@ import com.ahmad.model.BlogComment;
 import com.ahmad.model.Forum;
 import com.ahmad.model.ForumPost;
 import com.ahmad.model.ForumPostComment;
+import com.ahmad.model.Friend;
 import com.ahmad.model.JobOpportunity;
 import com.ahmad.model.Test;
 import com.ahmad.model.UserAuthorities;
@@ -66,7 +67,8 @@ public class ApplicationConfig {
 		sessionBuilder.addAnnotatedClass(ForumPostComment.class);
 		sessionBuilder.addAnnotatedClass(Event.class);
 		sessionBuilder.addAnnotatedClass(JobOpportunity.class);
-		sessionBuilder.addAnnotatedClass(Test.class);
+		sessionBuilder.addAnnotatedClass(Friend.class);
+		
 		return sessionBuilder.buildSessionFactory();
 	}
 

@@ -35,22 +35,44 @@ app.factory('profileFactory', ['$http','$q', function($http,$q){
 }
 
 
-function uploadImage(formData,userId) {
+function uploadImage(data) {
 	debugger;
 	var deferred = $q.defer();
-	$http.post(address+"upload/"+userId,formData,{
+	
+
+
+	/*$http({
+		method:'POST',
+		url:address+"upload/",
+		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		transformRequest: function(obj) {
+			var str = [];
+			for(var p in obj)
+				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+			return str.join("&");
+		},
+		data:data
+
+	})*/
+
+
+	$http({
+		method:'POST',
+		url:address+"upload/",
 		transformRequest : angular.identity,
 		headers:{
 			'Content-Type':undefined
-		}
+		},
+		data:data
 
-}).then(function(response){
-	deferred.resolve(response.data);
-},
-function(errResponse){
-	deferred.reject(errResponse)
-});
-return deferred.promise;
+	}).then(function(response){
+		deferred.resolve(response.data);
+		console.log('image uploaded');
+	},
+	function(errResponse){
+		deferred.reject(errResponse)
+	});
+	return deferred.promise;
 }
 
 

@@ -69,7 +69,7 @@ public class BlogController {
 		System.out.println(blog);
 		//System.out.println(blogJson.toString());
 		//JSONObject jsonObj = new JSONObject(blogJson);
-		// --- JsonNode jsonNode = convertJsonFormat(jsonObj);
+		//JsonNode jsonNode = convertJsonFormat(jsonObj);
 		//ObjectMapper mapper = new ObjectMapper().registerModule(new JsonOrgModule());
 	//	blog = mapper.convertValue(jsonObj, Blog.class);
 

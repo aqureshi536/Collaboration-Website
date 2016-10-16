@@ -4,7 +4,8 @@ app.controller('profileController', ['profileFactory','$routeParams','$rootScope
 	self.error = false;
 	self.status = {userStatus:''};
 	self.loading=false;
-	self.dataLoaded=true;
+	
+	self.image='./assets/images/users/'+$rootScope.client.userId+'.png';
 	
 
 	function getUser(){
@@ -14,12 +15,14 @@ app.controller('profileController', ['profileFactory','$routeParams','$rootScope
 		then(function (data) {
 			console.log(data);
 			self.user = data;
+			self.dataLoaded=true;
 		},
 		function(errResponse){
 			console.error(errResponse);
 			self.error = true;
+			self.dataLoaded=true;
 		});
-		self.dataLoaded=true;
+		
 	}
 
 	getUser();
@@ -32,29 +35,48 @@ app.controller('profileController', ['profileFactory','$routeParams','$rootScope
 		then(function(data){
 			console.log(data);
 			self.user.userStatus = data.userStatus;
+			self.loading= false;
 		},function(errResponse){
 			console.error(errResponse);
+			self.loading= false;
 		});
 		reset();
-		self.loading= false;
+		
 	}
 
 
 	self.uploadImage = function () {
+		self.loading= true;
 		debugger;
 		var form = new FormData();
 		var file = self.userImage;
 		console.log(file);
-	form.append('image',file);
+		var user = {userId:self.user.userId};
+		form.append('image',file);
+		form.append('userId',angular.toJson(user,true));
+	//var data ={userId:self.user.userId,image:self.userImage};
 	
 	//form.append('userId',self.user.userId);
 	
 	
-	profileFactory.uploadImage(form,self.user.userId).
-	then(function(data){
+	profileFactory.uploadImage(form).
+	then(function(event,data){
+		/*var newImage = new Image();
+		document.getElementById("userImage").src = newImage.src;
+		newImage = new Image();*/
+		//console.log(image);
+		var random = (new Date()).toString();
+		self.image= self.image + "?cb=" + random;
 		
+		/*if(!$scope.$$phase){
+			$scope.$apply (function(){
+				self.image = self.image;
+			});
+		}*/
+		self.loading = false;
 	},function(errResponse){
 		console.error(errResponse);
+		self.loading = false;
 	});
 }
 

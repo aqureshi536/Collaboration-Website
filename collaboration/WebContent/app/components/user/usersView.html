@@ -2,13 +2,18 @@
 <div class="col-sm-8">
 	<input type="text" class="form-control pull right " placeholder="Search User ....">
 </div>
+
 <div style="clear: both;"></div>
+<div ng-if="userCtrl.confirm" class="alert alert-success ajax-loader col-md-4"><b>Request Sent</b><a ng-click="userCtrl.confirm = false" class="pull right">X</a></div>
 <ul class="collection inner-content col-md-8 col-sm-10 col-xs-12">
 	<li class="collection-item-avatar" ng-repeat="user in userCtrl.users">
 		<img src="./.././assets/images/1.jpg" alt="" class="card-image circle">
 		<span class="name">{{user.name}}</span>
-		<p ><img src="./.././assets/images/online.png" ng-if="user.status == A"> <span ng-if="user.status == A">Online</span> 
-		<img src="./.././assets/images/offline.png" ng-if="user.status == N"> <span>Offline </span><span class="pull right"><button class="btn btn-primary">Send Request</button></span></p>
-		<p>{{user.userStatus}}</p>
-	</li>
-</ul>
+		<p ng-if="user.status == 'A'"><img src="./.././assets/images/online.png" > <span> Online</span> 
+		</p>
+		<p ng-if="user.status == 'N'">
+			<img src="./.././assets/images/offline.png"><span> Offline </span><span class="pull right"></span></p>
+			<button class="btn btn-primary pull right" ng-if="client" ng-click="userCtrl.sendFriendRequest(user.userId)">Send Request</button>
+			<p>{{user.userStatus}}</p>
+		</li>
+	</ul>

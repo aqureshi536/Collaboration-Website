@@ -27,21 +27,42 @@ public class FriendDAOImpl implements FriendDAO {
 	}
 
 	@Override
-	public void sendRequest() {
-		// TODO Auto-generated method stub
+	public Friend getFriend(String user1, String user2, char status) {
+		String hql = "from Friend where user1=:user1 and user2=:user2 and status=:status";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("user1", user1)
+				.setParameter("user2", user2).setParameter("status", status);
+		List<Friend> listOfFriend = query.getResultList();
+		if(listOfFriend!=null &&!listOfFriend.isEmpty())
+			return listOfFriend.get(0);
+		return null;
+	}
+
+	@Override
+	public void sendRequest(Friend friend) {
+		sessionFactory.getCurrentSession().saveOrUpdate(friend);
 
 	}
 
 	@Override
-	public void acceptRequest() {
-		// TODO Auto-generated method stub
+	public void acceptRequest(Friend friend) {
+		sessionFactory.getCurrentSession().saveOrUpdate(friend);
 
 	}
 
 	@Override
-	public void rejectRequest() {
-		// TODO Auto-generated method stub
+	public void rejectRequest(Friend friend) {
+		sessionFactory.getCurrentSession().saveOrUpdate(friend);
 
+	}
+
+	@Override
+	public List<Friend> getFriendsN(String userId, char status) {
+		String hql = "from Friend where user1=:userId or user2=:userId and status!=:status";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("userId", userId)
+				.setParameter("status", status);
+		List<Friend> listOfFriends = query.getResultList();
+		return listOfFriends;
+		
 	}
 
 }
