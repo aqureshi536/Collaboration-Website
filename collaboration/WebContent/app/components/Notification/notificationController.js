@@ -7,7 +7,7 @@ app.controller('notificationController', ['notificationFactory','$rootScope', fu
 		self.process = true;
 		notificationFactory.getAllFriendNotification($rootScope.client.userId).
 		then(function(data){
-			self.friendNotification = data;
+			self.friendNotifications = data;
 			self.process = false;
 		},
 		function(errResponse){
@@ -17,7 +17,9 @@ app.controller('notificationController', ['notificationFactory','$rootScope', fu
 	})();
 
 	self.rejectFriendRequest = function(userId){
-		userFactory.rejectFriendRequest(userId).
+		var value = {user1:$rootScope.client.userId,user2:userId};
+		console.log(value)
+		userFactory.rejectFriendRequest(value).
 		then(function(data){
 			console.log('rejected request');
 		},function(errResponse){

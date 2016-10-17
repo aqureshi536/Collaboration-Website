@@ -171,18 +171,18 @@ public class FriendController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	@PutMapping("/friends/user/notification/reject")
+	@PutMapping("/friends/user/notification/reject/request/")
 	public ResponseEntity<Void> rejectFriendRequest(@RequestParam("user1") String user1,
 			@RequestParam("user2") String user2) {
 
 		friend = friendDAO.getFriend(user1, user2, 'P');
 		if (friend != null) {
-			friend.setStatus('R');
-			friendDAO.acceptRequest(friend);
+			
+			friendDAO.rejectRequest(friend);
 		} else {
 			friend = friendDAO.getFriend(user2, user1, 'P');
-			friend.setStatus('R');
-			friendDAO.acceptRequest(friend);
+			
+			friendDAO.rejectRequest(friend);
 		}
 
 		return new ResponseEntity<Void>(HttpStatus.OK);

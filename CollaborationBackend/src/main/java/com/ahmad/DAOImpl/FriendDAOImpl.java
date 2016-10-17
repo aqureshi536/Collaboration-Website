@@ -51,7 +51,7 @@ public class FriendDAOImpl implements FriendDAO {
 
 	@Override
 	public void rejectRequest(Friend friend) {
-		sessionFactory.getCurrentSession().saveOrUpdate(friend);
+		sessionFactory.getCurrentSession().delete(friend);
 
 	}
 

@@ -52,6 +52,11 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 	}).
 	when('/admin/dashboard',{
 		templateUrl:'./app/components/admin/adminView.html'
+	}).
+	when('/user/notification/',{
+		templateUrl:'./app/components/notification/notificationView.html',
+		controller:'notificationController',
+		controllerAs:'notificationCtrl'
 	})
 	.otherwise({
 		redirectTo:'/'

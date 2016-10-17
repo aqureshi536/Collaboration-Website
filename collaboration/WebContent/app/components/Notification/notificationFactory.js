@@ -21,9 +21,21 @@ function getAllFriendNotification(userId){
 	return deferred.promise;
 }
 
-	function rejectFriendRequest(){
+	function rejectFriendRequest(user){
 		var deferred = $q.defer();
-		$http.post(address+'reject/request/'+userId).
+	//	$http.post(address+'reject/request/',user).
+	$http({
+		method:"POST",
+		url:address+'reject/request/',
+		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		transformRequest: function(obj) {
+			var str = [];
+			for(var p in obj)
+				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+			return str.join("&");
+		},
+		data:user
+	}).
 		then(function(response){
 			deferred.resolve(response.data);
 		},function(errResponse){
