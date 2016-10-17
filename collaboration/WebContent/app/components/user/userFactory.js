@@ -3,8 +3,8 @@ app.factory('userFactory', ['$http','$q', function($http,$q){
 
 	return {
 		getAllUsers:getAllUsers,
-		sendFriendRequest:sendFriendRequest,
-		rejectFriendRequest:rejectFriendRequest
+		sendFriendRequest:sendFriendRequest
+		//rejectFriendRequest:rejectFriendRequest
 	};
 
 

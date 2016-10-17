@@ -9,6 +9,7 @@ app.controller('userController', ['userFactory','$rootScope',function(userFactor
 
 getAllUsers();
 	function getAllUsers(){
+		debugger;
 		self.loading = true;
 		userFactory.getAllUsers($rootScope.client.userId).
 		then(function(data){

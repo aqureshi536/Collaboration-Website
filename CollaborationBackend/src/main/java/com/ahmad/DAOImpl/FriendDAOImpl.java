@@ -57,7 +57,7 @@ public class FriendDAOImpl implements FriendDAO {
 
 	@Override
 	public List<Friend> getFriendsN(String userId, char status) {
-		String hql = "from Friend where user1=:userId or user2=:userId and status!=:status";
+		String hql = "from Friend where (user1=:userId or user2=:userId) and status!=:status";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("userId", userId)
 				.setParameter("status", status);
 		List<Friend> listOfFriends = query.getResultList();

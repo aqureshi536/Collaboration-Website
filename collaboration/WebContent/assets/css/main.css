@@ -369,3 +369,8 @@ font-size: 18px;
 	width: 40%;
 	box-shadow: 0px 1px 1px 0px;
 }
+
+.user-status{
+	font-size: 2em
+	word-spacing: 5px;
+}

@@ -7,13 +7,19 @@
 <div ng-if="userCtrl.confirm" class="alert alert-success ajax-loader col-md-4"><b>Request Sent</b><a ng-click="userCtrl.confirm = false" class="pull right">X</a></div>
 <ul class="collection inner-content col-md-8 col-sm-10 col-xs-12">
 	<li class="collection-item-avatar" ng-repeat="user in userCtrl.users">
-		<img src="./.././assets/images/1.jpg" alt="" class="card-image circle">
-		<span class="name">{{user.name}}</span>
-		<p ng-if="user.status == 'A'"><img src="./.././assets/images/online.png" > <span> Online</span> 
+		<img src="./assets/images/users/{{user.userDetails.userId}}.png" alt="" class="card-image circle">
+		<span class="name">{{user.userDetail.name}}</span>
+		<button class="btn btn-primary pull right" ng-if="client" ng-show="user.status == 'R' || user.status == 'N'" ng-click="userCtrl.sendFriendRequest(user.userDetail.userId)">Send Request</button>
+		<button class="btn btn-primary pull right" ng-if="client" ng-show="user.status == 'P'" disabled>Request Sent <span class="fa fa-check"></span></button>
+		<p ng-if="user.userDetail.status == 'A'"><img src="./assets/images/online.png" > <span> Online</span> 
 		</p>
-		<p ng-if="user.status == 'N'">
-			<img src="./.././assets/images/offline.png"><span> Offline </span><span class="pull right"></span></p>
-			<button class="btn btn-primary pull right" ng-if="client" ng-click="userCtrl.sendFriendRequest(user.userId)">Send Request</button>
-			<p>{{user.userStatus}}</p>
-		</li>
-	</ul>
+		<p ng-if="user.userDetail.status == 'N'">
+			<img src="./assets/images/offline.png"><span> Offline </span><span class="pull right"></span>
+		</p>
+		<p class="user-status">
+			{{user.userDetail.userStatus}}
+		</p>
+		
+		<p>{{user.userStatus}}</p>
+	</li>
+</ul>
