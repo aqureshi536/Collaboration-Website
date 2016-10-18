@@ -7,7 +7,7 @@
 <div ng-if="userCtrl.confirm" class="alert alert-success ajax-loader col-md-4"><b>Request Sent</b><a ng-click="userCtrl.confirm = false" class="pull right">X</a></div>
 <ul class="collection inner-content col-md-8 col-sm-10 col-xs-12">
 	<li class="collection-item-avatar" ng-repeat="user in userCtrl.users">
-		<img src="./assets/images/users/{{user.userDetails.userId}}.png" alt="" class="card-image circle">
+		<img src="./assets/images/users/{{user.userDetail.userId}}.png" alt="" class="card-image circle">﻿
 		<span class="name">{{user.userDetail.name}}</span>
 		<button class="btn btn-primary pull right" ng-if="client" ng-show="user.status == 'R' || user.status == 'N'" ng-click="userCtrl.sendFriendRequest(user.userDetail.userId)">Send Request</button>
 		<button class="btn btn-primary pull right" ng-if="client" ng-show="user.status == 'P'" disabled>Request Sent <span class="fa fa-check"></span></button>

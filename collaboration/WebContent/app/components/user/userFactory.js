@@ -9,6 +9,7 @@ app.factory('userFactory', ['$http','$q', function($http,$q){
 
 
 	function getAllUsers(userId){
+		debugger;
 		var deferred = $q.defer();
 		$http.get(address+userId).
 		then(function(response){

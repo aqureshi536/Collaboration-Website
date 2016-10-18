@@ -8,10 +8,10 @@
 		<i class="fa fa-spinner fa-pulse fa-5x"></i>
 	</p>
 	<li class="collection-item-avatar" ng-repeat="user in notificationCtrl.friendNotifications">
-		<img src="./assets/images/users/{{user.userId}}.png" alt="" class="card-image circle">
+		<img ng-src="./assets/images/users/{{user.userId}}.png" alt="" class="card-image circle">
 		<span class="name">{{user.name}}</span>
 		<p ng-if="user.status == 'A'"><img src="./assets/images/online.png" > <span> Online</span> 
-
+{{user.userId}}
 		</p>
 		<p>{{user.userStatus}}</p>
 		<p ng-if="user.status == 'N'">
