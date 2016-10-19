@@ -1,0 +1,25 @@
+<h2 class="ctitle shift-right"><span class="fa fa-users"></span> Friends</h2>
+<div class="col-sm-8">
+	<input type="text" class="form-control pull right " placeholder="Search Friend ...." ng-model="search.name">
+</div>
+
+<div style="clear: both;"></div>
+
+<ul class="collection inner-content col-md-8 col-sm-10 col-xs-12">
+	<p class="text-center" ng-show="friendCtrl.loading">
+					<i class="fa fa-spinner fa-pulse fa-5x"></i>
+				</p>
+	<li class="collection-item-avatar" ng-repeat="friend in friendCtrl.friends | filter:search">
+		<img src="./assets/images/users/{{friend.userId}}.png" alt="" class="card-image circle">﻿
+		<span class="name">{{friend.name}}</span>
+		
+		<p ng-if="friend.status == 'A'"><img src="./assets/images/online.png" > <span> Online</span> 
+		</p>
+		<p ng-if="friend.status == 'N'">
+			<img src="./assets/images/offline.png"><span> Offline </span><span class="pull right"></span>
+		</p>
+		<p class="user-status">
+			{{friend.userStatus}}
+		</p>
+	</li>
+</ul>

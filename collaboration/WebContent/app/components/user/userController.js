@@ -38,6 +38,7 @@ getAllUsers();
 		userFactory.sendFriendRequest(user).
 		then(function(data){
 			console.log(data);
+			getAllUsers();
 			self.confirm = true;
 			self.error = false;
 		},function(errResponse){

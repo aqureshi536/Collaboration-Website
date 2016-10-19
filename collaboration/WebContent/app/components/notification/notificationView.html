@@ -7,16 +7,17 @@
 	<p class="text-center" ng-show="notificationCtrl.process">
 		<i class="fa fa-spinner fa-pulse fa-5x"></i>
 	</p>
+	<h4 ng-if="notificationCtrl.friendNotifications<=0">No new notifications</h4>
 	<li class="collection-item-avatar" ng-repeat="user in notificationCtrl.friendNotifications">
 		<img ng-src="./assets/images/users/{{user.userId}}.png" alt="" class="card-image circle">
 		<span class="name">{{user.name}}</span>
 		<p ng-if="user.status == 'A'"><img src="./assets/images/online.png" > <span> Online</span> 
-{{user.userId}}
+
 		</p>
 		<p>{{user.userStatus}}</p>
 		<p ng-if="user.status == 'N'">
 			<img src="./assets/images/offline.png"><span> Offline </span><span class="pull right"></span><div class="pull right">
-			<button class="btn green pull right" ng-if="client" ng-click="notificationCtrl.acceptFriendRequest(user.userId)">Accept Request</button>&nbsp;&nbsp;
+			<button class="btn green" ng-if="client" ng-click="notificationCtrl.acceptFriendRequest(user.userId)">Accept Request</button>&nbsp;&nbsp;
 			<button class="btn btn-danger" ng-click="notificationCtrl.rejectFriendRequest(user.userId)">Reject Request</button>
 
 		</div></p>

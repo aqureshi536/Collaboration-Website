@@ -32,7 +32,7 @@
 <!-- <img ng-src="file:E:/beone/users/{{client.userId}}" class="circle profile-image" alt="{{client.userId}}.png"> <-->
 <!-- <img src="./assets/images/users/{{client.userId}}.png" class="img-circle img-responsive profile-image" alt="" id="userImage"> -->
 <div ng-show="profileCtrl.dataLoaded">
-	<p><img ng-src="{{profileCtrl.image}}" class="img-circle img-responsive profile-image" alt="" id="userImage"><span class="shift-right profile-name">{{profileCtrl.user.name}}</span>
+	<p><img ng-src="{{profileCtrl.image}}" class="img-circle img-responsive profile-image" alt="" id="userImage" onerror="this.src='./assets/images/default.png'"><span class="shift-right profile-name">{{profileCtrl.user.name}}</span>
 	</p><br>
 	<span class="profile-status shift-right" ng-if="profileCtrl.user.userStatus">	 {{profileCtrl.user.userStatus}}</span><br><br>
 	<!-- <button id="buttonManage" class="btn btn-primary">Manage Profile</button> -->

@@ -4,8 +4,9 @@ app.controller('profileController', ['profileFactory','$routeParams','$rootScope
 	self.error = false;
 	self.status = {userStatus:''};
 	self.loading=false;
-	
-	self.image='./assets/images/users/'+$rootScope.client.userId+'.png';
+	var random = (new Date()).toString();
+	//	self.image= self.image + "?cb=" + random;
+	self.image='./assets/images/users/'+$rootScope.client.userId+'.png'+ "?cb=" + random;
 	
 
 	function getUser(){

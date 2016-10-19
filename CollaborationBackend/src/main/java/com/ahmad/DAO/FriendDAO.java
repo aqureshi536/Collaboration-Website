@@ -19,4 +19,8 @@ public interface FriendDAO {
 	void rejectRequest(Friend friend);
 	
 	List<Friend> getFriends(String userId,char status);
+	
+	List<Friend> listFriends();
+	
+	 List<Friend> getRequested(String userId, char status);
 }

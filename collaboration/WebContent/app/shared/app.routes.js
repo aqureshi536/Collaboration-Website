@@ -57,6 +57,11 @@ app.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 		templateUrl:'./app/components/notification/notificationView.html',
 		controller:'notificationController',
 		controllerAs:'notificationCtrl'
+	}).
+	when('/user/friends/',{
+		templateUrl:'./app/components/friend/friendView.html',
+		controller:'friendController',
+		controllerAs:'friendCtrl'
 	})
 	.otherwise({
 		redirectTo:'/'

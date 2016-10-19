@@ -28,7 +28,7 @@ public class FriendDAOImpl implements FriendDAO {
 
 	@Override
 	public Friend getFriend(String user1, String user2, char status) {
-		String hql = "from Friend where user1=:user1 and user2=:user2 and status=:status";
+		String hql = "from Friend where user1=:user1 and friendUser=:user2 and status=:status";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("user1", user1)
 				.setParameter("user2", user2).setParameter("status", status);
 		List<Friend> listOfFriend = query.getResultList();
@@ -72,6 +72,27 @@ public class FriendDAOImpl implements FriendDAO {
 		List<Friend> listOfFriends = query.getResultList();
 		return listOfFriends;
 		
+	}
+	
+	@Override
+	public List<Friend> getRequested(String userId, char status) {
+		String hql = "from Friend where friendUser=:userId and status=:status";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("userId", userId)
+				.setParameter("status", status);
+		List<Friend> listOfFriends = query.getResultList();
+		return listOfFriends;
+		
+	}
+	
+	
+
+	@Override
+	public List<Friend> listFriends() {
+		String hql = "from Friend ";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Friend> listOfFriends = query.getResultList();
+		return listOfFriends;
+	
 	}
 
 }

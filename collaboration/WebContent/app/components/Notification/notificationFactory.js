@@ -25,8 +25,8 @@ function getAllFriendNotification(userId){
 
 function acceptFriendRequest (user) {
 		var deferred = $q.defer();
-	//	$http.post(address+'reject/request/',user).
-	$http({
+		$http.put(address+'accept',user).
+	/*$http({
 		method:"PUT",
 		url:address+'accept',
 		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -37,7 +37,7 @@ function acceptFriendRequest (user) {
 			return str.join("&");
 		},
 		data:user
-	}).
+	}).*/
 		then(function(response){
 			deferred.resolve(response.data);
 		},function(errResponse){
@@ -48,9 +48,9 @@ function acceptFriendRequest (user) {
 
 	function rejectFriendRequest(user){
 		var deferred = $q.defer();
-	//	$http.post(address+'reject/request/',user).
-	$http({
-		method:"PUT",
+		$http.put(address+'reject/request/',user).
+	/*$http({
+		method:"DELETE",
 		url:address+'reject/request/',
 		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 		transformRequest: function(obj) {
@@ -60,7 +60,7 @@ function acceptFriendRequest (user) {
 			return str.join("&");
 		},
 		data:user
-	}).
+	}).*/
 		then(function(response){
 			deferred.resolve(response.data);
 		},function(errResponse){

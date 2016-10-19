@@ -1,8 +1,16 @@
-app.controller('adminBlogController', ['adminFactory', function(adminFactory){
+app.controller('adminBlogController', ['adminFactory','$rootScope','$location', function(adminFactory,$rootScope,$location){
 
 	var self= this;
 	self.blogs=[];
 	self.none = false;
+
+
+(function(){
+	if($rootScope.client==undefined || $rootScope.client == null || $rootScope.client.role!=0 )
+	{
+$location.path("/");
+	}
+})();
 
 	function getUnapprovedBlogs(){
 		debugger;
