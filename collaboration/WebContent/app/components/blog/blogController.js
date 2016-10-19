@@ -96,6 +96,7 @@ app.controller('blogController', ['blogFactory','$log','$rootScope', function(bl
 
 
 	function createBlog(blog){
+		self.msgApproval = false;
 		self.process=true;
 		debugger;
 		console.log(blog);
@@ -104,11 +105,13 @@ app.controller('blogController', ['blogFactory','$log','$rootScope', function(bl
 			function(data){
 				//self.blogs=self.blogs.concat(data);
 				self.confirm=true;
+				self.msgApproval = true;
 				self.process=false;
 			},
 			function(errResponse){
 				console.error("Error creating blog");
 				self.process=false;
+				self.msgApproval = false;
 
 			});
 		resetFields();

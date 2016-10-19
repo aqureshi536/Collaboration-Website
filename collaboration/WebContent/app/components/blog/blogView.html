@@ -67,6 +67,7 @@
 				</p>
 
 				<div class="row" ng-repeat="blog in blogCtrl.blogs |orderBy : 'createdAt':true" ng-show="blogCtrl.dataLoaded">
+				<p class="alert alert-success col-xs-4" ng-if="blogCtrl.msgApproval">Blog successfully sent for approval, it will be added automatically ! <span class="pull right" ng-click="blogCtrl.msgApproval=false">X</span></p>
 					<div class="col-xs-12" >
 						<ul class="collapsible popout" data-collapsible="accordion">
 							<li class="inner-content">

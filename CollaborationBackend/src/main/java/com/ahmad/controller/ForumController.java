@@ -54,7 +54,7 @@ public class ForumController {
 		forumDAO.saveOrUpdateForum(forum);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(ucBuilder.path("/forums/{id}").buildAndExpand(forum.getForumId()).toUri());
-		return new ResponseEntity<Forum>(forum,httpHeaders,HttpStatus.CREATED);
+		return new ResponseEntity<Forum>(httpHeaders,HttpStatus.CREATED);
 		
 	}
 	

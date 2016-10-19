@@ -90,7 +90,7 @@ public class BlogController {
 
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(ucBuilder.path("/blog/{id}").buildAndExpand(blog.getBlogId()).toUri());
-		return new ResponseEntity<Blog>(blog, httpHeaders, HttpStatus.CREATED);
+		return new ResponseEntity<Blog>(httpHeaders, HttpStatus.CREATED);
 
 	}
 

@@ -20,6 +20,7 @@
 	Add Forum
 </button>
 <div class="col-sm-8 col-xs-12 pop-form" ng-show="forumCtrl.form">
+<p class="alert alert-success col-xs-4" ng-if="forumCtrl.msgApproval">Forum successfully sent for approval, it will be added automatically ! <span class="pull right" ng-click="forumCtrl.msgApproval=false">X</span></p>
 	<div class="panel panel-primary" >
 		<div class="panel-heading">Manage Forum</div>
 		<div class="panel-body">

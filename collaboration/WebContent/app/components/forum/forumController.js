@@ -55,18 +55,21 @@
 
 		function createForum(forum){
 			self.process=true;
+			self.msgApproval = false;
 			forumFactory.createForum(forum).
 			then(function(data){
 				//$.extend( true, self.forums, data);
 				/*self.addedForum=forumFactory.getAddedForum();*/
 				
 				//self.forums=angular.merge(self.forums,data);
-				self.forums=self.forums.concat(data);// to refresh the data
+				//self.forums=self.forums.concat(data);// to refresh the data
 				/*$log.info(self.forums);*/
+				self.msgApproval = true;
 				self.process=false;
 			},
 			function(errResponse){
 				self.process=false;
+				self.msgApproval = true;
 				console.error(errResponse);
 			});
 			
