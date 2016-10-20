@@ -1,6 +1,6 @@
 app.controller('loginController', ['loginFactory','authenticationFactory','$rootScope','$location','$scope','$localStorage',function(loginFactory,authenticationFactory,$rootScope,$location,$scope,$localStorage){
 	var self = this;
-	self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
+	self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:'',conPass:''};
 	self.error=false;
 	self.client = {email:'',password:''};
 	self.loginError=false;
@@ -137,7 +137,7 @@ app.controller('loginController', ['loginFactory','authenticationFactory','$root
 
 
 	function reset(){
-		self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:''};
+		self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:'',conPass:''};
 	};
 
 	function resetLoginFields(){

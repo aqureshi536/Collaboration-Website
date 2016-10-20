@@ -69,13 +69,16 @@ public class LoginController {
 
 		userAuthorities.setUserDetail(userDetail);
 		userAuthorities.setAuthority(loginModel.getRegisterRole());
+		//userAuthorities.setAuthority("ROLE_ADMIN");
 		userAuthorities.setEmail(userDetail.getEmail());
 		userAuthoritiesDAO.saveOrUpdateUserAuthority(userAuthorities);
 
 		String message = "Hello " + userDetail.getName() + " you're successfully registered with us, Thanks !";
+		try {
+			emailsender.sendEmail(userDetail.getEmail(), "Registration Successfull", message);
+		} catch (Exception e) {
 
-		emailsender.sendEmail(userDetail.getEmail(), "Registration Successfull", message);
-
+		}
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(ucBuilder.path("/register/{userId}").buildAndExpand(userDetail.getUserId()).toUri());
 		return new ResponseEntity<Void>(httpHeaders, HttpStatus.CREATED);
@@ -89,12 +92,12 @@ public class LoginController {
 			return new ResponseEntity<UserToSend>(HttpStatus.NOT_FOUND);
 		}
 		userDetail = userDetailDAO.checkUser(validUser.getEmail(), validUser.getPassword());
-		
+
 		UserToSend userToSend = new UserToSend();
 		userToSend.setUserId(userDetail.getUserId());
-		userToSend.setEmail( userDetail.getEmail());
+		userToSend.setEmail(userDetail.getEmail());
 		int roleValue = 0;
-		switch( userAuthoritiesDAO.getUserAuthority(userDetail.getUserId()).getAuthority()){
+		switch (userAuthoritiesDAO.getUserAuthority(userDetail.getUserId()).getAuthority()) {
 		case "ROLE_STUDENT":
 			roleValue = 1;
 			break;
@@ -103,29 +106,26 @@ public class LoginController {
 			break;
 		case "ROLE_EMPLOYEE":
 			roleValue = 3;
-			break;		
+			break;
 		}
 		userToSend.setRole(roleValue);
 		userDetail.setStatus('A');
 		userDetailDAO.saveOrUpdateUserDetail(userDetail);
-		
-		return new ResponseEntity<UserToSend>(userToSend,HttpStatus.OK);
+
+		return new ResponseEntity<UserToSend>(userToSend, HttpStatus.OK);
 
 	}
-	
+
 	@PutMapping("/logout/{userId}")
-	public ResponseEntity<Void> logout(@PathVariable("userId") String userId){
-		if(userId !=null){
-		userDetail = userDetailDAO.getUserDetail(userId);
-		userDetail.setStatus('N');
-		userDetailDAO.saveOrUpdateUserDetail(userDetail);
-		return new ResponseEntity<Void>(HttpStatus.OK);
+	public ResponseEntity<Void> logout(@PathVariable("userId") String userId) {
+		if (userId != null) {
+			userDetail = userDetailDAO.getUserDetail(userId);
+			userDetail.setStatus('N');
+			userDetailDAO.saveOrUpdateUserDetail(userDetail);
+			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 	}
-	
-	
-	
 
 	/*
 	 * @GetMapping("/login") public ResponseEntity<Void>
