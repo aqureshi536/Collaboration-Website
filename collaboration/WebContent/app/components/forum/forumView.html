@@ -72,7 +72,7 @@
 								<div class="collapsible-body">									
 									<ul class="collection" ng-repeat="fp in forum.forumPosts | limitTo : 4 ">
 										<li class="collection-item avatar">
-											<img  class="circle card-image" ng-src="assets/images/{{fp.userImage}}.jpg"><span class="card-text">{{fp.forumPostContent}}</span>
+											<img  class="circle card-image" ng-src="./assets/images/users/{{fp.userId}}.png"><span class="card-text">{{fp.forumPostContent}}</span>
 										</li>
 									</ul>
 									<a class="btn green darken-1 waves-effect waves-light" ng-show="forum.forumPosts.length>4" 

@@ -62,5 +62,13 @@ public class Event {
 	public Event(){
 		this.eventId = IdGenerator.generateId("EVN");
 	}
+
+	@Override
+	public String toString() {
+		return "Event [eventId=" + eventId + ", content=" + content + ", place=" + place + ", eventAt=" + eventAt
+				+ ", postedAt=" + postedAt + "]";
+	}
+	
+	
 	
 }

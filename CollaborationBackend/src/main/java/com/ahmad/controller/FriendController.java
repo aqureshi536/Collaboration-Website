@@ -181,40 +181,6 @@ public class FriendController {
 
 	}
 
-	/*
-	 * COmmented for testing
-	 * 
-	 * @GetMapping("/friends/user/{userId}") public
-	 * ResponseEntity<List<UserModel>> getUnFriends(@PathVariable("userId")
-	 * String userId) { List<UserModel> listOfUserModel = new ArrayList<>();
-	 * List<UserDetail> listOfUsers = userDetailDAO.listUserDetails();
-	 * List<Friend> usersFromFriend = friendDAO.getUnFriends(userId, 'A');
-	 * 
-	 * /* trying to find the persons who have there status pending or rejected
-	 * in the friend table and get there details and give to the view (if the
-	 * user exist in friend table status will we same as friend status else it
-	 * will be N=Not avaialable)
-	 * 
-	 * boolean isPresent = false; for (UserDetail user : listOfUsers) {
-	 * UserModel userModel = new UserModel();
-	 * 
-	 * for (Friend friend : usersFromFriend) {
-	 * 
-	 * if (user.getUserId().equals(friend.getUser1())) {
-	 * 
-	 * userModel.setUserDetail(user); userModel.setStatus(friend.getStatus());
-	 * isPresent = true; break; } else { isPresent = false; } } if (!isPresent)
-	 * { userModel.setStatus('N'); userModel.setUserDetail(user); } if
-	 * (!userModel.getUserDetail().getUserId().equals(userId))
-	 * listOfUserModel.add(userModel); } return new
-	 * ResponseEntity<List<UserModel>>(listOfUserModel, HttpStatus.OK); }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 */
+
 
 }

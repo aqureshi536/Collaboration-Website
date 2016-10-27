@@ -27,7 +27,7 @@ app.factory('eventFactory', ['$http','$q', function($http,$q){
 		debugger;
 		$http.post(address,event).
 		then(function (response) {
-			deferred.resolve(response);
+			deferred.resolve(response.data);
 		},function (errResponse) {
 			deferred.reject(errResponse);
 		});

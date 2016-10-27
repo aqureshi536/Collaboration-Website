@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ahmad.DAO.EventDAO;
 import com.ahmad.model.Event;
@@ -32,8 +34,8 @@ public class EventController {
 	
 	@GetMapping("/events/")
 	public ResponseEntity<List<Event>> listEvents(){
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-		String date  = dateFormat.format(new Date());
+		//SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		//String date  = dateFormat.format(new Date());
 		List<Event> listOfEvents = eventDAO.listEvents();
 		if(listOfEvents==null || listOfEvents.isEmpty())
 		{
@@ -43,7 +45,8 @@ public class EventController {
 	}
 	
 	@PostMapping("/events/")
-	public ResponseEntity<Event> createEvent(@RequestBody EventModel eventModel){
+	public ResponseEntity<Event> createEvent(@RequestBody EventModel eventModel,UriComponentsBuilder ucBuilder) throws Exception{
+		event = new Event();
 		event = eventModel.getEvent();
 		event.setEventId(IdGenerator.generateId("EVN"));
 		Date date = new Date();
@@ -52,9 +55,16 @@ public class EventController {
 		event.setPostedAt(timestamp);
 		
 		System.out.println(eventModel.getCalendar());		
-		
-		//eventDAO.saveOrUpdateEvent(event);
-		return new ResponseEntity<Event>(HttpStatus.OK);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM, yyyy HH:mm");
+		//String eventAt = dateFormat.format(eventModel.getCalendar());
+		Date eventAt = dateFormat.parse(eventModel.getCalendar().getEventAt()+" "+eventModel.getCalendar().getHour()+":"+eventModel.getCalendar().getMin());
+		System.out.println(eventAt);
+		event.setEventAt(new Timestamp(eventAt.getTime()));
+		System.out.println(event);
+		eventDAO.saveOrUpdateEvent(event);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setLocation(ucBuilder.path("/events/{eventId}").buildAndExpand(event.getEventId()).toUri());
+		return new ResponseEntity<Event>(event,httpHeaders,HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/events/{eventId}")

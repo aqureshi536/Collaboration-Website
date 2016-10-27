@@ -4,7 +4,7 @@ import com.ahmad.model.Event;
 
 public class EventModel {
 	private Event event;
-	private String calendar;
+	private Calendar calendar;
 
 	public Event getEvent() {
 		return event;
@@ -14,12 +14,17 @@ public class EventModel {
 		this.event = event;
 	}
 
-	public String getCalendar() {
+	public Calendar getCalendar() {
 		return calendar;
 	}
 
-	public void setCalendar(String calendar) {
+	public void setCalendar(Calendar calendar) {
 		this.calendar = calendar;
 	}
 
+	
+	
+
 }
+
+

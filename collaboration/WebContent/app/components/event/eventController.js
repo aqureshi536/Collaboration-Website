@@ -2,8 +2,8 @@ app.controller('eventController', ['eventFactory', function(eventFactory){
 	
 	var self = this;
 	self.events = [];
-	self.event = {eventId:'',place:'',content:'',eventAt:''};
-	self.calendar = {date:'',hour:'',min:''}
+	self.event = {eventId:'',place:'',content:''};
+	self.calendar = {eventAt:'',hour:'',min:''}
 
 	function fetchAllEvents(){
 		eventFactory.fetchAllEvents().
@@ -65,7 +65,7 @@ app.controller('eventController', ['eventFactory', function(eventFactory){
 
 
 	function reset(){
-		self.event = {eventId:'',place:'',content:'',eventAt:''};
-		self.calendar = {date:'',hour:'',min:''}
+		self.event = {eventId:'',place:'',content:''};
+		self.calendar = {eventAt:'',hour:'',min:''}
 	}
 }])
