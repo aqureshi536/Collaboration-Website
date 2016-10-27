@@ -1,24 +1,24 @@
 <div class="container-fluid">
 	<h1 class="ctitle"><span class="fa fa-calendar-o"></span> Events <span class="pull right">  Found  {{eventCtrl.events.length}}</span></h1>
 	<hr>
-	<div class="inner-content col-xs-12">
-	<h3 class="ctitle">Add Event</h3>
-		<form ng-submit="eventCtrl.submit()">
+
+	<div class="panel panel-primary"><div class="panel-heading">Add Event</div><div>
+	<form ng-submit="eventCtrl.submit()">
 		<input type="hidden" ng-model="eventCtrl.event.eventId">
-		 <div class="input-field col-sm-5">
-          <i class="prefix glyphicon glyphicon-map-marker"></i>
-          <input id="icon_prefix" type="text" class="validate" ng-model="eventCtrl.event.place">
-          <label for="icon_prefix">Event Place</label>
-        </div>
-        <div class="input-field col-sm-5 col-sm-offset-1">
-          <i class="prefix glyphicon glyphicon-bookmark"></i>
-          <input id="icon_prefix" type="text" class="validate" ng-model="eventCtrl.event.content">
-          <label for="icon_prefix">Event Content</label>
-        </div>
-			<div class="col-sm-5">
-				<input type="date" class="datepicker" placeholder="Select event date" ng-model="eventCtrl.calendar.date">
-				<script>
-					$('.datepicker').pickadate({
+		<div class="input-field col-sm-5">
+			<i class="prefix glyphicon glyphicon-map-marker"></i>
+			<input id="icon_prefix" type="text" class="validate" ng-model="eventCtrl.event.place">
+			<label for="icon_prefix">Event Place</label>
+		</div>
+		<div class="input-field col-sm-5 col-sm-offset-1">
+			<i class="prefix glyphicon glyphicon-bookmark"></i>
+			<input id="icon_prefix" type="text" class="validate" ng-model="eventCtrl.event.content">
+			<label for="icon_prefix">Event Content</label>
+		</div>
+		<div class="col-sm-5">
+			<input type="date" class="datepicker" placeholder="Select event date" ng-model="eventCtrl.calendar.date" onchange="alert(value)">
+			<script>
+				$('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 16 // Creates a dropdown of 15 years to control year
 });
@@ -27,117 +27,123 @@
 <br>
 <div class="col-sm-5 col-sm-offset-1">
 	<fieldset><legend>Event date</legend>
-	<div class="col-lg-4 col-md-6 col-xs-6" >
-Hours
-		<select class="browser-default form-control" ng-model="eventCtrl.calendar.hour">
-			<option value="" disabled="true" selected="">Hour</option>
-			<option value="00">00</option>
-			<option value="01">01</option>
-			<option value="02">02</option>
-			<option value="03">03</option>
-			<option value="04">04</option>
-			<option value="05">05</option>
-			<option value="06">06</option>
-			<option value="07">07</option>
-			<option value="08">08</option>
-			<option value="09">09</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
-			<option value="13">13</option>
-			<option value="14">14</option>
-			<option value="15">15</option>
-			<option value="16">16</option>
-			<option value="17">17</option>
-			<option value="18">18</option>
-			<option value="19">19</option>
-			<option value="20">20</option>
-			<option value="21">21</option>
-			<option value="22">22</option>
-			<option value="23">23</option>
-		</select>
-	</div>
-	<div class="col-lg-4 col-md-6 col-xs-6">Minuites
-		<select class="browser-default form-control" ng-model="eventCtrl.calendar.min">
-		<option value="" disabled selected>Minutes</option>
-			<option value="0">0</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
-			<option value="13">13</option>
-			<option value="14">14</option>
-			<option value="15">15</option>
-			<option value="16">16</option>
-			<option value="17">17</option>
-			<option value="18">18</option>
-			<option value="19">19</option>
-			<option value="20">20</option>
-			<option value="21">21</option>
-			<option value="22">22</option>
-			<option value="23">23</option>
-			<option value="24">24</option>
-			<option value="25">25</option>
-			<option value="26">26</option>
-			<option value="27">27</option>
-			<option value="28">28</option>
-			<option value="29">29</option>
-			<option value="30">30</option>
-			<option value="31">31</option>
-			<option value="32">32</option>
-			<option value="33">33</option>
-			<option value="34">34</option>
-			<option value="35">35</option>
-			<option value="36">36</option>
-			<option value="37">37</option>
-			<option value="38">38</option>
-			<option value="39">39</option>
-			<option value="40">40</option>
-			<option value="41">41</option>
-			<option value="42">42</option>
-			<option value="43">43</option>
-			<option value="44">44</option>
-			<option value="45">45</option>
-			<option value="46">46</option>
-			<option value="47">47</option>
-			<option value="48">48</option>
-			<option value="49">49</option>
-			<option value="50">50</option>
-			<option value="51">51</option>
-			<option value="52">52</option>
-			<option value="53">53</option>
-			<option value="54">54</option>
-			<option value="55">55</option>
-			<option value="56">56</option>
-			<option value="57">57</option>
-			<option value="58">58</option>
-			<option value="59">59</option>
-		</select>
-	</div>
+		<div class="col-lg-4 col-md-6 col-xs-6" >
+			Hours
+			<select class="browser-default form-control" ng-model="eventCtrl.calendar.hour">
+				<option value="" disabled="true" selected="">Hour</option>
+				<option value="00">00</option>
+				<option value="01">01</option>
+				<option value="02">02</option>
+				<option value="03">03</option>
+				<option value="04">04</option>
+				<option value="05">05</option>
+				<option value="06">06</option>
+				<option value="07">07</option>
+				<option value="08">08</option>
+				<option value="09">09</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+			</select>
+		</div>
+		<div class="col-lg-4 col-md-6 col-xs-6">Minuites
+			<select class="browser-default form-control" ng-model="eventCtrl.calendar.min">
+				<option value="" disabled selected>Minutes</option>
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+				<option value="24">24</option>
+				<option value="25">25</option>
+				<option value="26">26</option>
+				<option value="27">27</option>
+				<option value="28">28</option>
+				<option value="29">29</option>
+				<option value="30">30</option>
+				<option value="31">31</option>
+				<option value="32">32</option>
+				<option value="33">33</option>
+				<option value="34">34</option>
+				<option value="35">35</option>
+				<option value="36">36</option>
+				<option value="37">37</option>
+				<option value="38">38</option>
+				<option value="39">39</option>
+				<option value="40">40</option>
+				<option value="41">41</option>
+				<option value="42">42</option>
+				<option value="43">43</option>
+				<option value="44">44</option>
+				<option value="45">45</option>
+				<option value="46">46</option>
+				<option value="47">47</option>
+				<option value="48">48</option>
+				<option value="49">49</option>
+				<option value="50">50</option>
+				<option value="51">51</option>
+				<option value="52">52</option>
+				<option value="53">53</option>
+				<option value="54">54</option>
+				<option value="55">55</option>
+				<option value="56">56</option>
+				<option value="57">57</option>
+				<option value="58">58</option>
+				<option value="59">59</option>
+			</select>
+		</div>
 	</fieldset>
 </div>
-<input type="submit" value="Add Event" class="btn green col-sm-offset-2">
+<br>
+	<input type="submit" value="Add Event" class="btn green col-xs-offset-2">
+
+
 </div>
 
 </form> 
+</div>
+</div>
+
 <!-- <div style="clear:both"></div> -->
 <div class="row">
 	<div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12 inner-content" ng-repeat="event in eventCtrl.events">
 		<div class="panel">
 			<div class="panel-heading">{{event.content }}<span class="pull right">{{event.postedAt | date:'short' }}</span></div>
 			<div class="panel-body">
-			<p style="font-size: 15px;">	Place : {{event.place}}</p>
+				<p style="font-size: 15px;">	Place : {{event.place}}</p>
 				<p style="font-size: 15px;">Event Date : {{event.eventAt | date:'short'}}</p>
 			</div>
 		</div>
 	</div>
-</div>
+
 </div>
