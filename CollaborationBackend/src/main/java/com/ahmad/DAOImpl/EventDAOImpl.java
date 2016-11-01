@@ -1,5 +1,6 @@
 package com.ahmad.DAOImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -53,8 +54,9 @@ public class EventDAOImpl implements EventDAO {
 	
 	@Transactional
 	public List<Event> listEventByEventAt(){
-		String hql = "from Event e ORDER BY e.eventAt ASC";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	
+		String hql = "from Event e where eventAt >=:eventDate ORDER BY e.eventAt ASC";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql).setParameter("eventDate",new Date());
 		List<Event> listOfEvents = query.getResultList();
 		return listOfEvents;
 	}

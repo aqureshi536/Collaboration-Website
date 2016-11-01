@@ -85,7 +85,7 @@
 									<div class="collapsible-body">									
 										<ul class="collection" ng-repeat="blogComment in blog.blogComments | limitTo : 4">
 											<li class="collection-item avatar">
-												<img  class="circle card-image" ng-src="assets/images/{{blogComment.userImage}}.jpg"><span class="card-text">{{blogComment.blogCommentContent}}</span>
+												<img  class="circle card-image" ng-src="./asets/images/users/{{blogComment.userId}}.png" onerror="this.src='./assets/images/default.png'"><span class="card-text">{{blogComment.blogCommentContent}}</span>
 											</li>
 										</ul>
 

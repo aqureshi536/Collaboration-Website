@@ -36,7 +36,7 @@ public class EventController {
 	public ResponseEntity<List<Event>> listEvents(){
 		//SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		//String date  = dateFormat.format(new Date());
-		List<Event> listOfEvents = eventDAO.listEvents();
+		List<Event> listOfEvents = eventDAO.listEventByEventAt();
 		if(listOfEvents==null || listOfEvents.isEmpty())
 		{
 			return new ResponseEntity<List<Event>>(HttpStatus.NO_CONTENT);
