@@ -1,5 +1,5 @@
 /// <reference path="resources/js/angular.js"/>
-var app = angular.module('module',["ngRoute","ngStorage","ngCookies"]);
+var app = angular.module('module',["ngRoute","ngStorage","ngCookies","ngResource"]);
 
 /*app.config(['$httpProvider',function($httpProvider) {
 	$httpProvider.interceptors.push('authInterceptor')

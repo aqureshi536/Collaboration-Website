@@ -1,4 +1,4 @@
-package com.ahmad.config;
+package com.ahmad.config.security;
 
 import java.io.IOException;
 import java.io.PrintWriter;

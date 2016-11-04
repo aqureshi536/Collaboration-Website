@@ -1,4 +1,6 @@
-app.controller('loginController', ['loginFactory','authenticationFactory','$rootScope','$location','$scope','$localStorage',function(loginFactory,authenticationFactory,$rootScope,$location,$scope,$localStorage){
+app.controller('loginController', 
+	['loginFactory','authenticationFactory','$rootScope','$location','$scope','$localStorage',
+	function(loginFactory,authenticationFactory,$rootScope,$location,$scope,$localStorage){
 	var self = this;
 	self.user={registerEmail:'',registerName:'',registerRole:'',registerGender:'',registerPassword:'',conPass:''};
 	self.error=false;
@@ -109,29 +111,7 @@ app.controller('loginController', ['loginFactory','authenticationFactory','$root
 		$localStorage.$reset();
 		delete $rootScope.client;
 		$location.path("/");
- /*document.cookie = 'globals';
-
-
-		function createCookie(name,value,days) {
-			if (days) {
-				var date = new Date();
-				date.setTime(date.getTime()+(days*24*60*60*1000));
-				var expires = "; expires="+date.toGMTString();
-			}
-			else var expires = "";
-			document.cookie = name+"="+value+expires+"; path=/";
-		}
-
-
-		function eraseCookie(name) {
-			createCookie(name,"",-1);
-		}
-
-
-		var cookies = document.cookie.split(";");
-		for (var i = 0; i < cookies.length; i++){
-			eraseCookie(cookies[i].split("=")[0]);
-		}*/
+ 
 
 	}
 

@@ -1,6 +1,9 @@
-app.factory('loginFactory', ['$http','$q','$rootScope',function($http,$q,$rootScope){
-	var address = 'http://localhost:8080/CollaborationWebsiteBackend/register';
-	var addressForLogin = 'http://localhost:8080/CollaborationWebsiteBackend/login';
+app.factory('loginFactory',
+	['$http','$q','$rootScope','$resource','$httpParamSerializer',
+	function($http,$q,$rootScope,$resource,$httpParamSerializer)
+	{
+		var address = 'http://localhost:8080/CollaborationWebsiteBackend/register';
+		var addressForLogin = 'http://localhost:8080/CollaborationWebsiteBackend/login';
 	//var firstRequestUri = 'http://localhost:8080/CollaborationWebsiteBackend/'+
 	//'oauth/token?grant_type=password&client_id=restapp&client_secret=restapp&username='
 	//+$rootScope.username+'&password='+$rootScope.password;
@@ -54,29 +57,56 @@ function registerUser(user){
 //}*/
 
 
+function loginUser(values){
+	var val = {grant_type:"password",
+username:values.email,
+password:values.password,
+client_id:"clientIdPassword"};
+var request = {
+	method:'POST',
+	url:"http://localhost:8080/CollaborationWebsite/oauth/token",
+            headers: {
+                "Authorization": "Basic " + btoa("clientIdPassword:secret"),
+                "Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+            },
+            data: $httpParamSerializer(val)
+        }
 
-
-
- function loginUser(values){
-
- 	var deferred  = $q.defer();
+	var deferred  = $q.defer();
  	//debugger;
- 	$http.post(addressForLogin,values).
+ 	$http(request).
  	then(function(response){
  		deferred.resolve(response.data);
-	},function(errResponse){
-		deferred.reject(errResponse);
+ 		console.log(respone.data);
+ 	},function(errResponse){
+ 		deferred.reject(errResponse);
  	});
  	return deferred.promise;	
  }
 
 
+/*  for security purpose
+function loginUser(values){
+
+	var deferred  = $q.defer();
+ 	//debugger;
+ 	$http.post(addressForLogin,values).
+ 	then(function(response){
+ 		deferred.resolve(response.data);
+ 	},function(errResponse){
+ 		deferred.reject(errResponse);
+ 	});
+ 	return deferred.promise;	
+ }*/
 
 
-/*#######################################################*/
 
 
-/*#######################        Code for basic authentication    #########################*/
+
+ /*#######################################################*/
+
+
+ /*#######################        Code for basic authentication    #########################*/
 
 /*function loginUser(client){
 	var deferred  = $q.defer();
