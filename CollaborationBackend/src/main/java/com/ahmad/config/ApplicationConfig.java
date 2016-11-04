@@ -6,22 +6,12 @@ import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.core.env.Environment;
-import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.init.DataSourceInitializer;
-import org.springframework.jdbc.datasource.init.DatabasePopulator;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
-import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.MultipartResolver;
 
@@ -36,6 +26,8 @@ import com.ahmad.model.JobOpportunity;
 import com.ahmad.model.UserAuthorities;
 import com.ahmad.model.UserDetail;
 import com.ahmad.model.Users;
+import com.ahmad.security.AccessToken;
+import com.ahmad.security.RefreshToken;
 
 @Configuration
 @EnableTransactionManagement
@@ -76,6 +68,8 @@ public class ApplicationConfig {
 		sessionBuilder.addAnnotatedClass(Event.class);
 		sessionBuilder.addAnnotatedClass(JobOpportunity.class);
 		sessionBuilder.addAnnotatedClass(Friend.class);
+		sessionBuilder.addAnnotatedClass(AccessToken.class);
+		sessionBuilder.addAnnotatedClass(RefreshToken.class);
 
 		return sessionBuilder.buildSessionFactory();
 	}
