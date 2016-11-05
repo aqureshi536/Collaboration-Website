@@ -16,57 +16,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 /*@Configuration
 @EnableWebSecurity*/
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-	private static String REALM = "REALM_NAME";
-	@Autowired
-	DataSource datasource;
 
-	@Autowired
-	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("aqureshi536@gmail.com").password("050325").roles("STUDENT");
+	
+	
+	
+	
+	
 
-	}
-
-	/*
-	 * @Override protected void configure(HttpSecurity http) throws Exception {
-	 * System.out.println("In security");
-	 * http.authorizeRequests().antMatchers("/admin/**").access(
-	 * "hasRole('ROLE_ADMIN')").antMatchers("/user/**")
-	 * .access("hasRole('ROLE_STUDENT')").antMatchers("/user/**").access(
-	 * "hasRole('ROLE_EMPLOYEE')")
-	 * .antMatchers("/user/**").access("hasRole('ROLE_ALUMNI')").and().formLogin
-	 * ().loginPage("/login").defaultSuccessUrl("/user/blogs/")
-	 * .loginProcessingUrl("/j_spring_security_check").usernameParameter("email"
-	 * ).passwordParameter("password")
-	 * .and().logout().logoutSuccessUrl("/login?logout").logoutUrl(
-	 * "/j_spring_security_logout")
-	 * .invalidateHttpSession(true).and().csrf().disable(); }
-	 */
-
-	/*
-	 * @Autowired public void configAuthentication(AuthenticationManagerBuilder
-	 * auth) throws Exception {
-	 * 
-	 * auth.jdbcAuthentication().dataSource(datasource)
-	 * .authoritiesByUsernameQuery("select email,authority from UserAuthorities where email=?"
-	 * )
-	 * .usersByUsernameQuery("select email,password,enabled from user_check where email=?"
-	 * );
-	 * 
-	 * }
-	 */
-
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-
-		http.csrf().disable().authorizeRequests().antMatchers("/user/**")
-				.hasRole("STUDENT").antMatchers("/user/**").hasRole("ALUMNI").antMatchers("/user/**")
-				.hasRole("EMPLOYEE").antMatchers("/admin/**").hasRole("ADMIN").and().httpBasic().realmName(REALM)
-				.authenticationEntryPoint(getBasicAuthorityPoint()).and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-	}
-
-	@Bean
+	/*@Bean
 	public CustomBasicAuthenticationEntryPoint getBasicAuthorityPoint() {
 		return new CustomBasicAuthenticationEntryPoint();
 	}
@@ -74,6 +31,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
-	}
+	}*/*/
 
 }
