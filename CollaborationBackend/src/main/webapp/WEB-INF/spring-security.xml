@@ -11,12 +11,11 @@
 
 	<!-- This is default url to get a token from OAuth -->
 	<http pattern="/oauth/token" create-session="stateless"
-		 authentication-manager-ref="clientAuthenticationManager"
-		 use-expressions="true"
-		xmlns="http://www.springframework.org/schema/security">
+		authentication-manager-ref="clientAuthenticationManager"
+		use-expressions="true" xmlns="http://www.springframework.org/schema/security">
 		<intercept-url pattern="/oauth/token" access="isFullyAuthenticated()" />
 		<anonymous enabled="false" />
-		<sec:csrf disabled="true"/>
+		<sec:csrf disabled="true" />
 		<http-basic entry-point-ref="clientAuthenticationEntryPoint" />
 		<!-- include this only if you need to authenticate clients via request 
 			parameters -->
@@ -27,9 +26,10 @@
 
 	<!-- This is where we tells spring security what URL should be protected 
 		and what roles have access to them -->
-		
-		
-		<!--Instead of using use-expression we can also remove it and use access="hasRole('ROLE_APP') due spring 4 migrated from spring 3  -->
+
+
+	<!--Instead of using use-expression we can also remove it and use access="hasRole('ROLE_APP') 
+		due spring 4 migrated from spring 3 -->
 	<http pattern="/user/**" create-session="never" use-expressions="false"
 		entry-point-ref="oauthAuthenticationEntryPoint"
 		access-decision-manager-ref="accessDecisionManager"
@@ -84,12 +84,15 @@
 		credentials from DB -->
 	<authentication-manager id="authenticationManager"
 		xmlns="http://www.springframework.org/schema/security">
-		<authentication-provider>
+		<!-- <authentication-provider>
 			<user-service>
 				<user name="ahmad@g.c" password="ahmad" authorities="ROLE_APP" />
 			</user-service>
-		</authentication-provider>
+		</authentication-provider> -->
+		<authentication-provider ref="customAuthenticationProvider"></authentication-provider>
 	</authentication-manager>
+	
+	<bean id="customAuthenticationProvider" class="com.ahmad.security.CustomAuthenticationProvider" />
 
 	<bean id="clientDetailsUserService"
 		class="org.springframework.security.oauth2.provider.client.ClientDetailsUserDetailsService">
@@ -153,7 +156,16 @@
 
 		<oauth:client client-id="restapp"
 			authorized-grant-types="password,authorization_code,refresh_token,implicit"
-			secret="restapp" authorities="ROLE_APP" />
+			secret="restapp" authorities="ROLE_ALUMNI" />
+		<oauth:client client-id="restapp"
+			authorized-grant-types="password,authorization_code,refresh_token,implicit"
+			secret="restapp" authorities="ROLE_STUDENT" />
+		<oauth:client client-id="restapp"
+			authorized-grant-types="password,authorization_code,refresh_token,implicit"
+			secret="restapp" authorities="ROLE_EMPLOYEE" />
+		<oauth:client client-id="restapp"
+			authorized-grant-types="password,authorization_code,refresh_token,implicit"
+			secret="restapp" authorities="ROLE_ADMIN" />
 
 	</oauth:client-details-service>
 

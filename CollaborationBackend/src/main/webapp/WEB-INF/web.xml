@@ -8,10 +8,10 @@
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
+		<!-- <init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value></param-value>
-		</init-param>
+		</init-param> -->
 		<load-on-startup>1</load-on-startup>
 		<async-supported>true</async-supported>
 	</servlet>
@@ -21,18 +21,18 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<filter>
+	<!-- <filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 
-	<listener>
+	<!-- <listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+	</listener> -->
 	<!-- CORS Filter -->
 
 	<filter>
@@ -43,7 +43,7 @@
 
 	<filter-mapping>
 		<filter-name>cors</filter-name>
-		<url-pattern>/**</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
 
@@ -54,7 +54,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>  
             /WEB-INF/dispatcher-servlet.xml,
-    	     /WEB-INF/spring-security-database.xml
+    	     /WEB-INF/spring-security.xml
         </param-value>
 	</context-param>
 </web-app>

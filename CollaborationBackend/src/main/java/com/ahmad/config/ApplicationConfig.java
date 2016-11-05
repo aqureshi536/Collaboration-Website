@@ -27,6 +27,7 @@ import com.ahmad.model.UserAuthorities;
 import com.ahmad.model.UserDetail;
 import com.ahmad.model.Users;
 import com.ahmad.security.AccessToken;
+import com.ahmad.security.ClientDetails;
 import com.ahmad.security.RefreshToken;
 
 @Configuration
@@ -70,6 +71,7 @@ public class ApplicationConfig {
 		sessionBuilder.addAnnotatedClass(Friend.class);
 		sessionBuilder.addAnnotatedClass(AccessToken.class);
 		sessionBuilder.addAnnotatedClass(RefreshToken.class);
+		sessionBuilder.addAnnotatedClass(ClientDetails.class);
 
 		return sessionBuilder.buildSessionFactory();
 	}

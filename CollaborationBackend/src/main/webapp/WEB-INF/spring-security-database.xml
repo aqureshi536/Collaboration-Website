@@ -60,6 +60,7 @@
 		<property name="tokenStore" ref="jdbcTokenStore" />
 		<property name="supportRefreshToken" value="true" />
 		<property name="clientDetailsService" ref="clientDetails" />
+		<property name="accessTokenValiditySeconds" value="4500" />
 	</bean>
 	<!-- token obtaining URL configurations -->
 	<http pattern="/oauth/token/**" create-session="stateless"
@@ -148,10 +149,14 @@
 		<anonymous enabled="false" />
 		<!-- <intercept-url pattern="/rest/register" access="IS_AUTHENTICATED_ANONYMOUSLY" 
 			/> -->
-		<intercept-url pattern="/user/**" access="ROLE_STUDENT" />
+		<sec:intercept-url pattern="/user/**" access="ROLE_EMPLOYEE" />
+		<sec:intercept-url pattern="/user/**" access="ROLE_STUDENT" />
+		<sec:intercept-url pattern="/user/**" access="ROLE_ALUMNI" />
 		<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
 		<access-denied-handler ref="oauthAccessDeniedHandler" />
 	</http>
+
+	
 	<!--==================================== Authentication managers ==================================== -->
 
 	<bean id="clientDetailsUserService"
@@ -167,15 +172,16 @@
 	<authentication-manager id="authenticationManager"
 		xmlns="http://www.springframework.org/schema/security">
 		<authentication-provider ref="customAuthenticationProvider"></authentication-provider>
-		<!-- TODO: FOR TEST ONLY !! REMOVE IN PRODUCTION ENVIRONMENT -->
-		<authentication-provider>
-			<user-service id="userDetailsService">
-				<user name="user" password="password" authorities="ROLE_USER" />
-			</user-service>
-		</authentication-provider>
+
+
 	</authentication-manager>
 
 	<bean id="customAuthenticationProvider" class="com.ahmad.security.CustomAuthenticationProvider" />
+
+
+	<!-- TODO: FOR TEST ONLY !! REMOVE IN PRODUCTION ENVIRONMENT <authentication-provider> 
+		<user-service id="userDetailsService"> <user name="user" password="password" 
+		authorities="ROLE_USER" /> </user-service> </authentication-provider> -->
 
 	<!--==================================== Enable Standard Pre/Post annotations 
 		====================================== -->

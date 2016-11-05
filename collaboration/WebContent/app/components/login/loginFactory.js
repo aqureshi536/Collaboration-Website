@@ -54,9 +54,8 @@ function registerUser(user){
 	//deferred.reject(errResponse);
 //});
 //return deferred.promise;	
-//}*/
-
-
+//}
+/*
 function loginUser(values){
 	var val = {grant_type:"password",
 username:values.email,
@@ -82,10 +81,10 @@ var request = {
  		deferred.reject(errResponse);
  	});
  	return deferred.promise;	
- }
+ }*/
 
 
-/*  for security purpose
+ 
 function loginUser(values){
 
 	var deferred  = $q.defer();
@@ -97,7 +96,7 @@ function loginUser(values){
  		deferred.reject(errResponse);
  	});
  	return deferred.promise;	
- }*/
+ }
 
 
 
