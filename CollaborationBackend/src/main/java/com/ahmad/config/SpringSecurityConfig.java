@@ -13,24 +13,37 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
-/*@Configuration
-@EnableWebSecurity*/
+@Configuration
+@EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	
-	
-	
-	
-	
-
-	/*@Bean
-	public CustomBasicAuthenticationEntryPoint getBasicAuthorityPoint() {
-		return new CustomBasicAuthenticationEntryPoint();
-	}
+	@Autowired
+	DataSource datasource;
 
 	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
-	}*/*/
+	protected void configure(HttpSecurity http) throws Exception {
+		System.out.println("In http confg");
+		http.csrf().disable().authorizeRequests().antMatchers("/user/**")
+				.access("hasAnyRole('ROLE_STUDENT,ROLE_ALUMNI,ROLE_EMPLOYEE,ROLE_ADMIN')").and().httpBasic();
+	}
 
+	/*
+	 * @Bean public AuthenticationManager authenticationManager() throws
+	 * Exception { return super.authenticationManager(); }
+	 */
+	@Autowired
+	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+		System.out.println("In jdbc auth confg");
+		auth.jdbcAuthentication().dataSource(datasource)
+				.authoritiesByUsernameQuery("select email,authority from UserAuthorities where email=?")
+				.usersByUsernameQuery("select email,password,enabled from user_check where email=?");
+	}
 }
+
+/*
+ * @Bean public CustomBasicAuthenticationEntryPoint getBasicAuthorityPoint() {
+ * return new CustomBasicAuthenticationEntryPoint(); }
+ * 
+ * @Override public void configure(WebSecurity web) throws Exception {
+ * web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**"); }
+ */

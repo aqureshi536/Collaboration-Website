@@ -30,14 +30,16 @@ app.factory('authenticationFactory', ['loginFactory','$http', '$cookieStore', '$
 
 //             Use this for real authentication
   //           ----------------------------------------------
-
+var emailData = '';
+var passData = '';
 
   function login(email, password, callback) {
     loginFactory.loginUser({email: email, password: password })
     .then(function (data) {
       //  $scope.$storage = $localStorage.$defaults({})
        // $scope.$storage.client = data;
-
+       emailData=email;
+       passData=password;
        callback(data,false);
    },
    function(errResponse){
@@ -53,7 +55,9 @@ app.factory('authenticationFactory', ['loginFactory','$http', '$cookieStore', '$
 }
 
 function setCredentials(email, password) {
-    var authdata = btoa(email + ':' + password);
+    alert(emailData+"  with "+passData);
+    var authdata = btoa(emailData + ':' + passData);
+    console.log(authdata);
 
     $rootScope.globals = {
         currentUser: {
@@ -62,8 +66,9 @@ function setCredentials(email, password) {
         }
     };
 
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+            $http.defaults.headers.common['Authorization'] = "Basic " + authdata; // jshint ignore:line
             $cookieStore.put('globals', $rootScope.globals);
+            console.log( $http.defaults.headers.common['Authorization']);
         }
 
         function clearCredentials() {
